@@ -23,7 +23,7 @@ Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan 
 
 1. **Create Transaction:** Sistem men-_generate_ Dynamic QRIS untuk spesifik nominal dengan kode unik perhari diakhir (contoh: 50.021), 21 merupakan kode unik untuk membedakan transaksi yang sama nominalnya (misal: Rp 50.000) agar _merchant_ bisa mem-verifikasi pembayaran secara _real-time_.
 2. **Customer Pays:** _Customer_ _scan_ QR dan bayar dengan nominal yang sudah _locked_.
-3. **Incoming Notification:** Aplikasi m-banking / e-wallet _merchant_ menerima _push notification_ (misal: "Dana Masuk Rp 50.000").
+3. **Incoming Notification:** Aplikasi m-banking / e-wallet _merchant_ menerima _push notification_ (misal: "Dana Masuk Rp 50.021").
 4. **Intercept & Forward:** Android Notification Forwarder akan _catch_ notifikasi ini dan melakukan _push data_ ke webhook `QRIS Dinamis`.
 5. **Status Update:** Logic di webhook akan mem-validasi teks/nominal dan otomatis mengubah status transaksi dari `PENDING` menjadi `PAID`.
 
