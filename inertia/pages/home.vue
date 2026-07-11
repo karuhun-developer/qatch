@@ -21,12 +21,24 @@ defineOptions({ layout: DefaultLayout })
           <span>Platform QRIS Dinamis Terbaik</span>
         </div>
         <h1 class="text-5xl font-extrabold tracking-tight lg:text-7xl text-balance bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-          Revolusi Transaksi <span class="text-primary block mt-2">Bisnis Anda</span>
+          Sulap QRIS Statis Jadi <span class="text-primary block mt-2">Dinamis & Otomatis</span>
         </h1>
         <p class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Ubah cara Anda menerima pembayaran. Buat, kelola, dan lacak QRIS dinamis secara real-time dengan keamanan level enterprise.
+          Platform andalan UMKM, Developer, dan Freelancer. Tingkatkan QRIS statis biasa menjadi sistem pembayaran pintar dengan integrasi API yang seamless.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-left max-w-3xl mx-auto pt-4">
+          <ul class="space-y-3">
+            <li class="flex items-center"><Check class="mr-2 h-5 w-5 text-primary" /> Nominal pembayaran otomatis terkunci</li>
+            <li class="flex items-center"><Check class="mr-2 h-5 w-5 text-primary" /> Kode unik cerdas untuk tracking instan</li>
+          </ul>
+          <ul class="space-y-3">
+            <li class="flex items-center"><Check class="mr-2 h-5 w-5 text-primary" /> API Key gratis untuk integrasi aplikasi</li>
+            <li class="flex items-center"><Check class="mr-2 h-5 w-5 text-primary" /> Webhook & Android Listener notifikasi real-time</li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center pt-6">
           <Button as-child size="lg" class="px-8 h-12 rounded-full text-md shadow-lg shadow-primary/20 transition-all hover:scale-105">
             <Link href="/signup">Mulai Gratis Sekarang</Link>
           </Button>
