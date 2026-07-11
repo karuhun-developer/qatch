@@ -29,6 +29,9 @@ export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   @column()
   declare webhookTextWildcard: string | null
 
+  @column()
+  declare webhookUrl: string | null
+
   get initials() {
     const [first, last] = this.fullName ? this.fullName.split(' ') : this.email.split('@')
     if (first && last) {

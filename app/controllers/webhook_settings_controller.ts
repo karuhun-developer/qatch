@@ -19,6 +19,7 @@ export default class WebhookSettingsController {
         listenApps: user.webhookListenApps ? user.webhookListenApps.split(',') : [],
         titleWildcard: user.webhookTitleWildcard || '',
         textWildcard: user.webhookTextWildcard || '',
+        targetUrl: user.webhookUrl || '',
       },
       webhookUrl: `${request.protocol()}://${request.host()}/api/v1/dynamic-qris/callback`
     })
@@ -28,7 +29,7 @@ export default class WebhookSettingsController {
     const user = auth.user!
     
     // Validasi input
-    const payload = request.only(['listenApps', 'titleWildcard', 'textWildcard'])
+    const payload = request.only(['listenApps', 'titleWildcard', 'textWildcard', 'targetUrl'])
     
     user.webhookListenApps = Array.isArray(payload.listenApps) 
       ? payload.listenApps.join(',') 
@@ -36,6 +37,7 @@ export default class WebhookSettingsController {
       
     user.webhookTitleWildcard = payload.titleWildcard || null
     user.webhookTextWildcard = payload.textWildcard || null
+    user.webhookUrl = payload.targetUrl || null
 
     await user.save()
 

@@ -68,6 +68,16 @@ export default class DynamicQrisController {
         })
         transaction.proof = `uploads/proofs/${payload.proof.fileName}`
       }
+
+      if (user.webhookUrl) {
+        try {
+          fetch(user.webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event: 'transaction.paid', data: transaction.toJSON() })
+          }).catch(err => console.error('Failed to send webhook:', err))
+        } catch (e) {}
+      }
     } else {
       transaction.paidAt = null
       transaction.proof = null
@@ -144,6 +154,16 @@ export default class DynamicQrisController {
       matchedTransaction.status = 'paid'
       matchedTransaction.paidAt = DateTime.now()
       await matchedTransaction.save()
+
+      if (user.webhookUrl) {
+        try {
+          fetch(user.webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ event: 'transaction.paid', data: matchedTransaction.toJSON() })
+          }).catch(err => console.error('Failed to send webhook:', err))
+        } catch (e) {}
+      }
 
       return response.ok({
         message: 'Callback processed successfully, transaction marked as paid',

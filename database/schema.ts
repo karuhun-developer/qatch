@@ -81,7 +81,7 @@ export class RoleSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'roleId', 'updatedAt', 'webhookListenApps', 'webhookTextWildcard', 'webhookTitleWildcard'] as const
+  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'roleId', 'updatedAt', 'webhookListenApps', 'webhookTextWildcard', 'webhookTitleWildcard', 'webhookUrl'] as const
   $columns = UserSchema.$columns
   @column()
   declare apiKey: string | null
@@ -107,4 +107,6 @@ export class UserSchema extends BaseModel {
   declare webhookTextWildcard: string | null
   @column()
   declare webhookTitleWildcard: string | null
+  @column()
+  declare webhookUrl: string | null
 }

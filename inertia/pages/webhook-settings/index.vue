@@ -18,6 +18,7 @@ const props = defineProps<{
     listenApps: string[]
     titleWildcard: string
     textWildcard: string
+    targetUrl: string
   }
   webhookUrl: string
 }>()
@@ -26,6 +27,7 @@ const form = useForm({
   listenApps: props.webhookSettings.listenApps.join(', '),
   titleWildcard: props.webhookSettings.titleWildcard,
   textWildcard: props.webhookSettings.textWildcard,
+  targetUrl: props.webhookSettings.targetUrl,
 })
 
 const isCopied = ref(false)
@@ -141,6 +143,16 @@ const apiEndpoints = [
                 />
                 <p class="text-xs text-muted-foreground">Pesan notifikasi (isi) harus mengandung kata ini.</p>
               </div>
+            </div>
+
+            <div class="space-y-2">
+              <Label>Target Webhook URL</Label>
+              <Input 
+                v-model="form.targetUrl" 
+                placeholder="https://api.websiteanda.com/qris/callback" 
+                type="url"
+              />
+              <p class="text-xs text-muted-foreground">URL yang akan dipanggil (POST) oleh sistem saat status transaksi berubah menjadi PAID.</p>
             </div>
 
             <Button type="submit" :disabled="form.processing">
