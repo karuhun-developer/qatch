@@ -1,34 +1,172 @@
-# QRIS Dinamis
+<div align="center">
+  <h1>⚡ QRIS Dinamis</h1>
+  <p><strong>Konversi Static QRIS menjadi Dynamic QRIS dengan verifikasi pembayaran secara real-time & zero payment gateway fees.</strong></p>
+  <br/>
+  <img alt="AdonisJS" src="https://img.shields.io/badge/AdonisJS-5E0DAC?style=for-the-badge&logo=adonisjs&logoColor=white"/>
+  <img alt="Vue.js" src="https://img.shields.io/badge/Vue.js-42B883?style=for-the-badge&logo=vuedotjs&logoColor=white"/>
+  <img alt="Inertia.js" src="https://img.shields.io/badge/Inertia.js-7C3AED?style=for-the-badge&logo=inertia&logoColor=white"/>
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+</div>
 
-Ubah standard Static QRIS menjadi Dynamic QRIS dengan fitur verifikasi pembayaran secara _real-time_. Project ini adalah solusi _cost-effective_ untuk bypass potongan _payment gateway_ (PG), dengan memanfaatkan device Android untuk _intercept_ notifikasi mutasi/e-wallet dan mem-forward datanya ke webhook.
+---
 
-## 💡 Concept
+## 💡 Konsep
 
-Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan _merchant_ harus ngecek mutasi via aplikasi m-banking/e-wallet untuk memastikan dana masuk. **QRIS Dinamis** men-_solve_ masalah ini dengan cara:
+Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan _merchant_ harus cek mutasi via aplikasi m-banking/e-wallet untuk memastikan dana masuk. **QRIS Dinamis** solve masalah ini:
 
-1. Mem-parsing _string_ Static QRIS dan _inject_ nominal transaksi untuk men-_generate_ Dynamic QR Code.
-2. Menggunakan [Android Notification Forwarder](https://github.com/karuhun-developer/android-notification-forwarder) untuk _intercept_ _incoming payment notification_ di HP _merchant_.
-3. Mem-forward data dari notifikasi tersebut via HTTP POST request ke _endpoint_ webhook sistem ini.
-4. Melakukan _auto-verification_ pada _payload_ dan meng-update status transaksi menjadi `PAID`.
+1. Mem-parsing _string_ Static QRIS dan inject nominal transaksi untuk generate Dynamic QR Code.
+2. Menggunakan [Android Notification Forwarder](https://github.com/karuhun-developer/android-notification-forwarder) untuk intercept _incoming payment notification_ di HP merchant.
+3. Mem-forward data notifikasi via HTTP POST ke endpoint webhook sistem ini.
+4. Melakukan auto-verification pada payload dan update status transaksi menjadi `PAID`.
 
-## 🚀 Key Features
+## 🚀 Fitur Utama
 
-- **Dynamic QRIS Generator:** Otomatis _append_ nominal transaksi ke _base payload_ Static QRIS.
-- **Real-time Webhook:** _Endpoint_ yang _ready_ menerima POST request langsung dari Android Notification Forwarder.
-- **Auto Verification:** Mem-parsing teks notifikasi untuk mencocokkan nominal transaksi dan langsung _update_ status di database.
-- **Zero PG Fees:** 100% _self-hosted_ dan bebas biaya admin _payment gateway_.
-- **Modern Dashboard:** UI dashboard yang _seamless_ untuk monitoring transaksi menggunakan Inertia.js dan Vue.
+| Fitur | Deskripsi |
+|---|---|
+| 🔁 **Dynamic QRIS Generator** | Otomatis append nominal + kode unik ke base payload Static QRIS |
+| 📡 **Real-time Webhook** | Endpoint siap menerima POST request dari Android Notification Forwarder |
+| 🤖 **Auto Verification** | Parsing teks notifikasi untuk mencocokkan nominal & update status otomatis |
+| 🔑 **API Key & HMAC** | Autentikasi aman untuk semua akses API |
+| 🛡️ **Webhook Filtering** | Wildcard filter berdasarkan nama app, judul & isi notifikasi |
+| 📊 **Analytics Dashboard** | Chart penggunaan harian, statistik, dan log transaksi terbaru |
+| 👥 **Multi-user & Roles** | Manajemen user dengan role Superadmin dan User biasa |
+| 💰 **Zero PG Fees** | 100% self-hosted, bebas biaya admin payment gateway |
 
-## ⚙️ How It Works
+## ⚙️ Cara Kerja
 
-1. **Create Transaction:** Sistem men-_generate_ Dynamic QRIS untuk spesifik nominal dengan kode unik perhari diakhir (contoh: 50.021), 21 merupakan kode unik untuk membedakan transaksi yang sama nominalnya (misal: Rp 50.000) agar _merchant_ bisa mem-verifikasi pembayaran secara _real-time_.
-2. **Customer Pays:** _Customer_ _scan_ QR dan bayar dengan nominal yang sudah _locked_.
-3. **Incoming Notification:** Aplikasi m-banking / e-wallet _merchant_ menerima _push notification_ (misal: "Dana Masuk Rp 50.021").
-4. **Intercept & Forward:** Android Notification Forwarder akan _catch_ notifikasi ini dan melakukan _push data_ ke webhook `QRIS Dinamis`.
-5. **Status Update:** Logic di webhook akan mem-validasi teks/nominal dan otomatis mengubah status transaksi dari `PENDING` menjadi `PAID`.
+```
+Customer scan QR
+      │
+      ▼
+[QRIS Dinamis] Generate QR dengan nominal spesifik + kode unik
+      │         misal: Rp 50.000 → Rp 50.021 (021 = kode unik harian)
+      │
+      ▼
+Customer bayar via e-wallet / m-banking
+      │
+      ▼
+Push notification masuk ke HP merchant
+("Dana masuk: Rp 50.021 dari QRIS")
+      │
+      ▼
+[Android Notification Forwarder] intercept & forward ke webhook
+      │
+      ▼
+[QRIS Dinamis] validasi nominal → status PENDING → PAID ✅
+```
+
+## 🗺️ API Endpoints
+
+Semua endpoint membutuhkan header `x-api-key` untuk autentikasi.
+
+### Static QRIS
+| Method | Endpoint | Deskripsi |
+|---|---|---|
+| `GET` | `/api/v1/static-qris` | Daftar semua QRIS statis (paginasi) |
+| `POST` | `/api/v1/static-qris` | Tambah QRIS statis baru |
+| `GET` | `/api/v1/static-qris/:id` | Detail QRIS statis |
+| `PUT` | `/api/v1/static-qris/:id` | Update QRIS statis |
+| `DELETE` | `/api/v1/static-qris/:id` | Hapus QRIS statis |
+
+### Dynamic QRIS
+| Method | Endpoint | Deskripsi |
+|---|---|---|
+| `POST` | `/api/v1/dynamic-qris` | Generate QRIS dinamis baru |
+| `GET` | `/api/v1/dynamic-qris/:id` | Cek status transaksi |
+| `PUT` | `/api/v1/dynamic-qris/:id` | Update status manual |
+| `POST` | `/api/v1/dynamic-qris/callback` | **Webhook** untuk notifikasi pembayaran |
+
+### Webhook Callback Payload
+```json
+POST /api/v1/dynamic-qris/callback
+x-api-key: YOUR_API_KEY
+
+{
+  "app_name": "Dana",
+  "notification_title": "Dana Masuk",
+  "notification_text": "Kamu menerima Rp 50.021 dari QRIS",
+  "timestamp_ms": 1720432800000
+}
+```
 
 ## 🔧 Tech Stack
 
-- **AdonisJS** - Node.js Framework (Backend & Webhook Processor)
-- **Inertia.js & Vue.js** - Frontend Stack (Dashboard & Transaction Monitor)
-- **[Android Notification Forwarder](https://github.com/karuhun-developer/android-notification-forwarder)** - Notification Interceptor
+- **[AdonisJS v6](https://adonisjs.com/)** — Backend framework (API, Webhook, Auth)
+- **[Inertia.js](https://inertiajs.com/) + [Vue.js 3](https://vuejs.org/)** — Full-stack SPA tanpa REST overhead
+- **[shadcn/vue](https://www.shadcn-vue.com/)** — UI Component library
+- **[Chart.js](https://www.chartjs.org/)** — Visualisasi data dashboard
+- **[Android Notification Forwarder](https://github.com/karuhun-developer/android-notification-forwarder)** — Notification interceptor di sisi Android
+
+## 🛠️ Instalasi
+
+### Prerequisites
+- Node.js >= 20
+- NPM atau Yarn
+- Database (SQLite untuk development, PostgreSQL/MySQL untuk production)
+
+### Langkah Instalasi
+
+```bash
+# 1. Clone repository
+git clone https://github.com/karuhun-developer/qris-dinamis.git
+cd qris-dinamis
+
+# 2. Install dependencies
+npm install
+
+# 3. Copy file environment
+cp .env.example .env
+
+# 4. Generate app key
+node ace generate:key
+
+# 5. Jalankan migrasi database
+node ace migration:run
+
+# 6. (Opsional) Jalankan seeder
+node ace db:seed
+
+# 7. Start development server
+npm run dev
+```
+
+## ⚙️ Konfigurasi Webhook
+
+1. Install **Android Notification Forwarder** di HP merchant.
+2. Login ke dashboard QRIS Dinamis → menu **Webhook & API**.
+3. Copy **URL Webhook** yang tersedia.
+4. Paste URL tersebut ke konfigurasi Android Notification Forwarder.
+5. Atur **Listen Apps** (contoh: `Dana, Gopay, Shopeepay`) dan **Wildcard** filter sesuai kebutuhan.
+6. Setiap ada notifikasi pembayaran masuk, status transaksi akan otomatis ter-update.
+
+## 📁 Struktur Project
+
+```
+├── app/
+│   ├── controllers/
+│   │   ├── api/v1/          # API Controllers (Static & Dynamic QRIS)
+│   │   └── ...              # Web Controllers (Dashboard, Auth, dll)
+│   ├── middleware/
+│   │   └── api_key_middleware.ts  # Autentikasi via x-api-key
+│   ├── models/              # Lucid ORM Models
+│   └── services/            # Business logic (QRIS parsing, generation)
+├── database/
+│   └── migrations/          # Database schema migrations
+├── inertia/
+│   ├── pages/               # Vue.js pages (Dashboard, QRIS, Webhook, dll)
+│   ├── components/          # Reusable Vue components
+│   └── layouts/             # Layout templates
+└── start/
+    ├── routes.ts            # Route definitions
+    └── kernel.ts            # Middleware registration
+```
+
+## 📄 Lisensi
+
+MIT License — bebas digunakan dan dimodifikasi.
+
+---
+
+<div align="center">
+  <p>Built with ❤️ by <a href="https://github.com/karuhun-developer">Karuhun Developer</a></p>
+</div>
