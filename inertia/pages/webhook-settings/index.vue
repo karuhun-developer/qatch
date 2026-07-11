@@ -5,9 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import SecuritySettings from '@/components/SecuritySettings.vue'
-import { Webhook, Shield, Link as LinkIcon, Save, Copy, Check, Terminal, Smartphone } from '@lucide/vue'
+import AndroidForwarderAlert from '@/components/AndroidForwarderAlert.vue'
+import { Webhook, Shield, Link as LinkIcon, Save, Copy, Check, Terminal } from '@lucide/vue'
 import { ref } from 'vue'
 
 defineOptions({ layout: DashboardLayout })
@@ -77,15 +77,7 @@ const apiEndpoints = [
     </div>
   </div>
 
-  <Alert class="mb-8 border-primary/20 bg-primary/5">
-    <Smartphone class="h-5 w-5 text-primary" />
-    <AlertTitle class="font-semibold text-primary">Info Penting: Aplikasi Forwarder Android</AlertTitle>
-    <AlertDescription class="text-muted-foreground mt-1 leading-relaxed">
-      Untuk mengaktifkan fitur verifikasi status pembayaran QRIS Dinamis secara otomatis (real-time), Anda harus menginstal 
-      <a href="https://github.com/karuhun-developer/android-notification-forwarder/releases" target="_blank" class="font-medium underline underline-offset-4 text-primary hover:text-primary/80 transition-colors">Android Notification Forwarder</a> 
-      di HP yang menerima notifikasi mutasi. Atur Webhook URL di HP tersebut dan arahkan ke pengaturan Webhook di aplikasi ini.
-    </AlertDescription>
-  </Alert>
+  <AndroidForwarderAlert class="mb-8" />
 
   <div class="mb-6 space-y-4">
     <div class="bg-primary/5 border border-primary/20 rounded-xl p-4 flex items-center gap-4 relative overflow-hidden">
