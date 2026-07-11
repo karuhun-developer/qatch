@@ -1,4 +1,4 @@
-import type { TLV, QRISData, MerchantAccountInfo } from './types.ts'
+import type { TLV, QRISData, MerchantAccountInfo } from './types.js'
 
 /** Map of known EMVCo / QRIS tag IDs to human-readable names */
 const TAG_NAMES: Record<string, string> = {

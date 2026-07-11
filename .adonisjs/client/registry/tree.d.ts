@@ -13,7 +13,11 @@ export interface ApiDefinition {
     destroy: typeof routes['session.destroy']
   }
   dashboard: typeof routes['dashboard']
-  profile: typeof routes['profile']
+  profile: {
+    index: typeof routes['profile.index']
+    hmac: typeof routes['profile.hmac']
+    apikey: typeof routes['profile.apikey']
+  }
   roles: {
     index: typeof routes['roles.index']
     store: typeof routes['roles.store']
@@ -25,5 +29,16 @@ export interface ApiDefinition {
     store: typeof routes['users.store']
     update: typeof routes['users.update']
     destroy: typeof routes['users.destroy']
+  }
+  qris: {
+    index: typeof routes['qris.index']
+    store: typeof routes['qris.store']
+    update: typeof routes['qris.update']
+    destroy: typeof routes['qris.destroy']
+  }
+  qrisDynamic: {
+    index: typeof routes['qris-dynamic.index']
+    store: typeof routes['qris-dynamic.store']
+    status: typeof routes['qris-dynamic.status']
   }
 }

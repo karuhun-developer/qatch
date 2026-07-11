@@ -42,11 +42,23 @@ const routes = {
     tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
     types: placeholder as Registry['dashboard']['types'],
   },
-  'profile': {
+  'profile.index': {
     methods: ["GET","HEAD"],
     pattern: '/profile',
     tokens: [{"old":"/profile","type":0,"val":"profile","end":""}],
-    types: placeholder as Registry['profile']['types'],
+    types: placeholder as Registry['profile.index']['types'],
+  },
+  'profile.hmac': {
+    methods: ["POST"],
+    pattern: '/profile/hmac',
+    tokens: [{"old":"/profile/hmac","type":0,"val":"profile","end":""},{"old":"/profile/hmac","type":0,"val":"hmac","end":""}],
+    types: placeholder as Registry['profile.hmac']['types'],
+  },
+  'profile.apikey': {
+    methods: ["POST"],
+    pattern: '/profile/api-key',
+    tokens: [{"old":"/profile/api-key","type":0,"val":"profile","end":""},{"old":"/profile/api-key","type":0,"val":"api-key","end":""}],
+    types: placeholder as Registry['profile.apikey']['types'],
   },
   'roles.index': {
     methods: ["GET","HEAD"],
@@ -95,6 +107,48 @@ const routes = {
     pattern: '/users/:id',
     tokens: [{"old":"/users/:id","type":0,"val":"users","end":""},{"old":"/users/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['users.destroy']['types'],
+  },
+  'qris.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/qris',
+    tokens: [{"old":"/qris","type":0,"val":"qris","end":""}],
+    types: placeholder as Registry['qris.index']['types'],
+  },
+  'qris.store': {
+    methods: ["POST"],
+    pattern: '/qris',
+    tokens: [{"old":"/qris","type":0,"val":"qris","end":""}],
+    types: placeholder as Registry['qris.store']['types'],
+  },
+  'qris.update': {
+    methods: ["PUT"],
+    pattern: '/qris/:id',
+    tokens: [{"old":"/qris/:id","type":0,"val":"qris","end":""},{"old":"/qris/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['qris.update']['types'],
+  },
+  'qris.destroy': {
+    methods: ["DELETE"],
+    pattern: '/qris/:id',
+    tokens: [{"old":"/qris/:id","type":0,"val":"qris","end":""},{"old":"/qris/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['qris.destroy']['types'],
+  },
+  'qris-dynamic.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/qris-dynamic',
+    tokens: [{"old":"/qris-dynamic","type":0,"val":"qris-dynamic","end":""}],
+    types: placeholder as Registry['qris-dynamic.index']['types'],
+  },
+  'qris-dynamic.store': {
+    methods: ["POST"],
+    pattern: '/qris-dynamic',
+    tokens: [{"old":"/qris-dynamic","type":0,"val":"qris-dynamic","end":""}],
+    types: placeholder as Registry['qris-dynamic.store']['types'],
+  },
+  'qris-dynamic.status': {
+    methods: ["POST"],
+    pattern: '/qris-dynamic/:id/status',
+    tokens: [{"old":"/qris-dynamic/:id/status","type":0,"val":"qris-dynamic","end":""},{"old":"/qris-dynamic/:id/status","type":1,"val":"id","end":""},{"old":"/qris-dynamic/:id/status","type":0,"val":"status","end":""}],
+    types: placeholder as Registry['qris-dynamic.status']['types'],
   },
   'session.destroy': {
     methods: ["POST"],

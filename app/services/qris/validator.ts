@@ -1,6 +1,6 @@
-import { calculateCRC16 } from './crc16.ts'
-import { parseTLV } from './parser.ts'
-import type { ValidationResult } from './types.ts'
+import { calculateCRC16 } from './crc16.js'
+import { parseTLV } from './parser.js'
+import type { ValidationResult } from './types.js'
 
 /**
  * Validate a QRIS string for structural correctness.

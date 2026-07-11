@@ -22,7 +22,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
-import { LayoutDashboard, User, LogOut, Shield, Users, Menu } from '@lucide/vue'
+import { LayoutDashboard, User, LogOut, Shield, Users, Menu, QrCode, RefreshCw } from '@lucide/vue'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 
@@ -77,6 +77,22 @@ watch(
             Dashboard
           </Link>
           <Link
+            href="/qris"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris') && !$page.url.startsWith('/qris-dynamic') }"
+          >
+            <QrCode class="h-4 w-4" />
+            QRIS Statis
+          </Link>
+          <Link
+            href="/qris-dynamic"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris-dynamic') }"
+          >
+            <RefreshCw class="h-4 w-4" />
+            QRIS Dinamis
+          </Link>
+          <Link
             v-if="page.props.user?.roleId === 1"
             href="/users"
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
@@ -124,6 +140,24 @@ watch(
               >
                 <LayoutDashboard class="h-4 w-4" />
                 Dashboard
+              </Link>
+              <Link
+                href="/qris"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris') && !$page.url.startsWith('/qris-dynamic') }"
+                @click="mobileMenuOpen = false"
+              >
+                <QrCode class="h-4 w-4" />
+                QRIS Statis
+              </Link>
+              <Link
+                href="/qris-dynamic"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris-dynamic') }"
+                @click="mobileMenuOpen = false"
+              >
+                <RefreshCw class="h-4 w-4" />
+                QRIS Dinamis
               </Link>
               <Link
                 v-if="page.props.user?.roleId === 1"

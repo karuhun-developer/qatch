@@ -4,8 +4,14 @@ import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Activity, ArrowUpRight, CreditCard, CheckCircle, QrCode, ArrowRight, Download, Calendar } from '@lucide/vue'
+import SecuritySettings from '@/components/SecuritySettings.vue'
 
 defineOptions({ layout: DashboardLayout })
+
+const props = defineProps<{
+  apiKey: string | null
+  hasHmac: boolean
+}>()
 </script>
 
 <template>
@@ -123,5 +129,9 @@ defineOptions({ layout: DashboardLayout })
       </CardContent>
     </Card>
 
+  </div>
+
+  <div class="mt-4">
+    <SecuritySettings :api-key="apiKey" :has-hmac="hasHmac" />
   </div>
 </template>

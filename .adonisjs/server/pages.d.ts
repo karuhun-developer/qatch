@@ -18,5 +18,7 @@ declare module '@adonisjs/inertia/types' {
     'profile': ExtractProps<(typeof import('../../inertia/pages/profile.vue'))['default']>
     'roles/index': ExtractProps<(typeof import('../../inertia/pages/roles/index.vue'))['default']>
     'users/index': ExtractProps<(typeof import('../../inertia/pages/users/index.vue'))['default']>
+    'qris/index': ExtractProps<(typeof import('../../inertia/pages/qris/index.vue'))['default']>
+    'qris-dynamic/index': ExtractProps<(typeof import('../../inertia/pages/qris-dynamic/index.vue'))['default']>
   }
 }

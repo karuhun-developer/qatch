@@ -1,6 +1,6 @@
-import { calculateCRC16 } from './crc16.ts'
-import { parseTLV } from './parser.ts'
-import type { ConvertOptions, TLV } from './types.ts'
+import { calculateCRC16 } from './crc16.js'
+import { parseTLV } from './parser.js'
+import type { ConvertOptions, TLV } from './types.js'
 
 /**
  * Rebuild a QRIS string from TLV elements (without CRC).

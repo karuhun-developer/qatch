@@ -8,4 +8,7 @@ export const controllers = {
   Session: () => import('#controllers/session_controller'),
   Roles: () => import('#controllers/roles_controller'),
   Users: () => import('#controllers/users_controller'),
+  Qris: () => import('#controllers/qris_controller'),
+  Profile: () => import('#controllers/profile_controller'),
+  DynamicQris: () => import('#controllers/dynamic_qris_controller'),
 }

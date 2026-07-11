@@ -7,8 +7,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import SecuritySettings from '@/components/SecuritySettings.vue'
 
 defineOptions({ layout: DashboardLayout })
+
+const props = defineProps<{
+  apiKey: string | null
+  hasHmac: boolean
+}>()
 
 const page = usePage<Data.SharedProps>()
 </script>
@@ -42,5 +48,9 @@ const page = usePage<Data.SharedProps>()
         <Button>Simpan Perubahan</Button>
       </CardFooter>
     </Card>
+
+    <div class="mt-4">
+      <SecuritySettings :api-key="apiKey" :has-hmac="hasHmac" />
+    </div>
   </div>
 </template>

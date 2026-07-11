@@ -79,7 +79,7 @@ export interface Registry {
       errorResponse: unknown
     }
   }
-  'profile': {
+  'profile.index': {
     methods: ["GET","HEAD"]
     pattern: '/profile'
     types: {
@@ -87,8 +87,32 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['index']>>>
+    }
+  }
+  'profile.hmac': {
+    methods: ["POST"]
+    pattern: '/profile/hmac'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('@vinejs/vine').default)['compile']>|InferInput<(typeof import('@vinejs/vine').default)['object']>|InferInput<(typeof import('@vinejs/vine').default)['string()']['trim()']['minLength']>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('@vinejs/vine').default)['compile']>|InferInput<(typeof import('@vinejs/vine').default)['object']>|InferInput<(typeof import('@vinejs/vine').default)['string()']['trim()']['minLength']>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['updateHmac']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['updateHmac']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'profile.apikey': {
+    methods: ["POST"]
+    pattern: '/profile/api-key'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['generateApiKey']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['generateApiKey']>>>
     }
   }
   'roles.index': {
@@ -185,6 +209,90 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/users_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/users_controller').default['destroy']>>>
+    }
+  }
+  'qris.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/qris'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['index']>>>
+    }
+  }
+  'qris.store': {
+    methods: ["POST"]
+    pattern: '/qris'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/qris').createQrisValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/qris').createQrisValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'qris.update': {
+    methods: ["PUT"]
+    pattern: '/qris/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/qris').updateQrisValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/qris').updateQrisValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'qris.destroy': {
+    methods: ["DELETE"]
+    pattern: '/qris/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['destroy']>>>
+    }
+  }
+  'qris-dynamic.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/qris-dynamic'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/dynamic_qris_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/dynamic_qris_controller').default['index']>>>
+    }
+  }
+  'qris-dynamic.store': {
+    methods: ["POST"]
+    pattern: '/qris-dynamic'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/qris_transaction').generateDynamicQrisValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/qris_transaction').generateDynamicQrisValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/dynamic_qris_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/dynamic_qris_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'qris-dynamic.status': {
+    methods: ["POST"]
+    pattern: '/qris-dynamic/:id/status'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/dynamic_qris_controller').default['updateStatus']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/dynamic_qris_controller').default['updateStatus']>>>
     }
   }
   'session.destroy': {

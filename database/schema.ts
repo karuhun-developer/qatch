@@ -7,6 +7,66 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class QriSchema extends BaseModel {
+  static $columns = ['createdAt', 'description', 'id', 'name', 'qris', 'qrisString', 'updatedAt', 'userId'] as const
+  $columns = QriSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column()
+  declare qris: string
+  @column()
+  declare qrisString: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
+export class QrisTransactionSchema extends BaseModel {
+  static $columns = ['amount', 'createdAt', 'expiredAt', 'feeAmount', 'feeType', 'feeValue', 'id', 'paidAt', 'proof', 'qrisId', 'qrisString', 'status', 'total', 'transactionCode', 'uniqueCode', 'updatedAt', 'userId'] as const
+  $columns = QrisTransactionSchema.$columns
+  @column()
+  declare amount: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare expiredAt: DateTime
+  @column()
+  declare feeAmount: number | null
+  @column()
+  declare feeType: string | null
+  @column()
+  declare feeValue: number | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column.dateTime()
+  declare paidAt: DateTime | null
+  @column()
+  declare proof: string | null
+  @column()
+  declare qrisId: number | null
+  @column()
+  declare qrisString: string
+  @column()
+  declare status: string | null
+  @column()
+  declare total: number
+  @column()
+  declare transactionCode: string
+  @column()
+  declare uniqueCode: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
 export class RoleSchema extends BaseModel {
   static $columns = ['createdAt', 'id', 'name', 'updatedAt'] as const
   $columns = RoleSchema.$columns
@@ -21,14 +81,18 @@ export class RoleSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'roleId', 'updatedAt'] as const
+  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'roleId', 'updatedAt'] as const
   $columns = UserSchema.$columns
+  @column()
+  declare apiKey: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
   declare email: string
   @column()
   declare fullName: string | null
+  @column()
+  declare hmacKey: string | null
   @column({ isPrimary: true })
   declare id: number
   @column({ serializeAs: null })
