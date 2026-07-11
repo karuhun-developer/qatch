@@ -3,7 +3,7 @@ import { watch } from 'vue'
 import { usePage } from '@inertiajs/vue3'
 import { toast } from 'vue-sonner'
 import type { Data } from '@generated/data'
-import { Link, Form } from '@adonisjs/inertia/vue'
+import { Link } from '@adonisjs/inertia/vue'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
@@ -16,9 +16,21 @@ import {
 } from '@/components/ui/dropdown-menu'
 import DarkModeToggle from '@/components/DarkModeToggle.vue'
 import { Toaster } from '@/components/ui/sonner'
+import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 import { LayoutDashboard, User, LogOut, Shield } from '@lucide/vue'
+import { ref } from 'vue'
+import { router } from '@inertiajs/vue3'
 
 const page = usePage<Data.SharedProps>()
+const logoutModalOpen = ref(false)
+
+function handleLogout() {
+  router.post('/logout', {}, {
+    onFinish: () => {
+      logoutModalOpen.value = false
+    }
+  })
+}
 
 watch(
   () => page.url,
@@ -59,14 +71,6 @@ watch(
             Dashboard
           </Link>
           <Link
-            href="/profile"
-            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            :class="{ 'bg-muted text-primary': $page.url === '/profile' }"
-          >
-            <User class="h-4 w-4" />
-            Profile
-          </Link>
-          <Link
             v-if="page.props.user?.roleId === 1"
             href="/roles"
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
@@ -83,8 +87,7 @@ watch(
       <!-- Header -->
       <header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
         <!-- Mobile Sidebar Toggle could be here -->
-        <div class="w-full flex-1">
-        </div>
+        <div class="w-full flex-1"></div>
         <DarkModeToggle />
         <DropdownMenu v-if="page.props.user">
           <DropdownMenuTrigger as-child>
@@ -111,13 +114,12 @@ watch(
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem as-child>
-              <Form route="session.destroy" class="w-full">
-                <button type="submit" class="w-full text-left flex items-center cursor-pointer text-destructive">
-                  <LogOut class="mr-2 h-4 w-4" />
-                  <span>Log out</span>
-                </button>
-              </Form>
+            <DropdownMenuItem 
+              class="w-full text-left flex items-center cursor-pointer text-destructive"
+              @click="logoutModalOpen = true"
+            >
+              <LogOut class="mr-2 h-4 w-4" />
+              <span>Log out</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -128,6 +130,14 @@ watch(
         <slot />
       </main>
     </div>
+
+    <ConfirmModal
+      v-model:open="logoutModalOpen"
+      title="Konfirmasi Logout"
+      description="Apakah Anda yakin ingin keluar dari aplikasi?"
+      confirm-text="Logout"
+      @confirm="handleLogout"
+    />
 
     <Toaster position="top-center" rich-colors />
   </div>
