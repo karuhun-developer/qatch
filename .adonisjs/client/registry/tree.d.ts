@@ -36,9 +36,26 @@ export interface ApiDefinition {
     update: typeof routes['qris.update']
     destroy: typeof routes['qris.destroy']
   }
+  webhookSettings: {
+    index: typeof routes['webhook-settings.index']
+    update: typeof routes['webhook-settings.update']
+  }
   qrisDynamic: {
     index: typeof routes['qris-dynamic.index']
     store: typeof routes['qris-dynamic.store']
     status: typeof routes['qris-dynamic.status']
+  }
+  staticQris: {
+    index: typeof routes['static_qris.index']
+    store: typeof routes['static_qris.store']
+    show: typeof routes['static_qris.show']
+    update: typeof routes['static_qris.update']
+    destroy: typeof routes['static_qris.destroy']
+  }
+  dynamicQris: {
+    store: typeof routes['dynamic_qris.store']
+    show: typeof routes['dynamic_qris.show']
+    update: typeof routes['dynamic_qris.update']
+    callback: typeof routes['dynamic_qris.callback']
   }
 }

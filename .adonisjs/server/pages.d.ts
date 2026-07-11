@@ -20,5 +20,6 @@ declare module '@adonisjs/inertia/types' {
     'users/index': ExtractProps<(typeof import('../../inertia/pages/users/index.vue'))['default']>
     'qris/index': ExtractProps<(typeof import('../../inertia/pages/qris/index.vue'))['default']>
     'qris-dynamic/index': ExtractProps<(typeof import('../../inertia/pages/qris-dynamic/index.vue'))['default']>
+    'webhook-settings/index': ExtractProps<(typeof import('../../inertia/pages/webhook-settings/index.vue'))['default']>
   }
 }

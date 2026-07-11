@@ -44,6 +44,9 @@ router
     router.put('qris/:id', [controllers.Qris, 'update']).as('qris.update')
     router.delete('qris/:id', [controllers.Qris, 'destroy']).as('qris.destroy')
     
+    router.get('webhook-settings', [controllers.WebhookSettings, 'index']).as('webhook-settings.index')
+    router.post('webhook-settings', [controllers.WebhookSettings, 'update']).as('webhook-settings.update')
+
     router.get('qris-dynamic', [controllers.DynamicQris, 'index']).as('qris-dynamic.index')
     router.post('qris-dynamic', [controllers.DynamicQris, 'store']).as('qris-dynamic.store')
     router.post('qris-dynamic/:id/status', [controllers.DynamicQris, 'updateStatus']).as('qris-dynamic.status')
@@ -51,3 +54,24 @@ router
     router.post('logout', [controllers.Session, 'destroy'])
   })
   .use(middleware.auth())
+
+// API Routes
+router
+  .group(() => {
+    // Static QRIS API
+    router.get('static-qris', '#controllers/api/v1/static_qris_controller.index')
+    router.post('static-qris', '#controllers/api/v1/static_qris_controller.store')
+    router.get('static-qris/:id', '#controllers/api/v1/static_qris_controller.show')
+    router.put('static-qris/:id', '#controllers/api/v1/static_qris_controller.update')
+    router.delete('static-qris/:id', '#controllers/api/v1/static_qris_controller.destroy')
+
+    // Dynamic QRIS API
+    router.post('dynamic-qris', '#controllers/api/v1/dynamic_qris_controller.store')
+    router.get('dynamic-qris/:id', '#controllers/api/v1/dynamic_qris_controller.show')
+    router.put('dynamic-qris/:id', '#controllers/api/v1/dynamic_qris_controller.update')
+    
+    // Callback Webhook
+    router.post('dynamic-qris/callback', '#controllers/api/v1/dynamic_qris_controller.callback')
+  })
+  .prefix('api/v1')
+  .use(middleware.apiKey())

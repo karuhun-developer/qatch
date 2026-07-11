@@ -12,4 +12,11 @@ export const controllers = {
   Profile: () => import('#controllers/profile_controller'),
   DynamicQris: () => import('#controllers/dynamic_qris_controller'),
   Dashboard: () => import('#controllers/dashboard_controller'),
+  api: {
+    v1: {
+      StaticQris: () => import('#controllers/api/v1/static_qris_controller'),
+      DynamicQris: () => import('#controllers/api/v1/dynamic_qris_controller'),
+    },
+  },
+  WebhookSettings: () => import('#controllers/webhook_settings_controller'),
 }

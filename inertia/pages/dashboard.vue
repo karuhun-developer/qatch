@@ -4,7 +4,7 @@ import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Users, QrCode, RefreshCw, Activity, Wallet, Calendar } from '@lucide/vue'
+import { Users, QrCode, RefreshCw, Activity, Wallet, Calendar, Webhook } from '@lucide/vue'
 import SecuritySettings from '@/components/SecuritySettings.vue'
 import { computed } from 'vue'
 
@@ -147,6 +147,9 @@ const chartOptions = {
       <div class="flex gap-2 w-full sm:w-auto mt-2 sm:mt-0">
         <Button variant="outline" as-child class="flex-1 sm:flex-none">
           <Link href="/qris"><QrCode class="mr-2 h-4 w-4" /> QRIS Statis</Link>
+        </Button>
+        <Button variant="outline" as-child class="flex-1 sm:flex-none">
+          <Link href="/webhook-settings"><Webhook class="mr-2 h-4 w-4" /> API & Webhook</Link>
         </Button>
         <Button as-child class="flex-1 sm:flex-none">
           <Link href="/qris-dynamic"><RefreshCw class="mr-2 h-4 w-4" /> QRIS Dinamis</Link>

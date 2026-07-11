@@ -20,6 +20,15 @@ export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   @column()
   declare apiKey: string | null
 
+  @column()
+  declare webhookListenApps: string | null
+
+  @column()
+  declare webhookTitleWildcard: string | null
+
+  @column()
+  declare webhookTextWildcard: string | null
+
   get initials() {
     const [first, last] = this.fullName ? this.fullName.split(' ') : this.email.split('@')
     if (first && last) {

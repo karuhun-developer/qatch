@@ -81,7 +81,7 @@ export class RoleSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'roleId', 'updatedAt'] as const
+  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'roleId', 'updatedAt', 'webhookListenApps', 'webhookTextWildcard', 'webhookTitleWildcard'] as const
   $columns = UserSchema.$columns
   @column()
   declare apiKey: string | null
@@ -101,4 +101,10 @@ export class UserSchema extends BaseModel {
   declare roleId: number | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare webhookListenApps: string | null
+  @column()
+  declare webhookTextWildcard: string | null
+  @column()
+  declare webhookTitleWildcard: string | null
 }

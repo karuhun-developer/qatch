@@ -259,6 +259,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/qris_controller').default['destroy']>>>
     }
   }
+  'webhook-settings.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/webhook-settings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/webhook_settings_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/webhook_settings_controller').default['index']>>>
+    }
+  }
+  'webhook-settings.update': {
+    methods: ["POST"]
+    pattern: '/webhook-settings'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/webhook_settings_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/webhook_settings_controller').default['update']>>>
+    }
+  }
   'qris-dynamic.index': {
     methods: ["GET","HEAD"]
     pattern: '/qris-dynamic'
@@ -305,6 +329,114 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/session_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/session_controller').default['destroy']>>>
+    }
+  }
+  'static_qris.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/static-qris'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'static_qris.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/static-qris'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'static_qris.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/static-qris/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'static_qris.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/static-qris/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'static_qris.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/v1/static-qris/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'dynamic_qris.store': {
+    methods: ["POST"]
+    pattern: '/api/v1/dynamic-qris'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'dynamic_qris.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/dynamic-qris/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'dynamic_qris.update': {
+    methods: ["PUT"]
+    pattern: '/api/v1/dynamic-qris/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'dynamic_qris.callback': {
+    methods: ["POST"]
+    pattern: '/api/v1/dynamic-qris/callback'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
     }
   }
 }

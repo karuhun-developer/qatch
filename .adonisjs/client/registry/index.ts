@@ -132,6 +132,18 @@ const routes = {
     tokens: [{"old":"/qris/:id","type":0,"val":"qris","end":""},{"old":"/qris/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['qris.destroy']['types'],
   },
+  'webhook-settings.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/webhook-settings',
+    tokens: [{"old":"/webhook-settings","type":0,"val":"webhook-settings","end":""}],
+    types: placeholder as Registry['webhook-settings.index']['types'],
+  },
+  'webhook-settings.update': {
+    methods: ["POST"],
+    pattern: '/webhook-settings',
+    tokens: [{"old":"/webhook-settings","type":0,"val":"webhook-settings","end":""}],
+    types: placeholder as Registry['webhook-settings.update']['types'],
+  },
   'qris-dynamic.index': {
     methods: ["GET","HEAD"],
     pattern: '/qris-dynamic',
@@ -155,6 +167,60 @@ const routes = {
     pattern: '/logout',
     tokens: [{"old":"/logout","type":0,"val":"logout","end":""}],
     types: placeholder as Registry['session.destroy']['types'],
+  },
+  'static_qris.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/static-qris',
+    tokens: [{"old":"/api/v1/static-qris","type":0,"val":"api","end":""},{"old":"/api/v1/static-qris","type":0,"val":"v1","end":""},{"old":"/api/v1/static-qris","type":0,"val":"static-qris","end":""}],
+    types: placeholder as Registry['static_qris.index']['types'],
+  },
+  'static_qris.store': {
+    methods: ["POST"],
+    pattern: '/api/v1/static-qris',
+    tokens: [{"old":"/api/v1/static-qris","type":0,"val":"api","end":""},{"old":"/api/v1/static-qris","type":0,"val":"v1","end":""},{"old":"/api/v1/static-qris","type":0,"val":"static-qris","end":""}],
+    types: placeholder as Registry['static_qris.store']['types'],
+  },
+  'static_qris.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/static-qris/:id',
+    tokens: [{"old":"/api/v1/static-qris/:id","type":0,"val":"api","end":""},{"old":"/api/v1/static-qris/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/static-qris/:id","type":0,"val":"static-qris","end":""},{"old":"/api/v1/static-qris/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['static_qris.show']['types'],
+  },
+  'static_qris.update': {
+    methods: ["PUT"],
+    pattern: '/api/v1/static-qris/:id',
+    tokens: [{"old":"/api/v1/static-qris/:id","type":0,"val":"api","end":""},{"old":"/api/v1/static-qris/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/static-qris/:id","type":0,"val":"static-qris","end":""},{"old":"/api/v1/static-qris/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['static_qris.update']['types'],
+  },
+  'static_qris.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/v1/static-qris/:id',
+    tokens: [{"old":"/api/v1/static-qris/:id","type":0,"val":"api","end":""},{"old":"/api/v1/static-qris/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/static-qris/:id","type":0,"val":"static-qris","end":""},{"old":"/api/v1/static-qris/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['static_qris.destroy']['types'],
+  },
+  'dynamic_qris.store': {
+    methods: ["POST"],
+    pattern: '/api/v1/dynamic-qris',
+    tokens: [{"old":"/api/v1/dynamic-qris","type":0,"val":"api","end":""},{"old":"/api/v1/dynamic-qris","type":0,"val":"v1","end":""},{"old":"/api/v1/dynamic-qris","type":0,"val":"dynamic-qris","end":""}],
+    types: placeholder as Registry['dynamic_qris.store']['types'],
+  },
+  'dynamic_qris.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/v1/dynamic-qris/:id',
+    tokens: [{"old":"/api/v1/dynamic-qris/:id","type":0,"val":"api","end":""},{"old":"/api/v1/dynamic-qris/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/dynamic-qris/:id","type":0,"val":"dynamic-qris","end":""},{"old":"/api/v1/dynamic-qris/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['dynamic_qris.show']['types'],
+  },
+  'dynamic_qris.update': {
+    methods: ["PUT"],
+    pattern: '/api/v1/dynamic-qris/:id',
+    tokens: [{"old":"/api/v1/dynamic-qris/:id","type":0,"val":"api","end":""},{"old":"/api/v1/dynamic-qris/:id","type":0,"val":"v1","end":""},{"old":"/api/v1/dynamic-qris/:id","type":0,"val":"dynamic-qris","end":""},{"old":"/api/v1/dynamic-qris/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['dynamic_qris.update']['types'],
+  },
+  'dynamic_qris.callback': {
+    methods: ["POST"],
+    pattern: '/api/v1/dynamic-qris/callback',
+    tokens: [{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"api","end":""},{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"v1","end":""},{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"dynamic-qris","end":""},{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"callback","end":""}],
+    types: placeholder as Registry['dynamic_qris.callback']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 
