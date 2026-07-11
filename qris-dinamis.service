@@ -1,0 +1,27 @@
+[Unit]
+Description=QRIS Dinamis AdonisJS App
+After=network.target
+
+[Service]
+# User dan Group tempat aplikasi dijalankan (sesuaikan jika perlu)
+User=orangkeren
+Group=orangkeren
+
+# Direktori kerja aplikasi
+WorkingDirectory=/home/orangkeren/node/qris-dinamis
+
+# Path ke Node.js (sesuaikan dengan output command 'which node')
+# Jika pakai nvm, biasanya path-nya mengarah ke /home/orangkeren/.nvm/versions/node/.../bin/node
+ExecStart=/usr/bin/node build/bin/server.js
+
+# Variabel Lingkungan (Environment Variables)
+Environment="NODE_ENV=production"
+# Load environment dari file .env
+EnvironmentFile=/home/orangkeren/node/qris-dinamis/.env
+
+# Konfigurasi Restart
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
