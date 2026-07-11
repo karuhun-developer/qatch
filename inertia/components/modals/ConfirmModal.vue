@@ -26,19 +26,20 @@ defineEmits<{
 
 <template>
   <Dialog :open="open" @update:open="$emit('update:open', $event)">
-    <DialogContent class="sm:max-w-[425px]">
-      <DialogHeader>
-        <DialogTitle>{{ title }}</DialogTitle>
-        <DialogDescription>
+    <DialogContent class="sm:max-w-[425px] p-0 overflow-hidden border-muted/60 bg-background/95 backdrop-blur-xl">
+      <DialogHeader class="p-6 pb-2">
+        <DialogTitle class="text-xl font-semibold">{{ title }}</DialogTitle>
+        <DialogDescription class="text-muted-foreground mt-2">
           {{ description }}
         </DialogDescription>
       </DialogHeader>
-      <DialogFooter class="mt-4">
+      <DialogFooter class="px-6 py-4 bg-muted/20 border-t border-muted/40 mt-4 sm:justify-end gap-2">
         <Button 
           type="button" 
           variant="outline" 
           @click="$emit('update:open', false)"
           :disabled="loading"
+          class="bg-background"
         >
           {{ cancelText || 'Batal' }}
         </Button>
@@ -47,6 +48,7 @@ defineEmits<{
           variant="destructive" 
           @click="$emit('confirm')"
           :disabled="loading"
+          class="shadow-md shadow-destructive/20"
         >
           {{ loading ? 'Memproses...' : (confirmText || 'Hapus') }}
         </Button>

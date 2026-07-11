@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import vine from '@vinejs/vine'
+import { createRoleValidator, updateRoleValidator } from '#validators/role'
 import { inject } from '@adonisjs/core'
 import RoleService from '#services/role_service'
 import { manageRoles } from '#abilities/main'
@@ -23,13 +23,7 @@ export default class RolesController {
       return response.unauthorized('You are not authorized')
     }
 
-    const payload = await request.validateUsing(
-      vine.compile(
-        vine.object({
-          name: vine.string().trim().minLength(3)
-        })
-      )
-    )
+    const payload = await request.validateUsing(createRoleValidator)
     
     await this.roleService.createRole(payload.name)
     session.flash('success', 'Role berhasil dibuat!')
@@ -42,13 +36,7 @@ export default class RolesController {
       return response.unauthorized('You are not authorized')
     }
 
-    const payload = await request.validateUsing(
-      vine.compile(
-        vine.object({
-          name: vine.string().trim().minLength(3)
-        })
-      )
-    )
+    const payload = await request.validateUsing(updateRoleValidator, { meta: { roleId: params.id } })
     
     await this.roleService.updateRole(params.id, payload.name)
     session.flash('success', 'Role berhasil diperbarui!')

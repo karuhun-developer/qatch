@@ -107,10 +107,10 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/roles'
     types: {
-      body: ExtractBody<InferInput<(typeof import('@vinejs/vine').default)['compile']>|InferInput<(typeof import('@vinejs/vine').default)['object']>|InferInput<(typeof import('@vinejs/vine').default)['string()']['trim()']['minLength']>>
+      body: ExtractBody<InferInput<(typeof import('#validators/role').createRoleValidator)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('@vinejs/vine').default)['compile']>|InferInput<(typeof import('@vinejs/vine').default)['object']>|InferInput<(typeof import('@vinejs/vine').default)['string()']['trim()']['minLength']>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/role').createRoleValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/roles_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/roles_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
@@ -119,10 +119,10 @@ export interface Registry {
     methods: ["PUT"]
     pattern: '/roles/:id'
     types: {
-      body: ExtractBody<InferInput<(typeof import('@vinejs/vine').default)['compile']>|InferInput<(typeof import('@vinejs/vine').default)['object']>|InferInput<(typeof import('@vinejs/vine').default)['string()']['trim()']['minLength']>>
+      body: ExtractBody<InferInput<(typeof import('#validators/role').updateRoleValidator)>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: ExtractQuery<InferInput<(typeof import('@vinejs/vine').default)['compile']>|InferInput<(typeof import('@vinejs/vine').default)['object']>|InferInput<(typeof import('@vinejs/vine').default)['string()']['trim()']['minLength']>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/role').updateRoleValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/roles_controller').default['update']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/roles_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
@@ -137,6 +137,54 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/roles_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/roles_controller').default['destroy']>>>
+    }
+  }
+  'users.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/users'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/users_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/users_controller').default['index']>>>
+    }
+  }
+  'users.store': {
+    methods: ["POST"]
+    pattern: '/users'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/user').createUserValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/user').createUserValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/users_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/users_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'users.update': {
+    methods: ["PUT"]
+    pattern: '/users/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/user').updateUserValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/user').updateUserValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/users_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/users_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'users.destroy': {
+    methods: ["DELETE"]
+    pattern: '/users/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/users_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/users_controller').default['destroy']>>>
     }
   }
   'session.destroy': {

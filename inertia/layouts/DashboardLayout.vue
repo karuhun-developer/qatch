@@ -16,13 +16,19 @@ import {
 } from '@/components/ui/dropdown-menu'
 import DarkModeToggle from '@/components/DarkModeToggle.vue'
 import { Toaster } from '@/components/ui/sonner'
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet'
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
-import { LayoutDashboard, User, LogOut, Shield } from '@lucide/vue'
+import { LayoutDashboard, User, LogOut, Shield, Users, Menu } from '@lucide/vue'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 
 const page = usePage<Data.SharedProps>()
 const logoutModalOpen = ref(false)
+const mobileMenuOpen = ref(false)
 
 function handleLogout() {
   router.post('/logout', {}, {
@@ -72,6 +78,15 @@ watch(
           </Link>
           <Link
             v-if="page.props.user?.roleId === 1"
+            href="/users"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/users') }"
+          >
+            <Users class="h-4 w-4" />
+            Users
+          </Link>
+          <Link
+            v-if="page.props.user?.roleId === 1"
             href="/roles"
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
             :class="{ 'bg-muted text-primary': $page.url.startsWith('/roles') }"
@@ -86,7 +101,54 @@ watch(
     <div class="flex flex-col flex-1">
       <!-- Header -->
       <header class="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-        <!-- Mobile Sidebar Toggle could be here -->
+        <!-- Mobile Sidebar Toggle -->
+        <Sheet v-model:open="mobileMenuOpen">
+          <SheetTrigger as-child>
+            <Button variant="outline" size="icon" class="shrink-0 md:hidden">
+              <Menu class="h-5 w-5" />
+              <span class="sr-only">Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" class="flex flex-col w-[280px] p-0 border-r-0">
+            <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+              <Link href="/" class="flex items-center gap-2 font-semibold" @click="mobileMenuOpen = false">
+                <span class="">QRIS Dinamis</span>
+              </Link>
+            </div>
+            <nav class="grid items-start px-2 text-sm font-medium lg:px-4 mt-4 gap-2 flex-1">
+              <Link
+                href="/dashboard"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                :class="{ 'bg-muted text-primary': $page.url === '/dashboard' }"
+                @click="mobileMenuOpen = false"
+              >
+                <LayoutDashboard class="h-4 w-4" />
+                Dashboard
+              </Link>
+              <Link
+                v-if="page.props.user?.roleId === 1"
+                href="/users"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                :class="{ 'bg-muted text-primary': $page.url.startsWith('/users') }"
+                @click="mobileMenuOpen = false"
+              >
+                <Users class="h-4 w-4" />
+                Users
+              </Link>
+              <Link
+                v-if="page.props.user?.roleId === 1"
+                href="/roles"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                :class="{ 'bg-muted text-primary': $page.url.startsWith('/roles') }"
+                @click="mobileMenuOpen = false"
+              >
+                <Shield class="h-4 w-4" />
+                Roles
+              </Link>
+            </nav>
+          </SheetContent>
+        </Sheet>
+        
         <div class="w-full flex-1"></div>
         <DarkModeToggle />
         <DropdownMenu v-if="page.props.user">

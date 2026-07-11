@@ -31,6 +31,11 @@ router
     router.post('roles', [controllers.Roles, 'store']).as('roles.store')
     router.put('roles/:id', [controllers.Roles, 'update']).as('roles.update')
     router.delete('roles/:id', [controllers.Roles, 'destroy']).as('roles.destroy')
+    
+    router.get('users', [controllers.Users, 'index']).as('users.index')
+    router.post('users', [controllers.Users, 'store']).as('users.store')
+    router.put('users/:id', [controllers.Users, 'update']).as('users.update')
+    router.delete('users/:id', [controllers.Users, 'destroy']).as('users.destroy')
     router.post('logout', [controllers.Session, 'destroy'])
   })
   .use(middleware.auth())
