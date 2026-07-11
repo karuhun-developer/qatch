@@ -161,6 +161,10 @@ npm run dev
     └── kernel.ts            # Middleware registration
 ```
 
+## 🙌 Inspired By
+
+Project ini terinspirasi dari [verssache/qris-dinamis](https://github.com/verssache/qris-dinamis).
+
 ## 📄 Lisensi
 
 MIT License — bebas digunakan dan dimodifikasi.
