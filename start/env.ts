@@ -23,4 +23,16 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   // Session
   SESSION_DRIVER: Env.schema.enum(['cookie', 'memory', 'database'] as const),
+
+  // Database
+  DB_CONNECTION: Env.schema.enum(['mysql', 'pg', 'sqlite', 'mssql', 'libsql'] as const),
+  DB_HOST: Env.schema.string.optional(),
+  DB_PORT: Env.schema.number.optional(),
+  DB_USER: Env.schema.string.optional(),
+  DB_PASSWORD: Env.schema.string.optional(),
+  DB_DATABASE: Env.schema.string.optional(),
+
+  // libSQL (Turso)
+  LIBSQL_URL: Env.schema.string.optional(),
+  LIBSQL_AUTH_TOKEN: Env.schema.string.optional(),
 })
