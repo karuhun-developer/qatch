@@ -5,6 +5,7 @@ import { defineConfig } from '@adonisjs/core/http'
  * The configuration settings used by the HTTP server
  */
 export const http = defineConfig({
+  keepAliveTimeout: 55000,
   /**
    * Generate a unique request id for each incoming request.
    * Useful to correlate logs and debug a request flow.
