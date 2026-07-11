@@ -11,4 +11,5 @@ export const controllers = {
   Qris: () => import('#controllers/qris_controller'),
   Profile: () => import('#controllers/profile_controller'),
   DynamicQris: () => import('#controllers/dynamic_qris_controller'),
+  Dashboard: () => import('#controllers/dashboard_controller'),
 }

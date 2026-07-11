@@ -20,6 +20,8 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
+  SheetTitle,
+  SheetDescription,
 } from '@/components/ui/sheet'
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 import { LayoutDashboard, User, LogOut, Shield, Users, Menu, QrCode, RefreshCw } from '@lucide/vue'
@@ -126,12 +128,15 @@ watch(
             </Button>
           </SheetTrigger>
           <SheetContent side="left" class="flex flex-col w-[280px] p-0 border-r-0">
+            <SheetTitle class="sr-only">Navigasi Menu</SheetTitle>
+            <SheetDescription class="sr-only">Menu navigasi untuk berpindah halaman di dashboard QRIS Dinamis.</SheetDescription>
             <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
               <Link href="/" class="flex items-center gap-2 font-semibold" @click="mobileMenuOpen = false">
                 <span class="">QRIS Dinamis</span>
               </Link>
             </div>
-            <nav class="grid items-start px-2 text-sm font-medium lg:px-4 mt-4 gap-2 flex-1">
+            <div class="flex-1 overflow-y-auto">
+              <nav class="grid items-start px-2 text-sm font-medium mt-4 gap-2">
               <Link
                 href="/dashboard"
                 class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
@@ -179,7 +184,8 @@ watch(
                 <Shield class="h-4 w-4" />
                 Roles
               </Link>
-            </nav>
+              </nav>
+            </div>
           </SheetContent>
         </Sheet>
         

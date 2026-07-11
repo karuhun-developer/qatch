@@ -25,20 +25,7 @@ router
 
 router
   .group(() => {
-    router.get('dashboard', async ({ inertia, auth }) => {
-      const user = auth.user!
-      const encryption = (await import('@adonisjs/core/services/encryption')).default
-      
-      let decryptedApiKey: string | null = null
-      if (user.apiKey) {
-        decryptedApiKey = encryption.decrypt(user.apiKey) as string
-      }
-      
-      return inertia.render('dashboard', {
-        apiKey: decryptedApiKey,
-        hasHmac: !!user.hmacKey
-      })
-    }).as('dashboard')
+    router.get('dashboard', [controllers.Dashboard, 'index']).as('dashboard')
     router.get('profile', [controllers.Profile, 'index']).as('profile.index')
     router.post('profile/hmac', [controllers.Profile, 'updateHmac']).as('profile.hmac')
     router.post('profile/api-key', [controllers.Profile, 'generateApiKey']).as('profile.apikey')

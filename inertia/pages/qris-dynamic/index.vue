@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Head, useForm, router } from '@inertiajs/vue3'
+import { Head, useForm, router, Link } from '@inertiajs/vue3'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -121,6 +121,11 @@ function updateStatus() {
     <div>
       <h2 class="text-3xl font-bold tracking-tight">QRIS Dinamis</h2>
       <p class="text-muted-foreground mt-1">Generate QRIS sekali pakai dengan nominal spesifik dan kode unik.</p>
+    </div>
+    <div class="flex items-center space-x-2">
+      <Button variant="outline" as-child>
+        <Link href="/qris"><QrCode class="mr-2 h-4 w-4" /> Kelola QRIS Statis</Link>
+      </Button>
     </div>
   </div>
 
