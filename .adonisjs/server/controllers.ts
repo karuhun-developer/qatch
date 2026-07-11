@@ -4,19 +4,19 @@
  */
 
 export const controllers = {
-  NewAccount: () => import('#controllers/new_account_controller'),
-  Session: () => import('#controllers/session_controller'),
-  Roles: () => import('#controllers/roles_controller'),
-  Users: () => import('#controllers/users_controller'),
-  Qris: () => import('#controllers/qris_controller'),
-  Profile: () => import('#controllers/profile_controller'),
-  DynamicQris: () => import('#controllers/dynamic_qris_controller'),
-  Dashboard: () => import('#controllers/dashboard_controller'),
   api: {
     v1: {
-      StaticQris: () => import('#controllers/api/v1/static_qris_controller'),
       DynamicQris: () => import('#controllers/api/v1/dynamic_qris_controller'),
+      StaticQris: () => import('#controllers/api/v1/static_qris_controller'),
     },
   },
+  Dashboard: () => import('#controllers/dashboard_controller'),
+  DynamicQris: () => import('#controllers/dynamic_qris_controller'),
+  NewAccount: () => import('#controllers/new_account_controller'),
+  Profile: () => import('#controllers/profile_controller'),
+  Qris: () => import('#controllers/qris_controller'),
+  Roles: () => import('#controllers/roles_controller'),
+  Session: () => import('#controllers/session_controller'),
+  Users: () => import('#controllers/users_controller'),
   WebhookSettings: () => import('#controllers/webhook_settings_controller'),
 }
