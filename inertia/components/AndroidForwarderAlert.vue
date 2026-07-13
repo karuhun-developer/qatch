@@ -15,6 +15,8 @@ defineProps<{
       Untuk mengaktifkan fitur verifikasi status pembayaran QRIS Dinamis secara otomatis (real-time), Anda harus menginstal 
       <a href="https://github.com/karuhun-developer/android-notification-forwarder/releases" target="_blank" class="font-medium underline underline-offset-4 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">Android Notification Forwarder</a> 
       di HP yang menerima notifikasi mutasi. Atur Webhook URL di HP tersebut dan arahkan ke pengaturan Webhook di aplikasi ini.
+      <br><br>
+      <strong>Catatan:</strong> Saat mengkonfigurasi aplikasi Android, pastikan API Key dimasukkan pada header <code class="bg-muted px-1 py-0.5 rounded text-foreground">x-api-key</code>.
     </AlertDescription>
   </Alert>
 </template>

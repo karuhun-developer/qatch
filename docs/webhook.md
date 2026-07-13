@@ -44,7 +44,7 @@ Isi konfigurasi berikut di aplikasi Android Notification Forwarder:
 | Field | Contoh Nilai | Keterangan |
 |-------|-------------|-----------|
 | **Server URL** | `https://your-domain.com/api/v1/dynamic-qris/callback` | Endpoint callback QRIS Dinamis |
-| **API Key** | `qd_live_abc123xyz456` | API Key dari dashboard |
+| **Headers** | `x-api-key: qd_live_abc123xyz456` | API Key dari dashboard (Wajib ditaruh di header `x-api-key`) |
 
 Setelah dikonfigurasi, aplikasi akan otomatis mengirim setiap notifikasi yang masuk ke server QRIS Dinamis.
 
@@ -58,10 +58,10 @@ Buka dashboard → **Pengaturan Webhook & API** untuk mengatur filter dan target
 
 #### `listenApps` — Filter Aplikasi
 
-Daftar nama package aplikasi yang notifikasinya akan diproses. Pisahkan dengan koma. Biarkan kosong untuk menerima dari semua aplikasi.
+Daftar nama aplikasi yang notifikasinya akan diproses. Pisahkan dengan koma. Biarkan kosong untuk menerima dari semua aplikasi.
 
 ```
-com.bni.bniactivity, id.co.mandiri.mobile, com.gojek.app
+Dana, Gojek Merchant, Mandiri Livin
 ```
 
 > **Tip:** Gunakan ini untuk hanya memproses notifikasi dari m-banking atau e-wallet tertentu, mengabaikan notifikasi WhatsApp, SMS, dll.

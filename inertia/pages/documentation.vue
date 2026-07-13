@@ -91,8 +91,7 @@ const sidebarOpen = ref(false)
           prose-h3:text-base prose-h3:mt-6 prose-h3:mb-2
           prose-p:text-muted-foreground prose-p:leading-7
           prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-          prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:text-foreground prose-code:before:content-none prose-code:after:content-none
-          prose-pre:!p-0 prose-pre:!bg-transparent prose-pre:!border-none prose-pre:rounded-xl prose-pre:overflow-hidden prose-pre:text-sm
+          prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-none
           prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-muted-foreground
           prose-strong:text-foreground prose-strong:font-semibold
           prose-table:text-sm
@@ -133,7 +132,7 @@ const sidebarOpen = ref(false)
 </template>
 
 <style scoped>
-/* hljs code block padding & radius */
+/* hljs code block (dark mode by default via monokai) */
 :deep(.hljs) {
   display: block;
   padding: 1rem 1.25rem;
@@ -141,12 +140,18 @@ const sidebarOpen = ref(false)
   font-size: 0.8125rem;
   line-height: 1.7;
   overflow-x: auto;
+  color: #f8f8f2 !important;
 }
 
-/* inline code inside pre — strip muted bg */
-:deep(pre code.hljs) {
-  background: transparent;
-  padding: 0;
-  border-radius: 0;
+/* Inline code styling (outside pre) */
+:deep(:not(pre) > code) {
+  background-color: hsl(var(--muted));
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  color: hsl(var(--foreground));
+}
+:deep(:not(pre) > code::before), :deep(:not(pre) > code::after) {
+  content: none;
 }
 </style>

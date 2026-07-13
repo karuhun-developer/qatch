@@ -83,6 +83,9 @@ const apiEndpoints = [
       <h2 class="text-3xl font-bold tracking-tight">API & Webhook</h2>
       <p class="text-muted-foreground mt-1">
         Kelola integrasi, webhook otomatisasi, dan kredensial API Anda.
+        <a href="/docs" target="_blank" class="text-primary hover:underline font-medium inline-flex items-center gap-1">
+          Baca dokumentasi lengkap di sini <LinkIcon class="h-3 w-3" />
+        </a>
       </p>
     </div>
   </div>
@@ -189,8 +192,11 @@ const apiEndpoints = [
           <Terminal class="h-5 w-5 text-emerald-500" />
           Daftar API Endpoint
         </CardTitle>
-        <CardDescription>
-          Gunakan <code>x-api-key</code> di header untuk mengakses endpoint di bawah ini.
+        <CardDescription class="flex items-center justify-between">
+          <span>Gunakan <code>x-api-key</code> di header untuk mengakses endpoint di bawah ini.</span>
+          <a href="/docs" target="_blank" class="text-primary hover:underline font-medium flex items-center gap-1 text-xs">
+            Dokumentasi lengkap <LinkIcon class="h-3 w-3" />
+          </a>
         </CardDescription>
       </CardHeader>
       <CardContent>
