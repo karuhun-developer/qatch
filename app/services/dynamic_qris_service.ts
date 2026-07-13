@@ -71,7 +71,7 @@ export default class DynamicQrisService {
     const dynamicQrisString = this.qrisService.convert(staticQris.qrisString, convertOptions)
 
     // 6. Save to database
-    const transactionCode = `TRX-${string.random(8).toUpperCase()}-${Date.now()}`
+    const transactionCode = `TRX-${Date.now()}`
 
     const transaction = await QrisTransaction.create({
       transactionCode,

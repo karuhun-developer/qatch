@@ -236,9 +236,9 @@ curl -X POST https://qris.karuhundeveloper.com/api/v1/dynamic-qris/callback \
   -H "x-api-key: qd_live_abc123xyz456" \
   -H "Content-Type: application/json" \
   -d '{
-    "app_name": "com.bni.bniactivity",
-    "notification_title": "BNI - Penerimaan Dana",
-    "notification_text": "Pembayaran QRIS Rp52.021 diterima dari 081234567890",
+    "app_name": "Dana",
+    "notification_title": "Pembayaran Masuk",
+    "notification_text": "Rp52.021 dari PT.BANK SEABANK INDONESIA berhasil diterima DANA Bisnis.",
     "timestamp_ms": 1752393600000
   }'
 ```

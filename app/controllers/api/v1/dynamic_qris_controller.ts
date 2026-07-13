@@ -164,8 +164,9 @@ export default class DynamicQrisController {
 
     for (const tx of pendingTransactions) {
       // total sudah mencakup amount + uniqueCode, jadi ini yang muncul di mutasi bank
-      const expectedTotal = tx.total
-      if (numbersInText.includes(expectedTotal)) {
+      const expectedTotal = tx.total.toString()
+
+      if (numbersInText.includes(Number.parseInt(expectedTotal))) {
         matchedTransaction = tx
         break
       }
