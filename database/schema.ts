@@ -7,6 +7,29 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class PlanSchema extends BaseModel {
+  static $columns = ['createdAt', 'description', 'features', 'id', 'maxQris', 'maxTransactionPerMonth', 'name', 'price', 'updatedAt'] as const
+  $columns = PlanSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare description: string | null
+  @column()
+  declare features: any | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare maxQris: number | null
+  @column()
+  declare maxTransactionPerMonth: number | null
+  @column()
+  declare name: string
+  @column()
+  declare price: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class QriSchema extends BaseModel {
   static $columns = ['createdAt', 'description', 'id', 'name', 'qris', 'qrisString', 'updatedAt', 'userId'] as const
   $columns = QriSchema.$columns

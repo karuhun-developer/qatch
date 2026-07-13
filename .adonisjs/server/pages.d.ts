@@ -22,5 +22,6 @@ declare module '@adonisjs/inertia/types' {
     'users/index': ExtractProps<(typeof import('../../inertia/pages/users/index.vue'))['default']>
     'webhook-settings/index': ExtractProps<(typeof import('../../inertia/pages/webhook-settings/index.vue'))['default']>
     'documentation': ExtractProps<(typeof import('../../inertia/pages/documentation.vue'))['default']>
+    'plans/index': ExtractProps<(typeof import('../../inertia/pages/plans/index.vue'))['default']>
   }
 }

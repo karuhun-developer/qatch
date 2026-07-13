@@ -23,7 +23,7 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet'
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
-import { LayoutDashboard, User, LogOut, Shield, Users, Menu, QrCode, RefreshCw, Webhook } from '@lucide/vue'
+import { LayoutDashboard, User, LogOut, Shield, Users, Menu, QrCode, RefreshCw, Webhook, Package } from '@lucide/vue'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 
@@ -119,6 +119,15 @@ watch(
             <Shield class="h-4 w-4" />
             Roles
           </Link>
+          <Link
+            v-if="page.props.user?.roleId === 1"
+            href="/plans"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/plans') }"
+          >
+            <Package class="h-4 w-4" />
+            Plans
+          </Link>
         </nav>
       </div>
     </aside>
@@ -199,6 +208,16 @@ watch(
               >
                 <Shield class="h-4 w-4" />
                 Roles
+              </Link>
+              <Link
+                v-if="page.props.user?.roleId === 1"
+                href="/plans"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                :class="{ 'bg-muted text-primary': $page.url.startsWith('/plans') }"
+                @click="mobileMenuOpen = false"
+              >
+                <Package class="h-4 w-4" />
+                Plans
               </Link>
               </nav>
             </div>

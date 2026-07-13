@@ -31,6 +31,12 @@ export interface ApiDefinition {
     update: typeof routes['users.update']
     destroy: typeof routes['users.destroy']
   }
+  plans: {
+    index: typeof routes['plans.index']
+    store: typeof routes['plans.store']
+    update: typeof routes['plans.update']
+    destroy: typeof routes['plans.destroy']
+  }
   qris: {
     index: typeof routes['qris.index']
     store: typeof routes['qris.store']

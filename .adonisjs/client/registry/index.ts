@@ -114,6 +114,30 @@ const routes = {
     tokens: [{"old":"/users/:id","type":0,"val":"users","end":""},{"old":"/users/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['users.destroy']['types'],
   },
+  'plans.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/plans',
+    tokens: [{"old":"/plans","type":0,"val":"plans","end":""}],
+    types: placeholder as Registry['plans.index']['types'],
+  },
+  'plans.store': {
+    methods: ["POST"],
+    pattern: '/plans',
+    tokens: [{"old":"/plans","type":0,"val":"plans","end":""}],
+    types: placeholder as Registry['plans.store']['types'],
+  },
+  'plans.update': {
+    methods: ["PUT"],
+    pattern: '/plans/:id',
+    tokens: [{"old":"/plans/:id","type":0,"val":"plans","end":""},{"old":"/plans/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['plans.update']['types'],
+  },
+  'plans.destroy': {
+    methods: ["DELETE"],
+    pattern: '/plans/:id',
+    tokens: [{"old":"/plans/:id","type":0,"val":"plans","end":""},{"old":"/plans/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['plans.destroy']['types'],
+  },
   'qris.index': {
     methods: ["GET","HEAD"],
     pattern: '/qris',

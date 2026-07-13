@@ -22,6 +22,10 @@ export type ScannedRoutes = {
     'users.store': { paramsTuple?: []; params?: {} }
     'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'plans.index': { paramsTuple?: []; params?: {} }
+    'plans.store': { paramsTuple?: []; params?: {} }
+    'plans.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'plans.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'qris.store': { paramsTuple?: []; params?: {} }
     'qris.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -51,6 +55,7 @@ export type ScannedRoutes = {
     'profile.index': { paramsTuple?: []; params?: {} }
     'roles.index': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
+    'plans.index': { paramsTuple?: []; params?: {} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
@@ -67,6 +72,7 @@ export type ScannedRoutes = {
     'profile.index': { paramsTuple?: []; params?: {} }
     'roles.index': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
+    'plans.index': { paramsTuple?: []; params?: {} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
@@ -81,6 +87,7 @@ export type ScannedRoutes = {
     'profile.apikey': { paramsTuple?: []; params?: {} }
     'roles.store': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
+    'plans.store': { paramsTuple?: []; params?: {} }
     'qris.store': { paramsTuple?: []; params?: {} }
     'webhook-settings.update': { paramsTuple?: []; params?: {} }
     'qris-dynamic.store': { paramsTuple?: []; params?: {} }
@@ -93,6 +100,7 @@ export type ScannedRoutes = {
   PUT: {
     'roles.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'plans.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'qris.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'static_qris.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'dynamic_qris.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -100,6 +108,7 @@ export type ScannedRoutes = {
   DELETE: {
     'roles.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'plans.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'qris.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'static_qris.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }

@@ -11,7 +11,12 @@ import { middleware } from '#start/kernel'
 import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
 
-router.on('/').renderInertia('home', {}).as('home')
+import Plan from '#models/plan'
+
+router.get('/', async ({ inertia }) => {
+  const plans = await Plan.query().orderBy('price', 'asc')
+  return inertia.render('home', { plans })
+}).as('home')
 router.get('/docs/:slug?', [controllers.Documentations, 'index']).as('docs')
 
 router
@@ -39,6 +44,11 @@ router
     router.post('users', [controllers.Users, 'store']).as('users.store')
     router.put('users/:id', [controllers.Users, 'update']).as('users.update')
     router.delete('users/:id', [controllers.Users, 'destroy']).as('users.destroy')
+    
+    router.get('plans', [controllers.Plans, 'index']).as('plans.index')
+    router.post('plans', [controllers.Plans, 'store']).as('plans.store')
+    router.put('plans/:id', [controllers.Plans, 'update']).as('plans.update')
+    router.delete('plans/:id', [controllers.Plans, 'destroy']).as('plans.destroy')
     
     router.get('qris', [controllers.Qris, 'index']).as('qris.index')
     router.post('qris', [controllers.Qris, 'store']).as('qris.store')

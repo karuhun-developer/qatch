@@ -223,6 +223,54 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/users_controller').default['destroy']>>>
     }
   }
+  'plans.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/plans'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['index']>>>
+    }
+  }
+  'plans.store': {
+    methods: ["POST"]
+    pattern: '/plans'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/plan').createPlanValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/plan').createPlanValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'plans.update': {
+    methods: ["PUT"]
+    pattern: '/plans/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/plan').updatePlanValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/plan').updatePlanValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'plans.destroy': {
+    methods: ["DELETE"]
+    pattern: '/plans/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/plans_controller').default['destroy']>>>
+    }
+  }
   'qris.index': {
     methods: ["GET","HEAD"]
     pattern: '/qris'

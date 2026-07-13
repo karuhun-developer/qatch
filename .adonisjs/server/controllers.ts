@@ -20,4 +20,5 @@ export const controllers = {
   Users: () => import('#controllers/users_controller'),
   WebhookSettings: () => import('#controllers/webhook_settings_controller'),
   Documentations: () => import('#controllers/documentations_controller'),
+  Plans: () => import('#controllers/plans_controller'),
 }

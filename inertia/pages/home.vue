@@ -6,6 +6,16 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { QrCode, Zap, Shield, LineChart, Check } from '@lucide/vue'
 
 defineOptions({ layout: DefaultLayout })
+
+const props = defineProps<{
+  plans: {
+    id: number
+    name: string
+    price: number
+    description: string | null
+    features: string[] | null
+  }[]
+}>()
 </script>
 
 <template>
@@ -61,82 +71,38 @@ defineOptions({ layout: DefaultLayout })
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <!-- Free Tier -->
-      <Card class="flex flex-col relative border-muted/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-colors">
-        <CardHeader>
-          <CardTitle class="text-xl">Starter</CardTitle>
-          <CardDescription>Cocok untuk mencoba dan usaha kecil</CardDescription>
-          <div class="mt-4 flex items-baseline text-5xl font-extrabold">
-            Gratis
-            <span class="ml-1 text-xl font-medium text-muted-foreground">/selamanya</span>
-          </div>
-        </CardHeader>
-        <CardContent class="flex-1">
-          <ul class="space-y-4 text-sm">
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Hingga 100 transaksi/bulan</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> 1 QRIS Statis</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Integrasi Webhook Dasar</li>
-            <li class="flex items-center text-muted-foreground"><Check class="mr-2 h-4 w-4 opacity-50" /> Community Support</li>
-          </ul>
-        </CardContent>
-        <div class="p-6 pt-0 mt-auto">
-          <Button as-child class="w-full" variant="outline">
-            <Link href="/register">Mulai Gratis</Link>
-          </Button>
-        </div>
-      </Card>
-
-      <!-- Pro Tier -->
-      <Card class="flex flex-col relative border-primary shadow-lg shadow-primary/10 bg-card/80 backdrop-blur-md scale-105 z-10">
-        <div class="absolute -top-4 inset-x-0 flex justify-center">
+      <Card 
+        v-for="plan in plans" 
+        :key="plan.id"
+        class="flex flex-col relative transition-colors"
+        :class="[
+          plan.price > 0 ? 'border-primary shadow-lg shadow-primary/10 bg-card/80 backdrop-blur-md scale-105 z-10' : 'border-muted/50 bg-card/50 backdrop-blur-sm hover:border-primary/50'
+        ]"
+      >
+        <div v-if="plan.price > 0" class="absolute -top-4 inset-x-0 flex justify-center">
           <span class="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Paling Populer</span>
         </div>
         <CardHeader>
-          <CardTitle class="text-xl">Pro</CardTitle>
-          <CardDescription>Untuk bisnis yang sedang berkembang pesat</CardDescription>
+          <CardTitle class="text-xl">{{ plan.name }}</CardTitle>
+          <CardDescription>{{ plan.description }}</CardDescription>
           <div class="mt-4 flex items-baseline text-5xl font-extrabold">
-            Rp 99rb
-            <span class="ml-1 text-xl font-medium text-muted-foreground">/bulan</span>
+            <span v-if="plan.price === 0">Gratis</span>
+            <span v-else>Rp {{ (plan.price / 1000).toLocaleString('id-ID') }}rb</span>
+            <span class="ml-1 text-xl font-medium text-muted-foreground">{{ plan.price === 0 ? '/selamanya' : '/bulan' }}</span>
           </div>
         </CardHeader>
         <CardContent class="flex-1">
           <ul class="space-y-4 text-sm">
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Hingga 1.500 transaksi/bulan</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> 5 QRIS Statis</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Webhook Lanjutan (Wildcard)</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Analitik & Laporan</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Prioritas Email Support</li>
+            <li v-for="(feature, idx) in plan.features" :key="idx" class="flex items-center">
+              <Check class="mr-2 h-4 w-4 text-primary" /> {{ feature }}
+            </li>
           </ul>
         </CardContent>
         <div class="p-6 pt-0 mt-auto">
-          <Button as-child class="w-full">
-            <Link href="/checkout?plan=pro">Pilih Pro</Link>
-          </Button>
-        </div>
-      </Card>
-
-      <!-- Enterprise Tier -->
-      <Card class="flex flex-col relative border-muted/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-colors">
-        <CardHeader>
-          <CardTitle class="text-xl">Enterprise</CardTitle>
-          <CardDescription>Skala tak terbatas untuk bisnis besar</CardDescription>
-          <div class="mt-4 flex items-baseline text-5xl font-extrabold">
-            Rp 199rb
-            <span class="ml-1 text-xl font-medium text-muted-foreground">/bulan</span>
-          </div>
-        </CardHeader>
-        <CardContent class="flex-1">
-          <ul class="space-y-4 text-sm">
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Transaksi Tanpa Batas (Unlimited)</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> QRIS Statis Tanpa Batas</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Akses Full API & Custom Domain</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> Multiple Users & Roles</li>
-            <li class="flex items-center"><Check class="mr-2 h-4 w-4 text-primary" /> 24/7 Dedicated Support</li>
-          </ul>
-        </CardContent>
-        <div class="p-6 pt-0 mt-auto">
-          <Button as-child class="w-full" variant="outline">
-            <Link href="/checkout?plan=enterprise">Pilih Enterprise</Link>
+          <Button as-child class="w-full" :variant="plan.price === 0 ? 'outline' : 'default'">
+            <Link :href="plan.price === 0 ? '/register' : `/checkout?plan=${plan.name.toLowerCase()}`">
+              {{ plan.price === 0 ? 'Mulai Gratis' : `Pilih ${plan.name}` }}
+            </Link>
           </Button>
         </div>
       </Card>
