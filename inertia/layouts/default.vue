@@ -92,15 +92,25 @@ watch(
           >Karuhun Developer</a
         >.
       </p>
-      <div class="hidden sm:block text-muted-foreground/30">|</div>
-      <a
-        href="https://t.me/bayurifkialgh"
-        target="_blank"
-        rel="noopener"
-        class="text-primary hover:underline font-medium flex items-center"
-      >
-        Hubungi via Telegram
-      </a>
+      <div class="flex items-center gap-2 sm:gap-4">
+        <a
+          href="https://t.me/bayurifkialgh"
+          target="_blank"
+          rel="noopener"
+          class="text-primary hover:underline font-medium flex items-center"
+        >
+          Telegram
+        </a>
+        <div class="text-muted-foreground/30">|</div>
+        <a
+          href="https://github.com/karuhun-developer/"
+          target="_blank"
+          rel="noopener"
+          class="text-primary hover:underline font-medium flex items-center"
+        >
+          GitHub
+        </a>
+      </div>
     </footer>
 
     <Toaster position="top-center" rich-colors />

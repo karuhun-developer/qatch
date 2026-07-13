@@ -36,6 +36,8 @@ import {
   Package,
   PlayCircle,
   MessageCircle,
+  Github,
+  BookOpen,
 } from '@lucide/vue'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
@@ -76,10 +78,12 @@ watch(
 </script>
 
 <template>
-  <div class="min-h-screen bg-background font-sans antialiased flex flex-col md:flex-row">
+  <div class="min-h-screen bg-background font-sans antialiased flex flex-col md:flex-row relative">
     <!-- Sidebar -->
-    <aside class="hidden w-64 flex-col md:flex border-r bg-muted/40">
-      <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
+    <aside
+      class="hidden w-64 flex-col md:flex border-r bg-muted/40 sticky top-0 h-screen overflow-y-auto"
+    >
+      <div class="flex h-14 shrink-0 items-center border-b px-4 lg:h-[60px] lg:px-6">
         <Link href="/" class="flex items-center gap-2 font-semibold">
           <span class="">QRIS Dinamis</span>
         </Link>
@@ -121,13 +125,33 @@ watch(
             <Webhook class="h-4 w-4" />
             Webhook & API
           </Link>
-          <Link
+          <a
+            href="/docs"
+            target="_blank"
+            rel="noopener"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/docs') }"
+          >
+            <BookOpen class="h-4 w-4" />
+            Dokumentasi
+          </a>
+          <a
             href="/tutorial"
+            target="_blank"
+            rel="noopener"
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
             :class="{ 'bg-muted text-primary': $page.url.startsWith('/tutorial') }"
           >
             <PlayCircle class="h-4 w-4" />
             Tutorial
+          </a>
+          <Link
+            href="/profile"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/profile') }"
+          >
+            <User class="h-4 w-4" />
+            Profile
           </Link>
           <Link
             v-if="page.props.user?.roleId === 1"
@@ -158,7 +182,7 @@ watch(
           </Link>
         </nav>
       </div>
-      <div class="p-4 mt-auto">
+      <div class="p-4 mt-auto flex flex-col gap-1">
         <a
           href="https://t.me/bayurifkialgh"
           target="_blank"
@@ -166,7 +190,16 @@ watch(
           class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-all hover:text-primary hover:bg-muted"
         >
           <MessageCircle class="h-4 w-4" />
-          Kontak Support
+          Telegram
+        </a>
+        <a
+          href="https://github.com/karuhun-developer/"
+          target="_blank"
+          rel="noopener"
+          class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-all hover:text-primary hover:bg-muted"
+        >
+          <Github class="h-4 w-4" />
+          GitHub
         </a>
       </div>
     </aside>
@@ -237,14 +270,36 @@ watch(
                   <Webhook class="h-4 w-4" />
                   Webhook & API
                 </Link>
-                <Link
+                <a
+                  href="/docs"
+                  target="_blank"
+                  rel="noopener"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/docs') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <BookOpen class="h-4 w-4" />
+                  Dokumentasi
+                </a>
+                <a
                   href="/tutorial"
+                  target="_blank"
+                  rel="noopener"
                   class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                   :class="{ 'bg-muted text-primary': $page.url.startsWith('/tutorial') }"
                   @click="mobileMenuOpen = false"
                 >
                   <PlayCircle class="h-4 w-4" />
                   Tutorial
+                </a>
+                <Link
+                  href="/profile"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/profile') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <User class="h-4 w-4" />
+                  Profile
                 </Link>
                 <Link
                   v-if="page.props.user?.roleId === 1"
@@ -278,7 +333,7 @@ watch(
                 </Link>
               </nav>
             </div>
-            <div class="p-4 mt-auto border-t">
+            <div class="p-4 mt-auto border-t flex flex-col gap-1">
               <a
                 href="https://t.me/bayurifkialgh"
                 target="_blank"
@@ -287,7 +342,17 @@ watch(
                 @click="mobileMenuOpen = false"
               >
                 <MessageCircle class="h-4 w-4" />
-                Kontak Support
+                Telegram
+              </a>
+              <a
+                href="https://github.com/karuhun-developer/"
+                target="_blank"
+                rel="noopener"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-all hover:text-primary hover:bg-muted"
+                @click="mobileMenuOpen = false"
+              >
+                <Github class="h-4 w-4" />
+                GitHub
               </a>
             </div>
           </SheetContent>
@@ -348,15 +413,25 @@ watch(
             >Karuhun Developer</a
           >.
         </p>
-        <div class="hidden sm:block text-muted-foreground/30">|</div>
-        <a
-          href="https://t.me/bayurifkialgh"
-          target="_blank"
-          rel="noopener"
-          class="text-primary hover:underline font-medium flex items-center"
-        >
-          Hubungi via Telegram
-        </a>
+        <div class="flex items-center gap-2 sm:gap-4">
+          <a
+            href="https://t.me/bayurifkialgh"
+            target="_blank"
+            rel="noopener"
+            class="text-primary hover:underline font-medium flex items-center"
+          >
+            Telegram
+          </a>
+          <div class="text-muted-foreground/30">|</div>
+          <a
+            href="https://github.com/karuhun-developer/"
+            target="_blank"
+            rel="noopener"
+            class="text-primary hover:underline font-medium flex items-center"
+          >
+            GitHub
+          </a>
+        </div>
       </footer>
     </div>
 
