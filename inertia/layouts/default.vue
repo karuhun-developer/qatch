@@ -5,7 +5,6 @@ import { toast, Toaster } from 'vue-sonner'
 import type { Data } from '@generated/data'
 import { Link, Form } from '@adonisjs/inertia/vue'
 import { Button } from '@/components/ui/button'
-import DarkModeToggle from '@/components/DarkModeToggle.vue'
 
 const page = usePage<Data.SharedProps>()
 
@@ -32,10 +31,13 @@ watch(
   <div class="min-h-screen bg-background font-sans antialiased flex flex-col">
     <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div class="container flex h-14 items-center justify-between">
-        <div class="flex items-center gap-4">
-          <Link href="/" class="font-bold flex items-center space-x-2">
+        <div class="flex items-center gap-1">
+          <Link href="/" class="font-bold flex items-center space-x-2 mr-2">
             <span class="inline-block text-xl">QRIS Dinamis</span>
           </Link>
+          <Button as-child variant="ghost" size="sm">
+            <Link href="/docs">Dokumentasi</Link>
+          </Button>
         </div>
         <div class="flex items-center gap-4">
           <nav class="flex items-center space-x-2">
@@ -55,7 +57,7 @@ watch(
                 <Link href="/register">Sign Up</Link>
               </Button>
             </template>
-            <DarkModeToggle />
+
           </nav>
         </div>
       </div>

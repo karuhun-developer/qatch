@@ -14,7 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import DarkModeToggle from '@/components/DarkModeToggle.vue'
 import { Toaster } from '@/components/ui/sonner'
 import {
   Sheet,
@@ -207,7 +206,6 @@ watch(
         </Sheet>
         
         <div class="w-full flex-1"></div>
-        <DarkModeToggle />
         <DropdownMenu v-if="page.props.user">
           <DropdownMenuTrigger as-child>
             <Button variant="ghost" class="relative h-8 w-8 rounded-full">
