@@ -129,10 +129,11 @@ const apiEndpoints = [
             <Label>Aplikasi yang Didengarkan (Listen To Apps)</Label>
             <TagInput
               v-model="form.listenApps"
+              :separators="[',']"
               placeholder="Ketik nama app lalu Enter atau koma... (Dana, Gojek)"
             />
             <p class="text-xs text-muted-foreground">
-              Tekan <kbd class="rounded border px-1 text-xs">Enter</kbd>, <kbd class="rounded border px-1 text-xs">,</kbd>, atau <kbd class="rounded border px-1 text-xs">Spasi</kbd> untuk menambah. Kosongkan untuk terima dari semua aplikasi.
+              Tekan <kbd class="rounded border px-1 text-xs">Enter</kbd> atau <kbd class="rounded border px-1 text-xs">,</kbd> untuk menambah. Kosongkan untuk terima dari semua aplikasi.
             </p>
           </div>
 
@@ -141,6 +142,7 @@ const apiEndpoints = [
               <Label>Wildcard Notification Title</Label>
               <TagInput
                 v-model="form.titleWildcards"
+                :separators="[',']"
                 placeholder="Pembayaran Diterima, QRIS..."
               />
               <p class="text-xs text-muted-foreground">
@@ -151,6 +153,7 @@ const apiEndpoints = [
               <Label>Wildcard Notification Text</Label>
               <TagInput
                 v-model="form.textWildcards"
+                :separators="[',']"
                 placeholder="Transaksi QRIS, berhasil..."
               />
               <p class="text-xs text-muted-foreground">

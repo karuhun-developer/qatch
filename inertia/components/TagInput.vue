@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { X } from '@lucide/vue'
 
 const props = defineProps<{
   modelValue: string[]
   placeholder?: string
+  separators?: string[] // default: [',', ' ']
 }>()
 
 const emit = defineEmits<{
@@ -12,11 +13,12 @@ const emit = defineEmits<{
 }>()
 
 const inputValue = ref('')
+const activeSeparators = props.separators ?? [',', ' ']
 
 function addTag(raw: string) {
-  // split by comma or space, support multiple at once
+  const pattern = new RegExp(`[${activeSeparators.map((s) => (s === ' ' ? '\\s' : s)).join('')}]+`)
   const newTags = raw
-    .split(/[,\s]+/)
+    .split(pattern)
     .map((t) => t.trim())
     .filter((t) => t.length > 0 && !props.modelValue.includes(t))
 
@@ -27,7 +29,7 @@ function addTag(raw: string) {
 }
 
 function onKeydown(e: KeyboardEvent) {
-  if (['Enter', ',', ' '].includes(e.key)) {
+  if (e.key === 'Enter' || activeSeparators.includes(e.key)) {
     e.preventDefault()
     addTag(inputValue.value)
   } else if (e.key === 'Backspace' && inputValue.value === '' && props.modelValue.length > 0) {
