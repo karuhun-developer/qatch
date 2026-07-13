@@ -2,6 +2,6 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class DemoController {
   async index({ inertia }: HttpContext) {
-    return inertia.render('demo')
+    return inertia.render('demo', {})
   }
 }

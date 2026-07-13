@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { Head, Link } from '@inertiajs/vue3'
+import { Head } from '@inertiajs/vue3'
 import DefaultLayout from '@/layouts/default.vue'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -45,8 +45,6 @@ const form = ref({
 const isGenerating = ref(false)
 const resultQrisString = ref('')
 const resultBase64 = ref('')
-
-const fileInputRef = ref<HTMLInputElement | null>(null)
 
 // Handle Upload Image
 function handleFileChange(event: Event) {
@@ -113,11 +111,15 @@ function generate() {
   resultBase64.value = ''
 
   try {
-    const newQrisString = convertQRIS(qrisString.value, {
-      amount: form.value.amount,
-      feeType: form.value.feeType as 'none' | 'fixed' | 'percent' | undefined,
-      feeValue: form.value.feeValue ? form.value.feeValue : undefined,
-    })
+    const convertOpts: any = { amount: form.value.amount }
+    if (form.value.feeType !== 'none' && form.value.feeValue > 0) {
+      convertOpts.fee = {
+        type: form.value.feeType === 'percent' ? 'percentage' : 'fixed',
+        value: form.value.feeValue
+      }
+    }
+
+    const newQrisString = convertQRIS(qrisString.value, convertOpts)
 
     resultQrisString.value = newQrisString
 

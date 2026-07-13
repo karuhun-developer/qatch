@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { watch } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import {
   Dialog,
@@ -37,8 +37,8 @@ const form = useForm({
   name: '',
   price: 0,
   description: '',
-  maxQris: null as number | null,
-  maxTransactionPerMonth: null as number | null,
+  maxQris: undefined as number | undefined,
+  maxTransactionPerMonth: undefined as number | undefined,
   isFeatured: false,
   features: [] as string[],
 })
@@ -51,8 +51,8 @@ watch(
         form.name = props.plan.name
         form.price = props.plan.price
         form.description = props.plan.description || ''
-        form.maxQris = props.plan.maxQris
-        form.maxTransactionPerMonth = props.plan.maxTransactionPerMonth
+        form.maxQris = props.plan.maxQris ?? undefined
+        form.maxTransactionPerMonth = props.plan.maxTransactionPerMonth ?? undefined
         form.isFeatured = !!props.plan.isFeatured
         form.features = props.plan.features || []
       } else {

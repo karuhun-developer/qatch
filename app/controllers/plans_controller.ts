@@ -9,7 +9,7 @@ export default class PlansController {
 
   async index({ inertia }: HttpContext) {
     const plans = await this.planService.getAllPlans()
-    return inertia.render('plans/index', { plans })
+    return inertia.render('plans/index', { plans: plans as any })
   }
 
   async store({ request, response, session }: HttpContext) {

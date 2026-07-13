@@ -65,7 +65,7 @@ const props = defineProps<{
 const page = usePage<any>()
 const isSuperadmin = computed(() => page.props.user?.roleId === 1)
 
-function updateFilter(value: string) {
+function updateFilter(value: any) {
   router.get('/dashboard', { days: value }, { preserveState: true })
 }
 

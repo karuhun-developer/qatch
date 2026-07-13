@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import SecuritySettings from '@/components/SecuritySettings.vue'
 import AndroidForwarderAlert from '@/components/AndroidForwarderAlert.vue'
 import TagInput from '@/components/TagInput.vue'
-import { Webhook, Shield, Link as LinkIcon, Save, Copy, Check, Terminal } from '@lucide/vue'
+import { Webhook, Link as LinkIcon, Save, Copy, Check, Terminal } from '@lucide/vue'
 import { ref } from 'vue'
 
 defineOptions({ layout: DashboardLayout })
