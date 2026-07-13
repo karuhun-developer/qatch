@@ -35,7 +35,7 @@ watch(
       <div class="container flex h-14 items-center justify-between">
         <div class="flex items-center gap-1">
           <Link href="/" class="font-bold flex items-center space-x-2 mr-2">
-            <span class="inline-block text-xl">Qatch</span>
+            <img src="/QATCHLOGO-bg-removed-vector.svg" alt="Qatch" class="h-8 w-auto" />
           </Link>
           <Button as-child variant="ghost" size="sm">
             <Link href="/docs">Dokumentasi</Link>

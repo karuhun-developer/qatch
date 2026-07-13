@@ -84,7 +84,7 @@ watch(
     >
       <div class="flex h-14 shrink-0 items-center border-b px-4 lg:h-[60px] lg:px-6">
         <Link href="/" class="flex items-center gap-2 font-semibold">
-          <span class="">Qatch</span>
+          <img src="/QATCHLOGO-bg-removed-vector.svg" alt="Qatch" class="h-8 w-auto" />
         </Link>
       </div>
       <div class="flex-1">
@@ -229,7 +229,7 @@ watch(
                 class="flex items-center gap-2 font-semibold"
                 @click="mobileMenuOpen = false"
               >
-                <span class="">Qatch</span>
+                <img src="/QATCHLOGO-bg-removed-vector.svg" alt="Qatch" class="h-8 w-auto" />
               </Link>
             </div>
             <div class="flex-1 overflow-y-auto">
