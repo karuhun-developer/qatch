@@ -57,17 +57,17 @@ export class QrisTransactionSchema extends BaseModel {
   static $columns = ['amount', 'createdAt', 'expiredAt', 'feeAmount', 'feeType', 'feeValue', 'id', 'paidAt', 'proof', 'qrisId', 'qrisString', 'status', 'total', 'transactionCode', 'uniqueCode', 'updatedAt', 'userId'] as const
   $columns = QrisTransactionSchema.$columns
   @column()
-  declare amount: number
+  declare amount: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
   @column.dateTime()
   declare expiredAt: DateTime
   @column()
-  declare feeAmount: number | null
+  declare feeAmount: string | null
   @column()
   declare feeType: string | null
   @column()
-  declare feeValue: number | null
+  declare feeValue: string | null
   @column({ isPrimary: true })
   declare id: number
   @column.dateTime()
@@ -81,7 +81,7 @@ export class QrisTransactionSchema extends BaseModel {
   @column()
   declare status: string | null
   @column()
-  declare total: number
+  declare total: string
   @column()
   declare transactionCode: string
   @column()
