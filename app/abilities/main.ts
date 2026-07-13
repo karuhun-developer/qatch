@@ -23,3 +23,7 @@ export const manageRoles = Bouncer.ability((user: User) => {
 export const manageUsers = Bouncer.ability((user: User) => {
   return user.roleId === 1
 })
+
+export const managePlans = Bouncer.ability((user: User) => {
+  return user.roleId === 1
+})
