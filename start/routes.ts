@@ -11,12 +11,7 @@ import { middleware } from '#start/kernel'
 import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
 
-import Plan from '#models/plan'
-
-router.get('/', async ({ inertia }) => {
-  const plans = await Plan.query().orderBy('price', 'asc')
-  return inertia.render('home', { plans })
-}).as('home')
+router.get('/', [controllers.Home, 'index']).as('home')
 router.get('/docs/:slug?', [controllers.Documentations, 'index']).as('docs')
 
 router
@@ -70,19 +65,19 @@ router
 router
   .group(() => {
     // Static QRIS API
-    router.get('static-qris', '#controllers/api/v1/static_qris_controller.index')
-    router.post('static-qris', '#controllers/api/v1/static_qris_controller.store')
-    router.get('static-qris/:id', '#controllers/api/v1/static_qris_controller.show')
-    router.put('static-qris/:id', '#controllers/api/v1/static_qris_controller.update')
-    router.delete('static-qris/:id', '#controllers/api/v1/static_qris_controller.destroy')
+    router.get('static-qris', [controllers.api.v1.StaticQris, 'index'])
+    router.post('static-qris', [controllers.api.v1.StaticQris, 'store'])
+    router.get('static-qris/:id', [controllers.api.v1.StaticQris, 'show'])
+    router.put('static-qris/:id', [controllers.api.v1.StaticQris, 'update'])
+    router.delete('static-qris/:id', [controllers.api.v1.StaticQris, 'destroy'])
 
     // Dynamic QRIS API
-    router.post('dynamic-qris', '#controllers/api/v1/dynamic_qris_controller.store')
-    router.get('dynamic-qris/:id', '#controllers/api/v1/dynamic_qris_controller.show')
-    router.put('dynamic-qris/:id', '#controllers/api/v1/dynamic_qris_controller.update')
+    router.post('dynamic-qris', [controllers.api.v1.DynamicQris, 'store'])
+    router.get('dynamic-qris/:id', [controllers.api.v1.DynamicQris, 'show'])
+    router.put('dynamic-qris/:id', [controllers.api.v1.DynamicQris, 'update'])
     
     // Callback Webhook
-    router.post('dynamic-qris/callback', '#controllers/api/v1/dynamic_qris_controller.callback')
+    router.post('dynamic-qris/callback', [controllers.api.v1.DynamicQris, 'callback'])
   })
   .prefix('api/v1')
   .use(middleware.apiKey())

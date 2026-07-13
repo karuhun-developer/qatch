@@ -15,8 +15,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/home_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/home_controller').default['index']>>>
     }
   }
   'docs': {
@@ -399,20 +399,20 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['index']>>>
     }
   }
   'static_qris.store': {
     methods: ["POST"]
     pattern: '/api/v1/static-qris'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/qris').createQrisValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
+      query: ExtractQuery<InferInput<(typeof import('#validators/qris').createQrisValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'static_qris.show': {
@@ -423,20 +423,20 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['show']>>>
     }
   }
   'static_qris.update': {
     methods: ["PUT"]
     pattern: '/api/v1/static-qris/:id'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/qris').updateQrisValidator)>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: {}
-      response: unknown
-      errorResponse: unknown
+      query: ExtractQuery<InferInput<(typeof import('#validators/qris').updateQrisValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'static_qris.destroy': {
@@ -447,20 +447,20 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/static_qris_controller').default['destroy']>>>
     }
   }
   'dynamic_qris.store': {
     methods: ["POST"]
     pattern: '/api/v1/dynamic-qris'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/qris_transaction').generateDynamicQrisValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
+      query: ExtractQuery<InferInput<(typeof import('#validators/qris_transaction').generateDynamicQrisValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'dynamic_qris.show': {
@@ -471,20 +471,20 @@ export interface Registry {
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['show']>>>
     }
   }
   'dynamic_qris.update': {
     methods: ["PUT"]
     pattern: '/api/v1/dynamic-qris/:id'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/qris_transaction').updateDynamicQrisStatusValidator)>>
       paramsTuple: [ParamValue]
       params: { id: ParamValue }
-      query: {}
-      response: unknown
-      errorResponse: unknown
+      query: ExtractQuery<InferInput<(typeof import('#validators/qris_transaction').updateDynamicQrisStatusValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'dynamic_qris.callback': {
@@ -495,8 +495,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['callback']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/api/v1/dynamic_qris_controller').default['callback']>>>
     }
   }
 }
