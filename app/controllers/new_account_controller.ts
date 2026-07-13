@@ -7,7 +7,8 @@ export default class NewAccountController {
   async create({ request, inertia }: HttpContext) {
     const plans = await Plan.query().orderBy('price', 'asc')
 
-    const plan = (await Plan.query().where('name', request.input('plan')).first())?.id
+    const planName = request.input('plan')
+    const plan = planName ? (await Plan.query().where('name', planName).first())?.id : undefined
 
     return inertia.render('auth/signup', { plans, plan })
   }
