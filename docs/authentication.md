@@ -1,6 +1,6 @@
 # Autentikasi
 
-Semua endpoint API di QRIS Dinamis memerlukan autentikasi menggunakan **API Key**. Selain itu, payload webhook yang dikirim ke server kamu dapat diverifikasi menggunakan **HMAC Signature**.
+Semua endpoint API di Qatch memerlukan autentikasi menggunakan **API Key**. Selain itu, payload webhook yang dikirim ke server kamu dapat diverifikasi menggunakan **HMAC Signature**.
 
 ---
 
@@ -8,7 +8,7 @@ Semua endpoint API di QRIS Dinamis memerlukan autentikasi menggunakan **API Key*
 
 ### Cara Generate API Key
 
-1. Login ke dashboard QRIS Dinamis
+1. Login ke dashboard Qatch
 2. Buka menu **Pengaturan Webhook & API**
 3. Klik tombol **Generate API Key**
 4. Salin API Key yang muncul — simpan baik-baik, tidak bisa dilihat lagi setelah ditutup
@@ -32,11 +32,11 @@ curl -X GET https://qris.karuhundeveloper.com/api/v1/static-qris \
 
 ## HMAC Signature (Verifikasi Webhook)
 
-HMAC Signature bersifat **opsional** namun sangat direkomendasikan untuk memastikan bahwa request webhook yang diterima benar-benar berasal dari server QRIS Dinamis.
+HMAC Signature bersifat **opsional** namun sangat direkomendasikan untuk memastikan bahwa request webhook yang diterima benar-benar berasal dari server Qatch.
 
 ### Cara Kerja
 
-Saat transaksi berhasil dibayar, server QRIS Dinamis akan mengirim POST request ke URL webhook kamu. Jika kamu telah mengatur **HMAC Key** di pengaturan, server akan menyertakan header `x-signature-key` yang berisi HMAC-SHA256 dari body request.
+Saat transaksi berhasil dibayar, server Qatch akan mengirim POST request ke URL webhook kamu. Jika kamu telah mengatur **HMAC Key** di pengaturan, server akan menyertakan header `x-signature-key` yang berisi HMAC-SHA256 dari body request.
 
 ### Cara Mengatur HMAC Key
 

@@ -13,7 +13,7 @@
         │ POST /api/v1/dynamic-qris/callback
         │ { app_name, notification_title, notification_text, timestamp_ms }
         ▼
-[QRIS Dinamis Server]
+[Qatch Server]
   1. Filter berdasarkan listenApps, titleWildcards, textWildcards
   2. Ekstrak semua angka dari notification_text
   3. Cocokkan dengan `total` transaksi pending milik user
@@ -43,10 +43,10 @@ Isi konfigurasi berikut di aplikasi Android Notification Forwarder:
 
 | Field          | Contoh Nilai                                                     | Keterangan                                                   |
 | -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Server URL** | `https://qris.karuhundeveloper.com/api/v1/dynamic-qris/callback` | Endpoint callback QRIS Dinamis                               |
+| **Server URL** | `https://qris.karuhundeveloper.com/api/v1/dynamic-qris/callback` | Endpoint callback Qatch                                      |
 | **Headers**    | `x-api-key: qd_live_abc123xyz456`                                | API Key dari dashboard (Wajib ditaruh di header `x-api-key`) |
 
-Setelah dikonfigurasi, aplikasi akan otomatis mengirim setiap notifikasi yang masuk ke server QRIS Dinamis.
+Setelah dikonfigurasi, aplikasi akan otomatis mengirim setiap notifikasi yang masuk ke server Qatch.
 
 ---
 

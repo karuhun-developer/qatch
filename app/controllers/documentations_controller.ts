@@ -23,7 +23,7 @@ const NAV = [
   // { slug: 'installation', title: 'Self Hosted' },
   { slug: 'authentication', title: 'Autentikasi API' },
   { slug: 'static-qris', title: 'QRIS Statis' },
-  { slug: 'dynamic-qris', title: 'QRIS Dinamis' },
+  { slug: 'dynamic-qris', title: 'Qatch' },
   { slug: 'webhook', title: 'Webhook & Android' },
 ]
 

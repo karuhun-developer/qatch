@@ -37,7 +37,29 @@ const displayPlans = computed(() => {
 </script>
 
 <template>
-  <Head title="Home" />
+  <Head>
+    <title>Qatch — Ubah QRIS Statis Jadi Dinamis dengan Nominal Otomatis</title>
+    <meta name="description" content="Qatch adalah platform SaaS untuk mengkonversi QRIS statis menjadi QRIS dinamis dengan nominal otomatis, kode unik anti-duplikat, API Key, Webhook, dan Android Listener. Solusi pembayaran QRIS terbaik untuk bisnis Anda." />
+    <meta name="keywords" content="QRIS dinamis, QRIS statis, generate QRIS, QRIS otomatis, API QRIS, webhook pembayaran, QR code pembayaran, payment gateway indonesia, QRIS nominal otomatis, Qatch" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Karuhun Developer" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Qatch — Ubah QRIS Statis Jadi Dinamis dengan Nominal Otomatis" />
+    <meta property="og:description" content="Konversi QRIS statis menjadi QRIS dinamis secara real-time. Dilengkapi API, Webhook, dan Android Notification Forwarder untuk deteksi pembayaran otomatis." />
+    <meta property="og:url" content="https://qris.karuhundeveloper.com" />
+    <meta property="og:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <meta property="og:site_name" content="Qatch" />
+    <meta property="og:locale" content="id_ID" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Qatch — QRIS Dinamis Otomatis" />
+    <meta name="twitter:description" content="Konversi QRIS statis ke dinamis dengan nominal otomatis. API, Webhook, dan Android Listener siap pakai." />
+    <meta name="twitter:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <!-- Canonical -->
+    <link rel="canonical" href="https://qris.karuhundeveloper.com" />
+    <link rel="icon" type="image/x-icon" href="/QATCHLOGO.ico" />
+  </Head>
 
   <!-- Hero Section -->
   <div class="relative overflow-hidden bg-background">
@@ -52,7 +74,7 @@ const displayPlans = computed(() => {
           class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm font-medium text-primary mb-4 backdrop-blur-sm"
         >
           <Zap class="mr-2 h-4 w-4" />
-          <span>Platform QRIS Dinamis Terbaik</span>
+          <span>Platform Qatch Terbaik</span>
         </div>
         <h1
           class="text-5xl font-extrabold tracking-tight lg:text-7xl text-balance bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"

@@ -63,7 +63,7 @@ export default class DynamicQrisController {
       expiredHours: payload.expiredHours || 24,
     })
 
-    session.flash('success', 'QRIS Dinamis berhasil digenerate!')
+    session.flash('success', 'Qatch berhasil digenerate!')
     return response.redirect().back()
   }
 

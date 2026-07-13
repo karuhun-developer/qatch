@@ -7,7 +7,7 @@ import { TuyauProvider } from '@adonisjs/inertia/vue'
 import { createApp, type DefineComponent, h } from 'vue'
 import { resolvePageComponent } from '@adonisjs/inertia/helpers'
 
-const appName = import.meta.env.VITE_APP_NAME || 'QRIS Dinamis'
+const appName = import.meta.env.VITE_APP_NAME || 'Qatch'
 
 createInertiaApp({
   title: (title) => (title ? `${title} - ${appName}` : appName),

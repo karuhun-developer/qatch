@@ -158,7 +158,26 @@ function copyBase64() {
 </script>
 
 <template>
-  <Head title="Demo QRIS Generator" />
+  <Head>
+    <title>Demo Qatch — Coba Generator QRIS Dinamis Gratis</title>
+    <meta name="description" content="Coba langsung fitur Qatch secara gratis. Generate QRIS dinamis dengan nominal kustom, kode unik, dan fee otomatis tanpa perlu daftar." />
+    <meta name="keywords" content="demo QRIS dinamis, coba QRIS otomatis, generator QRIS gratis, QRIS nominal kustom, Qatch demo" />
+    <meta name="robots" content="index, follow" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Demo Qatch — Coba Generator QRIS Dinamis Gratis" />
+    <meta property="og:description" content="Coba langsung generate QRIS dinamis dengan nominal kustom, kode unik, dan fee otomatis. Tanpa perlu daftar." />
+    <meta property="og:url" content="https://qris.karuhundeveloper.com/demo" />
+    <meta property="og:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <meta property="og:site_name" content="Qatch" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Demo Qatch — Coba QRIS Dinamis Gratis" />
+    <meta name="twitter:description" content="Generate QRIS dinamis dengan nominal kustom, tanpa perlu daftar." />
+    <meta name="twitter:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <link rel="canonical" href="https://qris.karuhundeveloper.com/demo" />
+    <link rel="icon" type="image/x-icon" href="/QATCHLOGO.ico" />
+  </Head>
 
   <div class="relative min-h-screen bg-background pt-24 pb-12 overflow-hidden">
     <!-- Background Decor -->
@@ -318,7 +337,7 @@ function copyBase64() {
                 @click="generate"
               >
                 <RefreshCw class="mr-2 h-4 w-4" :class="{ 'animate-spin': isGenerating }" />
-                {{ isGenerating ? 'Memproses...' : 'Generate QRIS Dinamis' }}
+                {{ isGenerating ? 'Memproses...' : 'Generate Qatch' }}
               </Button>
             </CardContent>
           </Card>
@@ -343,7 +362,7 @@ function copyBase64() {
                 >
                 Hasil Output
               </CardTitle>
-              <CardDescription>QRIS dinamis siap digunakan.</CardDescription>
+              <CardDescription>Qatch siap digunakan.</CardDescription>
             </CardHeader>
             <CardContent class="flex-1 flex flex-col relative z-10">
               <div

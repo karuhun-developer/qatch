@@ -20,8 +20,26 @@ const sidebarOpen = ref(false)
 
 <template>
   <Head>
-    <title>{{ currentTitle }} — Tutorial</title>
-    <meta name="description" content="Tutorial video dan panduan untuk menggunakan QRIS Dinamis." />
+    <title>{{ currentTitle }} — Tutorial Qatch | Panduan QRIS Dinamis</title>
+    <meta name="description" content="Tutorial video dan panduan langkah demi langkah menggunakan Qatch: cara setup QRIS dinamis, integrasi API, konfigurasi webhook, dan Android Notification Forwarder." />
+    <meta name="keywords" content="tutorial QRIS dinamis, cara pakai Qatch, panduan QRIS otomatis, tutorial API QRIS, video tutorial QRIS, Qatch tutorial" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Karuhun Developer" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" :content="currentTitle + ' — Tutorial Qatch'" />
+    <meta property="og:description" content="Pelajari cara menggunakan Qatch melalui video tutorial dan panduan lengkap. Dari setup awal hingga integrasi webhook." />
+    <meta property="og:url" content="https://qris.karuhundeveloper.com/tutorial" />
+    <meta property="og:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <meta property="og:site_name" content="Qatch" />
+    <meta property="og:locale" content="id_ID" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" :content="currentTitle + ' — Tutorial Qatch'" />
+    <meta name="twitter:description" content="Tutorial video dan panduan lengkap penggunaan Qatch untuk QRIS dinamis." />
+    <meta name="twitter:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <link rel="canonical" :href="'https://qris.karuhundeveloper.com/tutorial/' + currentSlug" />
+    <link rel="icon" type="image/x-icon" href="/QATCHLOGO.ico" />
   </Head>
 
   <div class="max-w-screen-xl mx-auto flex relative">

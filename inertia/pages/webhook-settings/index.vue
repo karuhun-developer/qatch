@@ -69,7 +69,7 @@ const apiEndpoints = [
   { method: 'GET', path: '/api/v1/static-qris/:id', desc: 'Melihat detail QRIS statis' },
   { method: 'PUT', path: '/api/v1/static-qris/:id', desc: 'Mengubah data QRIS statis' },
   { method: 'DELETE', path: '/api/v1/static-qris/:id', desc: 'Menghapus QRIS statis' },
-  { method: 'POST', path: '/api/v1/dynamic-qris', desc: 'Generate QRIS dinamis baru' },
+  { method: 'POST', path: '/api/v1/dynamic-qris', desc: 'Generate Qatch baru' },
   { method: 'GET', path: '/api/v1/dynamic-qris/:id', desc: 'Cek status transaksi dinamis' },
   { method: 'PUT', path: '/api/v1/dynamic-qris/:id', desc: 'Update status manual' },
   {

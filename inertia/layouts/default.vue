@@ -35,7 +35,7 @@ watch(
       <div class="container flex h-14 items-center justify-between">
         <div class="flex items-center gap-1">
           <Link href="/" class="font-bold flex items-center space-x-2 mr-2">
-            <span class="inline-block text-xl">QRIS Dinamis</span>
+            <span class="inline-block text-xl">Qatch</span>
           </Link>
           <Button as-child variant="ghost" size="sm">
             <Link href="/docs">Dokumentasi</Link>
@@ -83,7 +83,7 @@ watch(
       class="py-6 mt-auto border-t bg-muted/20 text-center text-sm text-muted-foreground flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-4"
     >
       <p>
-        &copy; 2026 QRIS Dinamis. Built by
+        &copy; 2026 Qatch. Built by
         <a
           href="https://karuhundeveloper.com/"
           target="_blank"

@@ -19,11 +19,26 @@ const sidebarOpen = ref(false)
 
 <template>
   <Head>
-    <title>{{ currentTitle }} — Dokumentasi QRIS Dinamis</title>
-    <meta
-      name="description"
-      content="Dokumentasi lengkap API, instalasi, dan konfigurasi QRIS Dinamis."
-    />
+    <title>{{ currentTitle }} — Dokumentasi Qatch | API QRIS Dinamis</title>
+    <meta name="description" content="Dokumentasi lengkap Qatch: panduan instalasi, API QRIS dinamis & statis, autentikasi API Key, konfigurasi Webhook, dan setup Android Notification Forwarder." />
+    <meta name="keywords" content="dokumentasi QRIS, API QRIS dinamis, QRIS API endpoint, webhook QRIS, Android forwarder QRIS, Qatch dokumentasi, QRIS statis ke dinamis" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Karuhun Developer" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" :content="currentTitle + ' — Dokumentasi Qatch'" />
+    <meta property="og:description" content="Pelajari cara menggunakan API Qatch untuk generate QRIS dinamis, konfigurasi webhook, dan integrasi Android Notification Forwarder." />
+    <meta property="og:url" content="https://qris.karuhundeveloper.com/docs" />
+    <meta property="og:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <meta property="og:site_name" content="Qatch" />
+    <meta property="og:locale" content="id_ID" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" :content="currentTitle + ' — Dokumentasi Qatch'" />
+    <meta name="twitter:description" content="Panduan lengkap API QRIS dinamis, webhook, dan instalasi Qatch." />
+    <meta name="twitter:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <link rel="canonical" :href="'https://qris.karuhundeveloper.com/docs/' + currentSlug" />
+    <link rel="icon" type="image/x-icon" href="/QATCHLOGO.ico" />
   </Head>
 
   <div class="max-w-screen-xl mx-auto flex relative">

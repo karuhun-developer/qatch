@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>⚡ QRIS Dinamis</h1>
+  <h1>⚡ Qatch</h1>
   <p><strong>Konversi Static QRIS menjadi Dynamic QRIS dengan verifikasi pembayaran secara real-time & zero payment gateway fees.</strong></p>
   <br/>
   <img alt="AdonisJS" src="https://img.shields.io/badge/AdonisJS-5E0DAC?style=for-the-badge&logo=adonisjs&logoColor=white"/>
@@ -12,7 +12,7 @@
 
 ## 💡 Konsep
 
-Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan _merchant_ harus cek mutasi via aplikasi m-banking/e-wallet untuk memastikan dana masuk. **QRIS Dinamis** solve masalah ini:
+Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan _merchant_ harus cek mutasi via aplikasi m-banking/e-wallet untuk memastikan dana masuk. **Qatch** solve masalah ini:
 
 1. Mem-parsing _string_ Static QRIS dan inject nominal transaksi untuk generate Dynamic QR Code.
 2. Menggunakan [Android Notification Forwarder](https://github.com/karuhun-developer/android-notification-forwarder) untuk intercept _incoming payment notification_ di HP merchant.
@@ -38,7 +38,7 @@ Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan 
 Customer scan QR
       │
       ▼
-[QRIS Dinamis] Generate QR dengan nominal spesifik + kode unik
+[Qatch] Generate QR dengan nominal spesifik + kode unik
       │         misal: Rp 50.000 → Rp 50.021 (021 = kode unik harian)
       │
       ▼
@@ -52,7 +52,7 @@ Push notification masuk ke HP merchant
 [Android Notification Forwarder] intercept & forward ke webhook
       │
       ▼
-[QRIS Dinamis] validasi nominal → status PENDING → PAID ✅
+[Qatch] validasi nominal → status PENDING → PAID ✅
 ```
 
 ## 🗺️ API Endpoints
@@ -73,7 +73,7 @@ Semua endpoint membutuhkan header `x-api-key` untuk autentikasi.
 
 | Method | Endpoint                        | Deskripsi                               |
 | ------ | ------------------------------- | --------------------------------------- |
-| `POST` | `/api/v1/dynamic-qris`          | Generate QRIS dinamis baru              |
+| `POST` | `/api/v1/dynamic-qris`          | Generate Qatch baru                     |
 | `GET`  | `/api/v1/dynamic-qris/:id`      | Cek status transaksi                    |
 | `PUT`  | `/api/v1/dynamic-qris/:id`      | Update status manual                    |
 | `POST` | `/api/v1/dynamic-qris/callback` | **Webhook** untuk notifikasi pembayaran |
@@ -137,7 +137,7 @@ npm run dev
 ## ⚙️ Konfigurasi Webhook
 
 1. Install **Android Notification Forwarder** di HP merchant.
-2. Login ke dashboard QRIS Dinamis → menu **Webhook & API**.
+2. Login ke dashboard Qatch → menu **Webhook & API**.
 3. Copy **URL Webhook** yang tersedia.
 4. Paste URL tersebut ke konfigurasi Android Notification Forwarder.
 5. Atur **Listen Apps** (contoh: `Dana, Gopay, Shopeepay`) dan **Wildcard** filter sesuai kebutuhan.

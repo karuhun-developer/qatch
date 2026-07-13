@@ -1,8 +1,8 @@
-# QRIS Dinamis — Pengenalan
+# Qatch — Pengenalan
 
-## Apa itu QRIS Dinamis?
+## Apa itu Qatch?
 
-**QRIS Dinamis** adalah platform yang memungkinkan kamu mengubah QRIS statis menjadi QRIS dinamis secara programatik. Dengan QRIS statis biasa, pembayar harus memasukkan nominal sendiri, sehingga sulit dicocokkan secara otomatis. QRIS Dinamis mengatasi hal ini dengan meng-_embed_ nominal langsung ke dalam kode QRIS yang di-generate, lalu mencocokkan pembayaran masuk secara otomatis melalui notifikasi Android.
+**Qatch** adalah platform yang memungkinkan kamu mengubah QRIS statis menjadi Qatch secara programatik. Dengan QRIS statis biasa, pembayar harus memasukkan nominal sendiri, sehingga sulit dicocokkan secara otomatis. Qatch mengatasi hal ini dengan meng-_embed_ nominal langsung ke dalam kode QRIS yang di-generate, lalu mencocokkan pembayaran masuk secara otomatis melalui notifikasi Android.
 
 Platform ini dibangun di atas **AdonisJS 6** (backend) dan **Vue 3 + Inertia** (frontend), dan dapat diintegrasikan ke sistem e-commerce atau aplikasi apapun melalui REST API.
 
@@ -30,7 +30,7 @@ Platform ini dibangun di atas **AdonisJS 6** (backend) dan **Vue 3 + Inertia** (
      │ POST /api/v1/dynamic-qris
      │ { qrisId, amount, feeType, expiredHours }
      ▼
-[QRIS Dinamis Server]
+[Qatch Server]
      │ Generate QRIS string dinamis + kode unik
      │ Simpan transaksi status: pending
      ▼
@@ -43,7 +43,7 @@ Platform ini dibangun di atas **AdonisJS 6** (backend) dan **Vue 3 + Inertia** (
      │ Android Notification Forwarder forward ke:
      │ POST /api/v1/dynamic-qris/callback
      ▼
-[QRIS Dinamis Server]
+[Qatch Server]
      │ Cocokkan nominal di teks notifikasi
      │   dengan `total` transaksi pending
      │ Jika cocok → status: paid
@@ -55,7 +55,7 @@ Platform ini dibangun di atas **AdonisJS 6** (backend) dan **Vue 3 + Inertia** (
 
 ### Penjelasan Singkat
 
-1. **Generate QRIS Dinamis** — Kirim request ke API dengan nominal yang diinginkan. Server akan men-generate QRIS string berisi nominal + kode unik.
+1. **Generate Qatch** — Kirim request ke API dengan nominal yang diinginkan. Server akan men-generate QRIS string berisi nominal + kode unik.
 2. **Tampilkan ke Pembayar** — Tampilkan QR Code dari `qrisString` yang diterima. Pembayar scan dan bayar seperti biasa.
 3. **Android Forwarder Mendeteksi Pembayaran** — Saat notifikasi masuk di HP Android merchant (dari m-banking atau e-wallet), Android Notification Forwarder mengirim notifikasi tersebut ke endpoint `/callback`.
 4. **Auto-Match & Mark Paid** — Server mencocokkan nominal di teks notifikasi dengan transaksi yang pending. Jika cocok, transaksi otomatis ditandai `paid`.

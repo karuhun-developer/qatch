@@ -159,7 +159,7 @@ const chartOptions = {
           <Link href="/webhook-settings"><Webhook class="mr-2 h-4 w-4" /> API & Webhook</Link>
         </Button>
         <Button as-child class="flex-1 sm:flex-none">
-          <Link href="/qris-dynamic"><RefreshCw class="mr-2 h-4 w-4" /> QRIS Dinamis</Link>
+          <Link href="/qris-dynamic"><RefreshCw class="mr-2 h-4 w-4" /> Qatch</Link>
         </Button>
       </div>
     </div>
@@ -179,7 +179,7 @@ const chartOptions = {
       <CardHeader class="pb-2 relative z-10">
         <CardTitle class="text-lg font-medium flex items-center">
           <Activity class="mr-2 h-5 w-5 text-primary" />
-          Penggunaan QRIS Dinamis ({{ filterLabel }})
+          Penggunaan Qatch ({{ filterLabel }})
         </CardTitle>
       </CardHeader>
       <CardContent class="relative z-10 h-[300px] w-full pt-4">

@@ -14,8 +14,8 @@ defineProps<{
       >Info Penting: Aplikasi Forwarder Android</AlertTitle
     >
     <AlertDescription class="text-muted-foreground mt-1 leading-relaxed">
-      Untuk mengaktifkan fitur verifikasi status pembayaran QRIS Dinamis secara otomatis
-      (real-time), Anda harus menginstal
+      Untuk mengaktifkan fitur verifikasi status pembayaran Qatch secara otomatis (real-time), Anda
+      harus menginstal
       <a
         href="https://github.com/karuhun-developer/android-notification-forwarder/releases"
         target="_blank"

@@ -1,6 +1,6 @@
-# Setup Dasar QRIS Dinamis
+# Setup Dasar Qatch
 
-Selamat datang di tutorial pertama! Di sini Anda akan belajar bagaimana cara melakukan setup dasar platform QRIS Dinamis mulai dari pendaftaran hingga integrasi Webhook.
+Selamat datang di tutorial pertama! Di sini Anda akan belajar bagaimana cara melakukan setup dasar platform Qatch mulai dari pendaftaran hingga integrasi Webhook.
 
 Silakan tonton video tutorial di bawah ini untuk panduan visual yang lebih jelas:
 
@@ -16,9 +16,10 @@ Silakan tonton video tutorial di bawah ini untuk panduan visual yang lebih jelas
 </div>
 
 ## Ringkasan Langkah-langkah
+
 1. **Daftar Akun**: Kunjungi halaman registrasi dan pilih paket (Plan) yang sesuai.
 2. **Upload QRIS Statis**: Masuk ke menu "QRIS Statis" dan upload gambar QRIS toko/bisnis Anda.
-3. **Simulasi Dinamis**: Masuk ke menu "QRIS Dinamis" lalu buat transaksi baru dengan nominal tertentu.
+3. **Simulasi Dinamis**: Masuk ke menu "Qatch" lalu buat transaksi baru dengan nominal tertentu.
 4. **Setup Webhook**: Gunakan "Android Notification Forwarder" dan salin URL Webhook Anda dari menu API & Webhook.
 
 Semoga berhasil! Jika ada pertanyaan lebih lanjut, silakan rujuk ke dokumentasi API kami.
