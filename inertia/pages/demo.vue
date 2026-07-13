@@ -115,7 +115,7 @@ function generate() {
     if (form.value.feeType !== 'none' && form.value.feeValue > 0) {
       convertOpts.fee = {
         type: form.value.feeType === 'percent' ? 'percentage' : 'fixed',
-        value: form.value.feeValue
+        value: form.value.feeValue,
       }
     }
 

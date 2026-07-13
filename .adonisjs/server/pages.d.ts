@@ -24,5 +24,6 @@ declare module '@adonisjs/inertia/types' {
     'documentation': ExtractProps<(typeof import('../../inertia/pages/documentation.vue'))['default']>
     'plans/index': ExtractProps<(typeof import('../../inertia/pages/plans/index.vue'))['default']>
     'demo': ExtractProps<(typeof import('../../inertia/pages/demo.vue'))['default']>
+    'tutorial': ExtractProps<(typeof import('../../inertia/pages/tutorial.vue'))['default']>
   }
 }

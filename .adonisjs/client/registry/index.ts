@@ -18,6 +18,12 @@ const routes = {
     tokens: [{"old":"/docs/:slug?","type":0,"val":"docs","end":""},{"old":"/docs/:slug?","type":3,"val":"slug","end":""}],
     types: placeholder as Registry['docs']['types'],
   },
+  'tutorial': {
+    methods: ["GET","HEAD"],
+    pattern: '/tutorial/:slug?',
+    tokens: [{"old":"/tutorial/:slug?","type":0,"val":"tutorial","end":""},{"old":"/tutorial/:slug?","type":3,"val":"slug","end":""}],
+    types: placeholder as Registry['tutorial']['types'],
+  },
   'demo': {
     methods: ["GET","HEAD"],
     pattern: '/demo',

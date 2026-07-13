@@ -31,6 +31,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/documentations_controller').default['index']>>>
     }
   }
+  'tutorial': {
+    methods: ["GET","HEAD"]
+    pattern: '/tutorial/:slug?'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/tutorials_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/tutorials_controller').default['index']>>>
+    }
+  }
   'demo': {
     methods: ["GET","HEAD"]
     pattern: '/demo'

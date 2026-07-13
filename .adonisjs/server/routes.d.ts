@@ -6,6 +6,7 @@ export type ScannedRoutes = {
   ALL: {
     'home': { paramsTuple?: []; params?: {} }
     'docs': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
+    'tutorial': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
     'demo': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'new_account.store': { paramsTuple?: []; params?: {} }
@@ -50,6 +51,7 @@ export type ScannedRoutes = {
   GET: {
     'home': { paramsTuple?: []; params?: {} }
     'docs': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
+    'tutorial': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
     'demo': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
@@ -68,6 +70,7 @@ export type ScannedRoutes = {
   HEAD: {
     'home': { paramsTuple?: []; params?: {} }
     'docs': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
+    'tutorial': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
     'demo': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }

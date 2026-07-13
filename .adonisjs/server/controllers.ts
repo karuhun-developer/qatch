@@ -23,4 +23,5 @@ export const controllers = {
   Plans: () => import('#controllers/plans_controller'),
   Home: () => import('#controllers/home_controller'),
   Demo: () => import('#controllers/demo_controller'),
+  Tutorials: () => import('#controllers/tutorials_controller'),
 }

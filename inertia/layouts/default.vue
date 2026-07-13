@@ -40,6 +40,9 @@ watch(
           <Button as-child variant="ghost" size="sm">
             <Link href="/docs">Dokumentasi</Link>
           </Button>
+          <Button as-child variant="ghost" size="sm">
+            <Link href="/tutorial">Tutorial</Link>
+          </Button>
           <Button
             as-child
             variant="ghost"
@@ -75,6 +78,30 @@ watch(
     <main class="flex-1 flex flex-col">
       <slot />
     </main>
+
+    <footer
+      class="py-6 mt-auto border-t bg-muted/20 text-center text-sm text-muted-foreground flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 px-4"
+    >
+      <p>
+        &copy; 2026 QRIS Dinamis. Built by
+        <a
+          href="https://karuhundeveloper.com/"
+          target="_blank"
+          rel="noopener"
+          class="text-primary hover:underline font-medium"
+          >Karuhun Developer</a
+        >.
+      </p>
+      <div class="hidden sm:block text-muted-foreground/30">|</div>
+      <a
+        href="https://t.me/bayurifkialgh"
+        target="_blank"
+        rel="noopener"
+        class="text-primary hover:underline font-medium flex items-center"
+      >
+        Hubungi via Telegram
+      </a>
+    </footer>
 
     <Toaster position="top-center" rich-colors />
   </div>

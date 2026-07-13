@@ -13,6 +13,7 @@ import router from '@adonisjs/core/services/router'
 
 router.get('/', [controllers.Home, 'index']).as('home')
 router.get('/docs/:slug?', [controllers.Documentations, 'index']).as('docs')
+router.get('/tutorial/:slug?', [controllers.Tutorials, 'index']).as('tutorial')
 
 router.get('/demo', [controllers.Demo, 'index']).as('demo')
 

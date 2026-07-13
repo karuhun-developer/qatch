@@ -34,6 +34,7 @@ import {
   RefreshCw,
   Webhook,
   Package,
+  PlayCircle,
 } from '@lucide/vue'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
@@ -118,6 +119,14 @@ watch(
           >
             <Webhook class="h-4 w-4" />
             Webhook & API
+          </Link>
+          <Link
+            href="/tutorial"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/tutorial') }"
+          >
+            <PlayCircle class="h-4 w-4" />
+            Tutorial
           </Link>
           <Link
             v-if="page.props.user?.roleId === 1"
@@ -217,6 +226,15 @@ watch(
                   Webhook & API
                 </Link>
                 <Link
+                  href="/tutorial"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/tutorial') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <PlayCircle class="h-4 w-4" />
+                  Tutorial
+                </Link>
+                <Link
                   v-if="page.props.user?.roleId === 1"
                   href="/users"
                   class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
@@ -292,6 +310,30 @@ watch(
       <main class="flex-1 flex flex-col p-4 lg:p-6">
         <slot />
       </main>
+
+      <footer
+        class="py-4 mt-auto border-t bg-muted/20 text-center text-xs text-muted-foreground flex flex-col sm:flex-row items-center justify-center gap-2 px-4"
+      >
+        <p>
+          &copy; 2026 QRIS Dinamis. Built by
+          <a
+            href="https://karuhundeveloper.com/"
+            target="_blank"
+            rel="noopener"
+            class="text-primary hover:underline font-medium"
+            >Karuhun Developer</a
+          >.
+        </p>
+        <div class="hidden sm:block text-muted-foreground/30">|</div>
+        <a
+          href="https://t.me/bayurifkialgh"
+          target="_blank"
+          rel="noopener"
+          class="text-primary hover:underline font-medium flex items-center"
+        >
+          Hubungi via Telegram
+        </a>
+      </footer>
     </div>
 
     <ConfirmModal
