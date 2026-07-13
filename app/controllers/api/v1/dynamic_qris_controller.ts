@@ -1,13 +1,17 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/core'
 import DynamicQrisService from '#services/dynamic_qris_service'
+import WebhookService from '#services/webhook_service'
 import { generateDynamicQrisValidator, updateDynamicQrisStatusValidator } from '#validators/qris_transaction'
 import QrisTransaction from '#models/qris_transaction'
 import { DateTime } from 'luxon'
 
 @inject()
 export default class DynamicQrisController {
-  constructor(protected dynamicQrisService: DynamicQrisService) {}
+  constructor(
+    protected dynamicQrisService: DynamicQrisService,
+    protected webhookService: WebhookService
+  ) {}
 
   async show({ params, response, auth }: HttpContext) {
     const user = auth.user!
@@ -70,13 +74,7 @@ export default class DynamicQrisController {
       }
 
       if (user.webhookUrl) {
-        try {
-          fetch(user.webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ event: 'transaction.paid', data: transaction.toJSON() })
-          }).catch(err => console.error('Failed to send webhook:', err))
-        } catch (e) {}
+        this.webhookService.dispatchTransactionPaid(user.webhookUrl, user.hmacKey, transaction.toJSON())
       }
     } else {
       transaction.paidAt = null
@@ -110,21 +108,23 @@ export default class DynamicQrisController {
       }
     }
 
-    // 2. Check title wildcard
+    // 2. Check title wildcards (OR logic — match any one)
     if (user.webhookTitleWildcard) {
       const titleStr = (payload.notification_title || '').toLowerCase()
-      const wildcard = user.webhookTitleWildcard.toLowerCase()
-      if (!titleStr.includes(wildcard)) {
-        return response.ok({ message: `Ignored: Title does not match wildcard` })
+      const wildcards = user.webhookTitleWildcard.split(',').map((w: string) => w.trim().toLowerCase()).filter(Boolean)
+      const matched = wildcards.some((w: string) => titleStr.includes(w))
+      if (!matched) {
+        return response.ok({ message: `Ignored: Title does not match any wildcard` })
       }
     }
 
-    // 3. Check text wildcard
+    // 3. Check text wildcards (OR logic — match any one)
     if (user.webhookTextWildcard) {
       const textStr = (payload.notification_text || '').toLowerCase()
-      const wildcard = user.webhookTextWildcard.toLowerCase()
-      if (!textStr.includes(wildcard)) {
-        return response.ok({ message: `Ignored: Text does not match wildcard` })
+      const wildcards = user.webhookTextWildcard.split(',').map((w: string) => w.trim().toLowerCase()).filter(Boolean)
+      const matched = wildcards.some((w: string) => textStr.includes(w))
+      if (!matched) {
+        return response.ok({ message: `Ignored: Text does not match any wildcard` })
       }
     }
 
@@ -134,17 +134,20 @@ export default class DynamicQrisController {
     const pendingTransactions = await QrisTransaction.query()
       .where('userId', user.id)
       .where('status', 'pending')
+      .where('expired_at', '>', DateTime.now().toSQL())
 
-    // Hapus semua karakter selain angka dari teks notifikasi untuk mencari nominal
-    // Contoh: "Rp 50.005" -> "50005"
-    const normalizedText = payload.notification_text.replace(/[^0-9]/g, '')
+    // Ekstrak semua angka yang muncul di teks notifikasi
+    // Contoh: "Pembayaran Rp 50.021 diterima" → [50021]
+    const numbersInText = [...payload.notification_text.matchAll(/[\d.,]+/g)]
+      .map((m) => parseInt(m[0].replace(/[.,]/g, ''), 10))
+      .filter((n) => !isNaN(n))
 
     let matchedTransaction: QrisTransaction | null = null
 
     for (const tx of pendingTransactions) {
-      const totalStr = tx.total.toString()
-      // Cek apakah nominal total transaksi ada di dalam teks notifikasi
-      if (normalizedText.includes(totalStr) || payload.notification_text.includes(totalStr)) {
+      // total sudah mencakup amount + uniqueCode, jadi ini yang muncul di mutasi bank
+      const expectedTotal = tx.total
+      if (numbersInText.includes(expectedTotal)) {
         matchedTransaction = tx
         break
       }
@@ -156,13 +159,7 @@ export default class DynamicQrisController {
       await matchedTransaction.save()
 
       if (user.webhookUrl) {
-        try {
-          fetch(user.webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ event: 'transaction.paid', data: matchedTransaction.toJSON() })
-          }).catch(err => console.error('Failed to send webhook:', err))
-        } catch (e) {}
+        this.webhookService.dispatchTransactionPaid(user.webhookUrl, user.hmacKey, matchedTransaction.toJSON())
       }
 
       return response.ok({
