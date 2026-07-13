@@ -4,6 +4,7 @@ import Qris from '#models/qris'
 import QrisTransaction from '#models/qris_transaction'
 import encryption from '@adonisjs/core/services/encryption'
 import db from '@adonisjs/lucid/services/db'
+import { DateTime } from 'luxon'
 
 export default class DashboardController {
   async index({ inertia, auth, request }: HttpContext) {
@@ -30,8 +31,9 @@ export default class DashboardController {
     if (daysFilter !== 'all') {
       const days = parseInt(daysFilter, 10)
       if (!isNaN(days)) {
-        qrisQuery.whereRaw(`created_at >= DATE('now', '-${days} days')`)
-        txQuery.whereRaw(`created_at >= DATE('now', '-${days} days')`)
+        const targetDate = DateTime.now().minus({ days }).toSQLDate()
+        qrisQuery.where('created_at', '>=', targetDate as string)
+        txQuery.where('created_at', '>=', targetDate as string)
       }
     }
 
@@ -45,7 +47,8 @@ export default class DashboardController {
       if (daysFilter !== 'all') {
         const days = parseInt(daysFilter, 10)
         if (!isNaN(days)) {
-          userQuery.whereRaw(`created_at >= DATE('now', '-${days} days')`)
+          const targetDate = DateTime.now().minus({ days }).toSQLDate()
+          userQuery.where('created_at', '>=', targetDate as string)
         }
       }
       totalUsers = (await userQuery.count('* as total').first())?.$extras.total || 0
