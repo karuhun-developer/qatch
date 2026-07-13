@@ -134,6 +134,10 @@ export default defineConfig({
       pattern: 'docs/**/*.md',
       reloadServer: false,
     },
+    {
+      pattern: 'tutorials/**/*.md',
+      reloadServer: false,
+    },
   ],
 
   hooks: {

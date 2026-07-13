@@ -36,8 +36,9 @@ export default class ApiKeyMiddleware {
 
     // Inject user ke object auth agar controller bisa memanggil auth.user
     if (ctx.auth) {
-      // @ts-ignore
-      ctx.auth.user = authenticatedUser
+      const guard = ctx.auth.use('web')
+      guard.user = authenticatedUser
+      guard.isAuthenticated = true
     }
 
     return next()
