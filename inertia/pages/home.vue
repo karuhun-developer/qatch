@@ -143,7 +143,7 @@ const displayPlans = computed(() => {
           <CardDescription>{{ plan.description }}</CardDescription>
           <div class="mt-4 flex items-baseline text-5xl font-extrabold">
             <span v-if="plan.price === 0">Gratis</span>
-            <span v-else>{{ (plan.price / 1000).toLocaleString('id-ID') }}rb</span>
+            <span v-else>{{ (plan.price / 1000).toLocaleString('id-ID') }}</span>
             <span class="ml-1 text-xl font-medium text-muted-foreground">{{
               plan.price === 0 ? '/selamanya' : '/bulan'
             }}</span>
