@@ -89,4 +89,4 @@ router
     router.post('dynamic-qris/callback', [controllers.api.v1.DynamicQris, 'callback'])
   })
   .prefix('api/v1')
-  .use(middleware.apiKey())
+  .use([middleware.apiKey(), middleware.forceJsonReponse()])

@@ -90,6 +90,7 @@
     "clsx": "^2.1.1",
     "edge.js": "^6.5.1",
     "highlight.js": "^11.11.1",
+    "jimp": "^1.6.1",
     "jsqr": "^1.4.0",
     "lucide-vue-next": "^1.0.0",
     "luxon": "^3.7.2",

@@ -19,6 +19,7 @@ server.use([
   () => import('@adonisjs/cors/cors_middleware'),
   () => import('@adonisjs/vite/vite_middleware'),
   () => import('#middleware/inertia_middleware'),
+  () => import('#middleware/force_json_response_middleware'),
 ])
 
 router.use([
@@ -34,4 +35,5 @@ export const middleware = router.named({
   guest: () => import('#middleware/guest_middleware'),
   auth: () => import('#middleware/auth_middleware'),
   apiKey: () => import('#middleware/api_key_middleware'),
+  forceJsonReponse: () => import('#middleware/force_json_response_middleware'),
 })

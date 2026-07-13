@@ -3,6 +3,8 @@ import User from '#models/user'
 import app from '@adonisjs/core/services/app'
 import { type MultipartFile } from '@adonisjs/core/bodyparser'
 import string from '@adonisjs/core/helpers/string'
+import { Jimp } from 'jimp'
+import jsQR from 'jsqr'
 
 export default class QrisManagementService {
   async getAllForUser(userId: number, page: number, limit: number) {
@@ -17,7 +19,7 @@ export default class QrisManagementService {
   }
 
   async createQris(
-    data: { userId: number; name: string; description?: string; qrisString: string },
+    data: { userId: number; name: string; description?: string; qrisString?: string },
     file: MultipartFile
   ) {
     const user = await User.findOrFail(data.userId)
@@ -35,11 +37,30 @@ export default class QrisManagementService {
 
     const filePath = `uploads/qris/${file.fileName}`
 
+    let qrisStr = data.qrisString
+    if (!qrisStr) {
+      const fullPath = app.makePath('public', filePath)
+      const image = await Jimp.read(fullPath)
+      // @ts-ignore
+      const code = jsQR(
+        new Uint8ClampedArray(image.bitmap.data),
+        image.bitmap.width,
+        image.bitmap.height
+      )
+      if (code && code.data) {
+        qrisStr = code.data
+      } else {
+        throw new Error(
+          'Gagal membaca QR Code dari gambar yang diupload. Pastikan gambar jelas dan memiliki QR Code.'
+        )
+      }
+    }
+
     const qris = await Qris.create({
       userId: data.userId,
       name: data.name,
       description: data.description || null,
-      qrisString: data.qrisString,
+      qrisString: qrisStr,
       qris: filePath,
     })
 
@@ -56,14 +77,34 @@ export default class QrisManagementService {
   ) {
     if (data.name) qris.name = data.name
     if (data.description !== undefined) qris.description = data.description || null
-    if (data.qrisString) qris.qrisString = data.qrisString
+
+    let qrisStr = data.qrisString
 
     if (file) {
       await file.move(app.makePath('public/uploads/qris'), {
         name: `${string.random(32)}.${file.extname}`,
       })
-      qris.qris = `uploads/qris/${file.fileName}`
+      const filePath = `uploads/qris/${file.fileName}`
+      qris.qris = filePath
+
+      if (!qrisStr) {
+        const fullPath = app.makePath('public', filePath)
+        const image = await Jimp.read(fullPath)
+        // @ts-ignore
+        const code = jsQR(
+          new Uint8ClampedArray(image.bitmap.data),
+          image.bitmap.width,
+          image.bitmap.height
+        )
+        if (code && code.data) {
+          qrisStr = code.data
+        } else {
+          throw new Error('Gagal membaca QR Code dari gambar yang diupload.')
+        }
+      }
     }
+
+    if (qrisStr) qris.qrisString = qrisStr
 
     await qris.save()
     return qris

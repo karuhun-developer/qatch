@@ -8,7 +8,7 @@ export const createQrisValidator = vine.compile(
       size: '5mb',
       extnames: ['jpg', 'png', 'jpeg', 'webp'],
     }),
-    qrisString: vine.string().trim().minLength(10), // The parsed string
+    qrisString: vine.string().trim().minLength(10).optional(), // The parsed string
   })
 )
 
