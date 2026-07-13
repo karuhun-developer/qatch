@@ -22,18 +22,23 @@ export default class QrisController {
     const payload = await request.validateUsing(createQrisValidator)
     const user = auth.user!
 
-    await this.qrisManagementService.createQris(
-      {
-        userId: user.id,
-        name: payload.name,
-        description: payload.description,
-        qrisString: payload.qrisString,
-      },
-      payload.qris
-    )
+    try {
+      await this.qrisManagementService.createQris(
+        {
+          userId: user.id,
+          name: payload.name,
+          description: payload.description,
+          qrisString: payload.qrisString,
+        },
+        payload.qris
+      )
 
-    session.flash('success', 'Data QRIS berhasil ditambahkan!')
-    return response.redirect().back()
+      session.flash('success', 'Data QRIS berhasil ditambahkan!')
+      return response.redirect().back()
+    } catch (error: any) {
+      session.flash('error', error.message + ' Silakan upgrade plan Anda di menu Plan Aktif.')
+      return response.redirect().back()
+    }
   }
 
   async update({ params, request, response, session, auth }: HttpContext) {

@@ -38,20 +38,26 @@ export default class StaticQrisController {
     const payload = await request.validateUsing(createQrisValidator)
     const user = auth.user!
 
-    const qris = await this.qrisManagementService.createQris(
-      {
-        userId: user.id,
-        name: payload.name,
-        description: payload.description,
-        qrisString: payload.qrisString,
-      },
-      payload.qris
-    )
+    try {
+      const qris = await this.qrisManagementService.createQris(
+        {
+          userId: user.id,
+          name: payload.name,
+          description: payload.description,
+          qrisString: payload.qrisString,
+        },
+        payload.qris
+      )
 
-    return response.created({
-      message: 'Static QRIS created successfully',
-      data: qris,
-    })
+      return response.created({
+        message: 'Static QRIS created successfully',
+        data: qris,
+      })
+    } catch (error: any) {
+      return response.badRequest({
+        message: error.message + ' Silakan upgrade plan Anda untuk menambah limit.',
+      })
+    }
   }
 
   async update({ params, request, response, auth }: HttpContext) {

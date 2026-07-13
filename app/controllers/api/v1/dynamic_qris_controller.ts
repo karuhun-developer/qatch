@@ -37,16 +37,22 @@ export default class DynamicQrisController {
     const payload = await request.validateUsing(generateDynamicQrisValidator)
     const user = auth.user!
 
-    const transaction = await this.dynamicQrisService.generateDynamicQris({
-      ...payload,
-      userId: user.id,
-      expiredHours: payload.expiredHours || 24,
-    })
+    try {
+      const transaction = await this.dynamicQrisService.generateDynamicQris({
+        ...payload,
+        userId: user.id,
+        expiredHours: payload.expiredHours || 24,
+      })
 
-    return response.created({
-      message: 'Dynamic QRIS generated successfully',
-      data: transaction,
-    })
+      return response.created({
+        message: 'Dynamic QRIS generated successfully',
+        data: transaction,
+      })
+    } catch (error: any) {
+      return response.badRequest({
+        message: error.message + ' Silakan upgrade plan Anda untuk menambah limit.',
+      })
+    }
   }
 
   async update({ params, request, response, auth }: HttpContext) {

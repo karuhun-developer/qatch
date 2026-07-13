@@ -57,14 +57,19 @@ export default class DynamicQrisController {
     const payload = await request.validateUsing(generateDynamicQrisValidator)
     const user = auth.user!
 
-    await this.dynamicQrisService.generateDynamicQris({
-      ...payload,
-      userId: user.id,
-      expiredHours: payload.expiredHours || 24,
-    })
+    try {
+      await this.dynamicQrisService.generateDynamicQris({
+        ...payload,
+        userId: user.id,
+        expiredHours: payload.expiredHours || 24,
+      })
 
-    session.flash('success', 'Qatch berhasil digenerate!')
-    return response.redirect().back()
+      session.flash('success', 'Qatch berhasil digenerate!')
+      return response.redirect().back()
+    } catch (error: any) {
+      session.flash('error', error.message + ' Silakan upgrade plan Anda di menu Plan Aktif.')
+      return response.redirect().back()
+    }
   }
 
   async updateStatus({ params, request, response, auth, session }: HttpContext) {
