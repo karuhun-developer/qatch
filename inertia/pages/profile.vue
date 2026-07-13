@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import SecuritySettings from '@/components/SecuritySettings.vue'
+import UserLimits from '@/components/UserLimits.vue'
 
 defineOptions({ layout: DashboardLayout })
 
@@ -49,32 +50,7 @@ const page = usePage<Data.SharedProps>()
       </CardFooter>
     </Card>
 
-    <Card>
-      <CardHeader>
-        <CardTitle>Informasi Limit & Paket</CardTitle>
-        <CardDescription>
-          Informasi paket langganan Anda dan sisa limit bulan ini.
-        </CardDescription>
-      </CardHeader>
-      <CardContent class="space-y-4">
-        <div class="space-y-1">
-          <Label>Paket Saat Ini</Label>
-          <div class="font-medium">{{ page.props.user?.plan?.name || 'Belum memilih paket' }}</div>
-        </div>
-        <div class="space-y-1">
-          <Label>Limit QRIS Statis</Label>
-          <div class="font-medium">
-            {{ page.props.user?.qrisTotal || 0 }} / {{ page.props.user?.plan?.maxQris === null ? 'Unlimited' : (page.props.user?.plan?.maxQris || 0) }}
-          </div>
-        </div>
-        <div class="space-y-1">
-          <Label>Limit Transaksi / Bulan</Label>
-          <div class="font-medium">
-            {{ page.props.user?.transactionTotal || 0 }} / {{ page.props.user?.plan?.maxTransactionPerMonth === null ? 'Unlimited' : (page.props.user?.plan?.maxTransactionPerMonth || 0) }}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+    <UserLimits />
 
     <div class="mt-4">
       <SecuritySettings :api-key="apiKey" :has-hmac="hasHmac" />

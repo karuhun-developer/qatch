@@ -23,6 +23,7 @@ import {
 
 import QrisModal from '@/components/modals/QrisModal.vue'
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
+import UserLimits from '@/components/UserLimits.vue'
 
 defineOptions({ layout: DashboardLayout })
 
@@ -234,4 +235,8 @@ function changePage(page: number) {
     :loading="isDeleting"
     @confirm="deleteQris"
   />
+
+  <div class="mt-8">
+    <UserLimits />
+  </div>
 </template>

@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/select'
 import { Users, QrCode, RefreshCw, Activity, Wallet, Calendar, Webhook } from '@lucide/vue'
 import AndroidForwarderAlert from '@/components/AndroidForwarderAlert.vue'
+import UserLimits from '@/components/UserLimits.vue'
 import { computed } from 'vue'
 
 import {
@@ -326,5 +327,9 @@ const chartOptions = {
         </CardContent>
       </Card>
     </div>
+  </div>
+
+  <div class="mt-8">
+    <UserLimits />
   </div>
 </template>

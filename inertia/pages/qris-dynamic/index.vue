@@ -19,6 +19,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+import UserLimits from '@/components/UserLimits.vue'
 
 defineOptions({ layout: DashboardLayout })
 
@@ -408,4 +409,8 @@ function updateStatus() {
       </form>
     </DialogContent>
   </Dialog>
+
+  <div class="mt-8">
+    <UserLimits />
+  </div>
 </template>
