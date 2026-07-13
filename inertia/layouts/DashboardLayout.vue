@@ -103,7 +103,7 @@ watch(
             :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris-dynamic') }"
           >
             <RefreshCw class="h-4 w-4" />
-            Qatch
+            QRIS Dinamis
           </Link>
           <Link
             href="/qris"

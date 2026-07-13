@@ -148,11 +148,11 @@ function updateStatus() {
 </script>
 
 <template>
-  <Head title="Manajemen Qatch" />
+  <Head title="Manajemen QRIS Dinamis" />
 
   <div class="flex items-center justify-between space-y-2 mb-8">
     <div>
-      <h2 class="text-3xl font-bold tracking-tight">Qatch</h2>
+      <h2 class="text-3xl font-bold tracking-tight">QRIS Dinamis</h2>
       <p class="text-muted-foreground mt-1">
         Generate QRIS sekali pakai dengan nominal spesifik dan kode unik.
       </p>
@@ -176,10 +176,10 @@ function updateStatus() {
         <CardHeader>
           <CardTitle class="flex items-center gap-2">
             <RefreshCw class="h-5 w-5 text-primary" />
-            Generator Qatch
+            Generator QRIS Dinamis
           </CardTitle>
           <CardDescription>
-            Pilih QRIS statis dasar dan tentukan nominal untuk membuat Qatch.
+            Pilih QRIS statis dasar dan tentukan nominal untuk membuat QRIS Dinamis.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -295,7 +295,7 @@ function updateStatus() {
 
             <Button type="submit" class="w-full" :disabled="form.processing || !form.qrisId">
               <QrCode class="h-4 w-4 mr-2" />
-              {{ form.processing ? 'Memproses...' : 'Generate Qatch' }}
+              {{ form.processing ? 'Memproses...' : 'Generate QRIS Dinamis' }}
             </Button>
           </form>
         </CardContent>
@@ -308,10 +308,10 @@ function updateStatus() {
         <CardHeader>
           <CardTitle class="flex items-center gap-2">
             <Receipt class="h-5 w-5 text-emerald-500" />
-            Riwayat Qatch
+            Riwayat QRIS Dinamis
           </CardTitle>
           <CardDescription>
-            Daftar transaksi Qatch yang telah Anda buat beserta statusnya.
+            Daftar transaksi QRIS Dinamis yang telah Anda buat beserta statusnya.
           </CardDescription>
         </CardHeader>
         <CardContent class="flex-1 flex flex-col">
@@ -383,7 +383,7 @@ function updateStatus() {
                 </TableRow>
                 <TableRow v-if="transactions.data.length === 0">
                   <TableCell colspan="4" class="text-center py-12 text-muted-foreground">
-                    Belum ada riwayat transaksi Qatch.
+                    Belum ada riwayat transaksi QRIS Dinamis.
                   </TableCell>
                 </TableRow>
               </TableBody>
