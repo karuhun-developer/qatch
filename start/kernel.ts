@@ -19,7 +19,6 @@ server.use([
   () => import('@adonisjs/cors/cors_middleware'),
   () => import('@adonisjs/vite/vite_middleware'),
   () => import('#middleware/inertia_middleware'),
-  () => import('#middleware/force_json_response_middleware'),
 ])
 
 router.use([

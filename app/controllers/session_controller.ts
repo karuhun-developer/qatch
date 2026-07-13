@@ -6,18 +6,12 @@ export default class SessionController {
     return inertia.render('auth/login', {})
   }
 
-  async store({ request, auth, response, session }: HttpContext) {
+  async store({ request, auth, response }: HttpContext) {
     const { email, password } = request.all()
-    
-    try {
-      const user = await User.verifyCredentials(email, password)
-      await auth.use('web').login(user)
-      return response.redirect().toRoute('dashboard')
-    } catch (error) {
-      session.flashExcept(['password'])
-      session.flash('error', 'Email atau password salah')
-      return response.redirect().back()
-    }
+    const user = await User.verifyCredentials(email, password)
+
+    await auth.use('web').login(user)
+    response.redirect().toRoute('dashboard')
   }
 
   async destroy({ auth, response }: HttpContext) {
