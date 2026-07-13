@@ -35,6 +35,7 @@ import {
   Webhook,
   Package,
   PlayCircle,
+  MessageCircle,
 } from '@lucide/vue'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
@@ -157,6 +158,17 @@ watch(
           </Link>
         </nav>
       </div>
+      <div class="p-4 mt-auto">
+        <a
+          href="https://t.me/bayurifkialgh"
+          target="_blank"
+          rel="noopener"
+          class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-all hover:text-primary hover:bg-muted"
+        >
+          <MessageCircle class="h-4 w-4" />
+          Kontak Support
+        </a>
+      </div>
     </aside>
 
     <div class="flex flex-col flex-1">
@@ -265,6 +277,18 @@ watch(
                   Plans
                 </Link>
               </nav>
+            </div>
+            <div class="p-4 mt-auto border-t">
+              <a
+                href="https://t.me/bayurifkialgh"
+                target="_blank"
+                rel="noopener"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-all hover:text-primary hover:bg-muted"
+                @click="mobileMenuOpen = false"
+              >
+                <MessageCircle class="h-4 w-4" />
+                Kontak Support
+              </a>
             </div>
           </SheetContent>
         </Sheet>
