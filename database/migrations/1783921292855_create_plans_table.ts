@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('description').nullable()
       table.integer('max_qris').nullable()
       table.integer('max_transaction_per_month').nullable()
+      table.boolean('is_featured').notNullable().defaultTo(false)
       table.json('features').nullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')

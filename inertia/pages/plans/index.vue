@@ -20,7 +20,7 @@ import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 defineOptions({ layout: DashboardLayout })
 
 const props = defineProps<{
-  plans: { id: number; name: string; price: number; description: string | null; features: string[] | null; createdAt: string; updatedAt: string }[]
+  plans: { id: number; name: string; price: number; description: string | null; maxQris: number | null; maxTransactionPerMonth: number | null; isFeatured: boolean; features: string[] | null; createdAt: string; updatedAt: string }[]
 }>()
 
 // Modal states
@@ -103,6 +103,9 @@ function deletePlan() {
                 <TableRow v-for="plan in plans" :key="plan.id">
                   <TableCell class="font-medium">
                     {{ plan.name }}
+                    <span v-if="plan.isFeatured" class="ml-2 inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                      Featured
+                    </span>
                   </TableCell>
                   <TableCell>
                     Rp {{ plan.price.toLocaleString('id-ID') }}

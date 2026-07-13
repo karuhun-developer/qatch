@@ -8,7 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class PlanSchema extends BaseModel {
-  static $columns = ['createdAt', 'description', 'features', 'id', 'maxQris', 'maxTransactionPerMonth', 'name', 'price', 'updatedAt'] as const
+  static $columns = ['createdAt', 'description', 'features', 'id', 'isFeatured', 'maxQris', 'maxTransactionPerMonth', 'name', 'price', 'updatedAt'] as const
   $columns = PlanSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -18,6 +18,8 @@ export class PlanSchema extends BaseModel {
   declare features: any | null
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare isFeatured: boolean
   @column()
   declare maxQris: number | null
   @column()

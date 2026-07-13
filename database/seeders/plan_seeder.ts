@@ -10,6 +10,7 @@ export default class extends BaseSeeder {
         description: 'Cocok untuk mencoba dan usaha kecil',
         maxQris: 1,
         maxTransactionPerMonth: 100,
+        isFeatured: false,
         features: [
           'Hingga 100 transaksi/bulan',
           '1 QRIS Statis',
@@ -23,6 +24,7 @@ export default class extends BaseSeeder {
         description: 'Untuk bisnis yang sedang berkembang pesat',
         maxQris: 5,
         maxTransactionPerMonth: 1500,
+        isFeatured: true,
         features: [
           'Hingga 1.500 transaksi/bulan',
           '5 QRIS Statis',
@@ -37,6 +39,7 @@ export default class extends BaseSeeder {
         description: 'Skala tak terbatas untuk bisnis besar',
         maxQris: null,
         maxTransactionPerMonth: null,
+        isFeatured: false,
         features: [
           'Transaksi Tanpa Batas (Unlimited)',
           'QRIS Statis Tanpa Batas',

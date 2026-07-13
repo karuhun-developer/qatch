@@ -7,6 +7,7 @@ export const createPlanValidator = vine.compile(
     description: vine.string().trim().nullable().optional(),
     maxQris: vine.number().nullable().optional(),
     maxTransactionPerMonth: vine.number().nullable().optional(),
+    isFeatured: vine.boolean().optional(),
     features: vine.array(vine.string().trim()).nullable().optional(),
   })
 )
@@ -18,6 +19,7 @@ export const updatePlanValidator = vine.compile(
     description: vine.string().trim().nullable().optional(),
     maxQris: vine.number().nullable().optional(),
     maxTransactionPerMonth: vine.number().nullable().optional(),
+    isFeatured: vine.boolean().optional(),
     features: vine.array(vine.string().trim()).nullable().optional(),
   })
 )

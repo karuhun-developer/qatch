@@ -20,6 +20,9 @@ export default class Plan extends BaseModel {
   @column()
   declare maxTransactionPerMonth: number | null
 
+  @column()
+  declare isFeatured: boolean
+
   @column({
     prepare: (value) => JSON.stringify(value),
     consume: (value) => (typeof value === 'string' ? JSON.parse(value) : value),

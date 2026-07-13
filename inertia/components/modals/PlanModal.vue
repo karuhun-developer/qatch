@@ -11,12 +11,13 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
 import TagInput from '@/components/TagInput.vue'
 import { Package } from '@lucide/vue'
 
 const props = defineProps<{
   open: boolean
-  plan: { id: number; name: string; price: number; description: string | null; features: string[] | null } | null
+  plan: { id: number; name: string; price: number; description: string | null; maxQris: number | null; maxTransactionPerMonth: number | null; isFeatured: boolean; features: string[] | null } | null
 }>()
 
 const emit = defineEmits<{
@@ -29,6 +30,7 @@ const form = useForm({
   description: '',
   maxQris: null as number | null,
   maxTransactionPerMonth: null as number | null,
+  isFeatured: false,
   features: [] as string[],
 })
 
@@ -42,6 +44,7 @@ watch(
         form.description = props.plan.description || ''
         form.maxQris = props.plan.maxQris
         form.maxTransactionPerMonth = props.plan.maxTransactionPerMonth
+        form.isFeatured = !!props.plan.isFeatured
         form.features = props.plan.features || []
       } else {
         form.reset()
@@ -111,6 +114,13 @@ function submit() {
             <Input id="maxTransaction" v-model="form.maxTransactionPerMonth" type="number" min="0" placeholder="e.g. 1500" />
             <p v-if="form.errors.maxTransactionPerMonth" class="text-sm text-destructive">{{ form.errors.maxTransactionPerMonth }}</p>
           </div>
+        </div>
+
+        <div class="flex items-center space-x-2 pt-2">
+          <Checkbox id="isFeatured" :checked="form.isFeatured" @update:checked="form.isFeatured = $event" />
+          <Label for="isFeatured" class="font-normal cursor-pointer text-sm">
+            Tandai sebagai Paket Paling Populer (Featured)
+          </Label>
         </div>
 
         <div class="space-y-2">

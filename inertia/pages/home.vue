@@ -13,9 +13,27 @@ const props = defineProps<{
     name: string
     price: number
     description: string | null
+    isFeatured: boolean
     features: string[] | null
   }[]
 }>()
+
+import { computed } from 'vue'
+
+const displayPlans = computed(() => {
+  const plansCopy = [...props.plans]
+  const featuredIndex = plansCopy.findIndex(p => p.isFeatured)
+  
+  if (featuredIndex !== -1 && plansCopy.length > 2) {
+    // Extract the featured plan
+    const featured = plansCopy.splice(featuredIndex, 1)[0]
+    // Insert it in the middle
+    const middleIndex = Math.floor(plansCopy.length / 2)
+    plansCopy.splice(middleIndex, 0, featured)
+  }
+  
+  return plansCopy
+})
 </script>
 
 <template>
@@ -72,14 +90,14 @@ const props = defineProps<{
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       <Card 
-        v-for="plan in plans" 
+        v-for="plan in displayPlans" 
         :key="plan.id"
         class="flex flex-col relative transition-colors"
         :class="[
-          plan.price > 0 ? 'border-primary shadow-lg shadow-primary/10 bg-card/80 backdrop-blur-md scale-105 z-10' : 'border-muted/50 bg-card/50 backdrop-blur-sm hover:border-primary/50'
+          plan.isFeatured ? 'border-primary shadow-lg shadow-primary/10 bg-card/80 backdrop-blur-md scale-105 z-10' : 'border-muted/50 bg-card/50 backdrop-blur-sm hover:border-primary/50'
         ]"
       >
-        <div v-if="plan.price > 0" class="absolute -top-4 inset-x-0 flex justify-center">
+        <div v-if="plan.isFeatured" class="absolute -top-4 inset-x-0 flex justify-center">
           <span class="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Paling Populer</span>
         </div>
         <CardHeader>
