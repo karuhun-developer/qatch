@@ -106,7 +106,7 @@ export class RoleSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'roleId', 'updatedAt', 'webhookListenApps', 'webhookTextWildcard', 'webhookTitleWildcard', 'webhookUrl'] as const
+  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'planId', 'qrisTotal', 'roleId', 'transactionTotal', 'updatedAt', 'webhookListenApps', 'webhookTextWildcard', 'webhookTitleWildcard', 'webhookUrl'] as const
   $columns = UserSchema.$columns
   @column()
   declare apiKey: string | null
@@ -123,7 +123,13 @@ export class UserSchema extends BaseModel {
   @column({ serializeAs: null })
   declare password: string
   @column()
+  declare planId: number | null
+  @column()
+  declare qrisTotal: number
+  @column()
   declare roleId: number | null
+  @column()
+  declare transactionTotal: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()

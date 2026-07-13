@@ -10,6 +10,7 @@ export const signupValidator = vine.compile(
     password: password().confirmed({
       confirmationField: 'passwordConfirmation',
     }),
+    planId: vine.number().nullable().optional(),
   })
 )
 

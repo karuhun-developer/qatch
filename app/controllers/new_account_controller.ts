@@ -1,10 +1,12 @@
 import User from '#models/user'
+import Plan from '#models/plan'
 import { signupValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class NewAccountController {
   async create({ inertia }: HttpContext) {
-    return inertia.render('auth/signup', {})
+    const plans = await Plan.query().orderBy('price', 'asc')
+    return inertia.render('auth/signup', { plans })
   }
 
   async store({ request, response, auth }: HttpContext) {

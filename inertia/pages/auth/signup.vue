@@ -7,12 +7,20 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Loader2 } from '@lucide/vue'
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
 defineOptions({ layout: DefaultLayout })
+
+const props = defineProps<{
+  plans: { id: number; name: string; price: number }[]
+}>()
 
 const form = useForm({
   fullName: '',
   email: '',
   password: '',
+  passwordConfirmation: '',
+  planId: null as number | null,
 })
 
 function submit() {
@@ -67,6 +75,29 @@ function submit() {
               :class="{ 'border-destructive': form.errors.password }"
             />
             <p v-if="form.errors.password" class="text-sm text-destructive">{{ form.errors.password }}</p>
+          </div>
+          <div class="space-y-2">
+            <Label for="passwordConfirmation">Konfirmasi Password</Label>
+            <Input 
+              id="passwordConfirmation" 
+              type="password" 
+              v-model="form.passwordConfirmation" 
+              required 
+            />
+          </div>
+          <div class="space-y-2">
+            <Label for="planId">Pilih Paket</Label>
+            <Select v-model="form.planId" required>
+              <SelectTrigger>
+                <SelectValue placeholder="Pilih paket langganan Anda" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem v-for="plan in plans" :key="plan.id" :value="plan.id.toString()">
+                  {{ plan.name }} - {{ plan.price === 0 ? 'Gratis' : `Rp ${(plan.price / 1000).toLocaleString('id-ID')}rb/bulan` }}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <p v-if="form.errors.planId" class="text-sm text-destructive">{{ form.errors.planId }}</p>
           </div>
         </CardContent>
         <CardFooter class="flex flex-col space-y-4">

@@ -6,13 +6,26 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Role from '#models/role'
+import Plan from '#models/plan'
 
 export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   @column()
   declare roleId: number
 
+  @column()
+  declare planId: number | null
+
+  @column()
+  declare qrisTotal: number
+
+  @column()
+  declare transactionTotal: number
+
   @belongsTo(() => Role)
   declare role: BelongsTo<typeof Role>
+
+  @belongsTo(() => Plan)
+  declare plan: BelongsTo<typeof Plan>
 
   @column()
   declare hmacKey: string | null

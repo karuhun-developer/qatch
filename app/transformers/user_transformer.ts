@@ -11,6 +11,10 @@ export default class UserTransformer extends BaseTransformer<User> {
       'updatedAt',
       'initials',
       'roleId',
+      'planId',
+      'qrisTotal',
+      'transactionTotal',
+      'plan'
     ])
   }
 }
