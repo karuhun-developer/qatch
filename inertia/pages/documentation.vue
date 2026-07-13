@@ -28,16 +28,16 @@ const sidebarOpen = ref(false)
     <meta property="og:type" content="article" />
     <meta property="og:title" :content="currentTitle + ' — Dokumentasi Qatch'" />
     <meta property="og:description" content="Pelajari cara menggunakan API Qatch untuk generate QRIS dinamis, konfigurasi webhook, dan integrasi Android Notification Forwarder." />
-    <meta property="og:url" content="https://qris.karuhundeveloper.com/docs" />
-    <meta property="og:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <meta property="og:url" :content="String($page.props.appUrl) + '/docs'" />
+    <meta property="og:image" :content="String($page.props.appUrl) + '/QATCHLOGO.jpeg'" />
     <meta property="og:site_name" content="Qatch" />
     <meta property="og:locale" content="id_ID" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" :content="currentTitle + ' — Dokumentasi Qatch'" />
     <meta name="twitter:description" content="Panduan lengkap API QRIS dinamis, webhook, dan instalasi Qatch." />
-    <meta name="twitter:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
-    <link rel="canonical" :href="'https://qris.karuhundeveloper.com/docs/' + currentSlug" />
+    <meta name="twitter:image" :content="String($page.props.appUrl) + '/QATCHLOGO.jpeg'" />
+    <link rel="canonical" :href="String($page.props.appUrl) + '/docs/' + currentSlug" />
     <link rel="icon" type="image/x-icon" href="/QATCHLOGO.ico" />
   </Head>
 

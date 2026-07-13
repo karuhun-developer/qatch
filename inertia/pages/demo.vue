@@ -167,15 +167,15 @@ function copyBase64() {
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Demo Qatch — Coba Generator QRIS Dinamis Gratis" />
     <meta property="og:description" content="Coba langsung generate QRIS dinamis dengan nominal kustom, kode unik, dan fee otomatis. Tanpa perlu daftar." />
-    <meta property="og:url" content="https://qris.karuhundeveloper.com/demo" />
-    <meta property="og:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
+    <meta property="og:url" :content="String($page.props.appUrl) + '/demo'" />
+    <meta property="og:image" :content="String($page.props.appUrl) + '/QATCHLOGO.jpeg'" />
     <meta property="og:site_name" content="Qatch" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Demo Qatch — Coba QRIS Dinamis Gratis" />
     <meta name="twitter:description" content="Generate QRIS dinamis dengan nominal kustom, tanpa perlu daftar." />
-    <meta name="twitter:image" content="https://qris.karuhundeveloper.com/QATCHLOGO.jpeg" />
-    <link rel="canonical" href="https://qris.karuhundeveloper.com/demo" />
+    <meta name="twitter:image" :content="String($page.props.appUrl) + '/QATCHLOGO.jpeg'" />
+    <link rel="canonical" :href="String($page.props.appUrl) + '/demo'" />
     <link rel="icon" type="image/x-icon" href="/QATCHLOGO.ico" />
   </Head>
 

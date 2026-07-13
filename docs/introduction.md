@@ -4,7 +4,7 @@
 
 **Qatch** adalah platform yang memungkinkan kamu mengubah QRIS statis menjadi Qatch secara programatik. Dengan QRIS statis biasa, pembayar harus memasukkan nominal sendiri, sehingga sulit dicocokkan secara otomatis. Qatch mengatasi hal ini dengan meng-_embed_ nominal langsung ke dalam kode QRIS yang di-generate, lalu mencocokkan pembayaran masuk secara otomatis melalui notifikasi Android.
 
-Platform ini dibangun di atas **AdonisJS 6** (backend) dan **Vue 3 + Inertia** (frontend), dan dapat diintegrasikan ke sistem e-commerce atau aplikasi apapun melalui REST API.
+Platform ini dibangun di atas **AdonisJS 7** (backend) dan **Vue 3 + Inertia** (frontend), dan dapat diintegrasikan ke sistem e-commerce atau aplikasi apapun melalui REST API.
 
 ---
 
