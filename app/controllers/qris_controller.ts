@@ -10,11 +10,11 @@ export default class QrisController {
   async index({ request, inertia, auth }: HttpContext) {
     const user = auth.user!
     const page = request.input('page', 1)
-    
+
     const qrisData = await this.qrisManagementService.getAllForUser(user.id, page, 10)
-    
+
     return inertia.render('qris/index', {
-      qrisList: qrisData.serialize() as any
+      qrisList: qrisData.serialize() as any,
     })
   }
 
@@ -27,7 +27,7 @@ export default class QrisController {
         userId: user.id,
         name: payload.name,
         description: payload.description,
-        qrisString: payload.qrisString
+        qrisString: payload.qrisString,
       },
       payload.qris
     )
@@ -53,7 +53,7 @@ export default class QrisController {
 
   async destroy({ params, response, session, auth }: HttpContext) {
     const user = auth.user!
-    
+
     const qris = await this.qrisManagementService.getByIdAndUser(params.id, user.id)
     if (!qris) {
       return response.notFound('Data QRIS tidak ditemukan')

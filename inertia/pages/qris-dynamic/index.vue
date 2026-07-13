@@ -6,11 +6,40 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import AndroidForwarderAlert from '@/components/AndroidForwarderAlert.vue'
-import { RefreshCw, QrCode, Building, MapPin, Receipt, Clock, Settings, Copy, Check } from '@lucide/vue'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
+import {
+  RefreshCw,
+  QrCode,
+  Building,
+  MapPin,
+  Receipt,
+  Clock,
+  Settings,
+  Copy,
+  Check,
+} from '@lucide/vue'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog'
 import QrcodeVue from 'qrcode.vue'
 import {
   Pagination,
@@ -36,11 +65,11 @@ const form = useForm({
   amount: 10000,
   feeType: 'none',
   feeValue: 0,
-  expiredHours: 24
+  expiredHours: 24,
 })
 
 const selectedQris = computed(() => {
-  return props.staticQrisOptions.find(q => q.id === form.qrisId)
+  return props.staticQrisOptions.find((q) => q.id === form.qrisId)
 })
 
 const totalAmount = computed(() => {
@@ -60,7 +89,7 @@ function submit() {
       form.reset('amount', 'feeType', 'feeValue')
       form.feeType = 'none'
       form.feeValue = 0
-    }
+    },
   })
 }
 
@@ -82,7 +111,9 @@ function copyQrisString() {
   if (selectedTx.value?.qrisString) {
     navigator.clipboard.writeText(selectedTx.value.qrisString)
     isCopied.value = true
-    setTimeout(() => { isCopied.value = false }, 2000)
+    setTimeout(() => {
+      isCopied.value = false
+    }, 2000)
   }
 }
 
@@ -91,7 +122,7 @@ const statusModalOpen = ref(false)
 const selectedTxForStatus = ref<any>(null)
 const statusForm = useForm({
   status: 'pending',
-  proof: null as File | null
+  proof: null as File | null,
 })
 
 function openStatusModal(tx: any) {
@@ -103,7 +134,7 @@ function openStatusModal(tx: any) {
 
 function updateStatus() {
   if (!selectedTxForStatus.value) return
-  
+
   // Create formData for file upload
   // Inertia handles it automatically if we have a file
   statusForm.post(`/qris-dynamic/${selectedTxForStatus.value.id}/status`, {
@@ -111,18 +142,20 @@ function updateStatus() {
     forceFormData: true,
     onSuccess: () => {
       statusModalOpen.value = false
-    }
+    },
   })
 }
 </script>
 
 <template>
   <Head title="Manajemen QRIS Dinamis" />
-  
+
   <div class="flex items-center justify-between space-y-2 mb-8">
     <div>
       <h2 class="text-3xl font-bold tracking-tight">QRIS Dinamis</h2>
-      <p class="text-muted-foreground mt-1">Generate QRIS sekali pakai dengan nominal spesifik dan kode unik.</p>
+      <p class="text-muted-foreground mt-1">
+        Generate QRIS sekali pakai dengan nominal spesifik dan kode unik.
+      </p>
     </div>
     <div class="flex items-center space-x-2">
       <Button variant="outline" as-child>
@@ -137,7 +170,9 @@ function updateStatus() {
     <!-- Generator Section (Left) -->
     <div class="md:col-span-5 space-y-6">
       <Card class="bg-card/60 backdrop-blur-xl border-muted/60 relative overflow-hidden">
-        <div class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+        <div
+          class="absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"
+        ></div>
         <CardHeader>
           <CardTitle class="flex items-center gap-2">
             <RefreshCw class="h-5 w-5 text-primary" />
@@ -148,7 +183,7 @@ function updateStatus() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form @submit.prevent="submit" class="space-y-5 relative z-10">
+          <form class="space-y-5 relative z-10" @submit.prevent="submit">
             <!-- QRIS Selection -->
             <div class="space-y-2">
               <Label>Sumber QRIS Statis</Label>
@@ -162,21 +197,36 @@ function updateStatus() {
                   </SelectItem>
                 </SelectContent>
               </Select>
-              <p v-if="form.errors.qrisId" class="text-xs text-destructive mt-1">{{ form.errors.qrisId }}</p>
+              <p v-if="form.errors.qrisId" class="text-xs text-destructive mt-1">
+                {{ form.errors.qrisId }}
+              </p>
             </div>
 
             <!-- Display Info if Selected -->
-            <div v-if="selectedQris" class="bg-muted/30 p-3 rounded-lg text-sm border space-y-2 mb-4">
+            <div
+              v-if="selectedQris"
+              class="bg-muted/30 p-3 rounded-lg text-sm border space-y-2 mb-4"
+            >
               <div class="flex items-center justify-between">
-                <span class="text-muted-foreground flex items-center gap-1"><Building class="h-3 w-3"/> Merchant</span>
-                <span class="font-medium truncate max-w-[150px]">{{ selectedQris.merchantName }}</span>
+                <span class="text-muted-foreground flex items-center gap-1"
+                  ><Building class="h-3 w-3" /> Merchant</span
+                >
+                <span class="font-medium truncate max-w-[150px]">{{
+                  selectedQris.merchantName
+                }}</span>
               </div>
               <div class="flex items-center justify-between">
-                <span class="text-muted-foreground flex items-center gap-1"><MapPin class="h-3 w-3"/> Lokasi</span>
-                <span class="font-medium">{{ selectedQris.merchantCity }} ({{ selectedQris.postalCode }})</span>
+                <span class="text-muted-foreground flex items-center gap-1"
+                  ><MapPin class="h-3 w-3" /> Lokasi</span
+                >
+                <span class="font-medium"
+                  >{{ selectedQris.merchantCity }} ({{ selectedQris.postalCode }})</span
+                >
               </div>
               <div class="flex items-center justify-between">
-                <span class="text-muted-foreground flex items-center gap-1"><Settings class="h-3 w-3"/> MCC</span>
+                <span class="text-muted-foreground flex items-center gap-1"
+                  ><Settings class="h-3 w-3" /> MCC</span
+                >
                 <span class="font-medium">{{ selectedQris.merchantCategoryCode }}</span>
               </div>
             </div>
@@ -184,14 +234,13 @@ function updateStatus() {
             <!-- Amount -->
             <div class="space-y-2">
               <Label>Nominal Pembayaran (Rp)</Label>
-              <Input 
-                type="number" 
-                v-model="form.amount" 
-                min="1" 
-                placeholder="Contoh: 50000"
-              />
-              <p class="text-xs text-muted-foreground">Kode unik (3 digit) akan ditambahkan otomatis ke total.</p>
-              <p v-if="form.errors.amount" class="text-xs text-destructive mt-1">{{ form.errors.amount }}</p>
+              <Input v-model="form.amount" type="number" min="1" placeholder="Contoh: 50000" />
+              <p class="text-xs text-muted-foreground">
+                Kode unik (3 digit) akan ditambahkan otomatis ke total.
+              </p>
+              <p v-if="form.errors.amount" class="text-xs text-destructive mt-1">
+                {{ form.errors.amount }}
+              </p>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
@@ -213,10 +262,10 @@ function updateStatus() {
               <!-- Fee Value -->
               <div class="space-y-2">
                 <Label>Nilai Fee</Label>
-                <Input 
-                  type="number" 
-                  v-model="form.feeValue" 
-                  min="0" 
+                <Input
+                  v-model="form.feeValue"
+                  type="number"
+                  min="0"
                   :disabled="form.feeType === 'none'"
                 />
               </div>
@@ -226,15 +275,22 @@ function updateStatus() {
             <div class="space-y-2">
               <Label>Masa Berlaku (Jam)</Label>
               <div class="flex items-center gap-2">
-                <Input type="number" v-model="form.expiredHours" min="1" max="720" class="w-24" />
-                <span class="text-sm text-muted-foreground flex items-center"><Clock class="h-4 w-4 mr-1"/> Jam dari sekarang</span>
+                <Input v-model="form.expiredHours" type="number" min="1" max="720" class="w-24" />
+                <span class="text-sm text-muted-foreground flex items-center"
+                  ><Clock class="h-4 w-4 mr-1" /> Jam dari sekarang</span
+                >
               </div>
             </div>
 
             <!-- Summary -->
-            <div class="bg-primary/5 p-4 rounded-lg border border-primary/20 flex items-center justify-between mt-4">
+            <div
+              class="bg-primary/5 p-4 rounded-lg border border-primary/20 flex items-center justify-between mt-4"
+            >
               <span class="font-semibold text-primary">Estimasi Total:</span>
-              <span class="font-bold text-xl">Rp {{ totalAmount.toLocaleString('id-ID') }} <span class="text-xs font-normal text-muted-foreground">+ Kode Unik</span></span>
+              <span class="font-bold text-xl"
+                >Rp {{ totalAmount.toLocaleString('id-ID') }}
+                <span class="text-xs font-normal text-muted-foreground">+ Kode Unik</span></span
+              >
             </div>
 
             <Button type="submit" class="w-full" :disabled="form.processing || !form.qrisId">
@@ -270,28 +326,50 @@ function updateStatus() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow v-for="tx in transactions.data" :key="tx.id" class="hover:bg-muted/20 transition-colors">
+                <TableRow
+                  v-for="tx in transactions.data"
+                  :key="tx.id"
+                  class="hover:bg-muted/20 transition-colors"
+                >
                   <TableCell>
-                    <div class="font-bold text-lg leading-none mb-1">Rp {{ Number(tx.total).toLocaleString('id-ID') }}</div>
+                    <div class="font-bold text-lg leading-none mb-1">
+                      Rp {{ Number(tx.total).toLocaleString('id-ID') }}
+                    </div>
                     <div class="text-xs text-muted-foreground">{{ tx.transactionCode }}</div>
                   </TableCell>
                   <TableCell>
-                    <div class="text-sm">Dasar: Rp {{ Number(tx.amount).toLocaleString('id-ID') }}</div>
-                    <div class="text-xs text-muted-foreground">Fee: Rp {{ Number(tx.feeAmount).toLocaleString('id-ID') }} | Kode: +{{ tx.uniqueCode }}</div>
+                    <div class="text-sm">
+                      Dasar: Rp {{ Number(tx.amount).toLocaleString('id-ID') }}
+                    </div>
+                    <div class="text-xs text-muted-foreground">
+                      Fee: Rp {{ Number(tx.feeAmount).toLocaleString('id-ID') }} | Kode: +{{
+                        tx.uniqueCode
+                      }}
+                    </div>
                   </TableCell>
                   <TableCell>
-                    <div class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold"
+                    <div
+                      class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold"
                       :class="{
                         'bg-yellow-500/10 text-yellow-500': tx.status === 'pending',
                         'bg-emerald-500/10 text-emerald-500': tx.status === 'paid',
-                        'bg-destructive/10 text-destructive': tx.status === 'expired'
-                      }">
+                        'bg-destructive/10 text-destructive': tx.status === 'expired',
+                      }"
+                    >
                       {{ tx.status.toUpperCase() }}
                     </div>
                   </TableCell>
                   <TableCell class="text-right">
                     <div class="flex items-center justify-end gap-2">
-                      <Button v-if="tx.proof" variant="ghost" size="sm" as="a" :href="`/${tx.proof}`" target="_blank" class="text-emerald-500 hover:text-emerald-600 hover:bg-emerald-500/10">
+                      <Button
+                        v-if="tx.proof"
+                        variant="ghost"
+                        size="sm"
+                        as="a"
+                        :href="`/${tx.proof}`"
+                        target="_blank"
+                        class="text-emerald-500 hover:text-emerald-600 hover:bg-emerald-500/10"
+                      >
                         Lihat Bukti
                       </Button>
                       <Button variant="outline" size="sm" @click="openStatusModal(tx)">
@@ -312,18 +390,42 @@ function updateStatus() {
             </Table>
           </div>
 
-          <div class="mt-4 flex justify-end" v-if="transactions.meta.lastPage > 1">
-            <Pagination :total="transactions.meta.total" :sibling-count="1" show-edges :default-page="transactions.meta.currentPage" :items-per-page="transactions.meta.perPage" @update:page="changePage">
+          <div v-if="transactions.meta.lastPage > 1" class="mt-4 flex justify-end">
+            <Pagination
+              :total="transactions.meta.total"
+              :sibling-count="1"
+              show-edges
+              :default-page="transactions.meta.currentPage"
+              :items-per-page="transactions.meta.perPage"
+              @update:page="changePage"
+            >
               <PaginationContent v-slot="{ items }" class="flex items-center gap-1">
-                <PaginationPrevious @click="changePage(transactions.meta.currentPage - 1)" :disabled="transactions.meta.currentPage === 1" />
+                <PaginationPrevious
+                  :disabled="transactions.meta.currentPage === 1"
+                  @click="changePage(transactions.meta.currentPage - 1)"
+                />
                 <template v-for="(item, index) in items">
-                  <PaginationItem v-if="item.type === 'page'" :key="index" :value="item.value" as-child>
-                    <Button class="w-9 h-9 p-0" :variant="item.value === transactions.meta.currentPage ? 'default' : 'outline'" @click="changePage(item.value)">
+                  <PaginationItem
+                    v-if="item.type === 'page'"
+                    :key="index"
+                    :value="item.value"
+                    as-child
+                  >
+                    <Button
+                      class="w-9 h-9 p-0"
+                      :variant="
+                        item.value === transactions.meta.currentPage ? 'default' : 'outline'
+                      "
+                      @click="changePage(item.value)"
+                    >
                       {{ item.value }}
                     </Button>
                   </PaginationItem>
                 </template>
-                <PaginationNext @click="changePage(transactions.meta.currentPage + 1)" :disabled="transactions.meta.currentPage === transactions.meta.lastPage" />
+                <PaginationNext
+                  :disabled="transactions.meta.currentPage === transactions.meta.lastPage"
+                  @click="changePage(transactions.meta.currentPage + 1)"
+                />
               </PaginationContent>
             </Pagination>
           </div>
@@ -336,19 +438,21 @@ function updateStatus() {
     <DialogContent class="sm:max-w-md">
       <DialogHeader>
         <DialogTitle>Scan QRIS untuk Membayar</DialogTitle>
-        <DialogDescription>
-          Kode: {{ selectedTx?.transactionCode }}
-        </DialogDescription>
+        <DialogDescription> Kode: {{ selectedTx?.transactionCode }} </DialogDescription>
       </DialogHeader>
       <div class="flex flex-col items-center justify-center py-6 space-y-6">
         <div class="p-4 bg-white rounded-xl shadow-sm border">
           <QrcodeVue v-if="selectedTx" :value="selectedTx.qrisString" :size="240" level="M" />
         </div>
-        
+
         <div class="text-center space-y-1">
           <p class="text-sm text-muted-foreground">Total Tagihan</p>
-          <p class="text-3xl font-bold text-primary">Rp {{ Number(selectedTx?.total).toLocaleString('id-ID') }}</p>
-          <p class="text-xs font-medium text-amber-500 bg-amber-500/10 px-2 py-1 rounded-full inline-block mt-2">
+          <p class="text-3xl font-bold text-primary">
+            Rp {{ Number(selectedTx?.total).toLocaleString('id-ID') }}
+          </p>
+          <p
+            class="text-xs font-medium text-amber-500 bg-amber-500/10 px-2 py-1 rounded-full inline-block mt-2"
+          >
             PENTING: Bayar sesuai nominal hingga 3 digit terakhir!
           </p>
         </div>
@@ -374,8 +478,8 @@ function updateStatus() {
           Perbarui status pembayaran untuk transaksi {{ selectedTxForStatus?.transactionCode }}.
         </DialogDescription>
       </DialogHeader>
-      
-      <form @submit.prevent="updateStatus" class="space-y-4 py-4">
+
+      <form class="space-y-4 py-4" @submit.prevent="updateStatus">
         <div class="space-y-2">
           <Label>Status Pembayaran</Label>
           <Select v-model="statusForm.status">
@@ -390,12 +494,15 @@ function updateStatus() {
           </Select>
         </div>
 
-        <div v-if="statusForm.status === 'paid'" class="space-y-2 border p-4 rounded-lg bg-muted/20">
+        <div
+          v-if="statusForm.status === 'paid'"
+          class="space-y-2 border p-4 rounded-lg bg-muted/20"
+        >
           <Label>Bukti Pembayaran (Opsional)</Label>
-          <Input 
-            type="file" 
-            accept="image/png, image/jpeg, image/jpg" 
-            @change="(e: any) => statusForm.proof = e.target.files[0]"
+          <Input
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            @change="(e: any) => (statusForm.proof = e.target.files[0])"
           />
           <p class="text-xs text-muted-foreground mt-1">Format: JPG, PNG. Maks 5MB.</p>
         </div>

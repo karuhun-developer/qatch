@@ -102,6 +102,14 @@ const displayPlans = computed(() => {
           >
             <Link href="/login">Masuk ke Dashboard</Link>
           </Button>
+          <Button
+            as-child
+            size="lg"
+            variant="ghost"
+            class="px-8 h-12 rounded-full text-md font-medium text-primary hover:text-primary hover:bg-primary/10 transition-all"
+          >
+            <Link href="/demo">Coba Live Demo Interaktif</Link>
+          </Button>
         </div>
       </div>
 

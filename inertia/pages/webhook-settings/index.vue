@@ -27,7 +27,12 @@ const props = defineProps<{
 
 // Parse stored comma-separated wildcards back to arrays for TagInput
 function parseWildcards(value: string): string[] {
-  return value ? value.split(',').map((s) => s.trim()).filter(Boolean) : []
+  return value
+    ? value
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : []
 }
 
 const form = useForm({
@@ -83,7 +88,11 @@ const apiEndpoints = [
       <h2 class="text-3xl font-bold tracking-tight">API & Webhook</h2>
       <p class="text-muted-foreground mt-1">
         Kelola integrasi, webhook otomatisasi, dan kredensial API Anda.
-        <a href="/docs" target="_blank" class="text-primary hover:underline font-medium inline-flex items-center gap-1">
+        <a
+          href="/docs"
+          target="_blank"
+          class="text-primary hover:underline font-medium inline-flex items-center gap-1"
+        >
           Baca dokumentasi lengkap di sini <LinkIcon class="h-3 w-3" />
         </a>
       </p>
@@ -127,7 +136,7 @@ const apiEndpoints = [
           </Button>
         </div>
 
-        <form @submit.prevent="submit" class="space-y-5">
+        <form class="space-y-5" @submit.prevent="submit">
           <div class="space-y-2">
             <Label>Aplikasi yang Didengarkan (Listen To Apps)</Label>
             <TagInput
@@ -136,7 +145,9 @@ const apiEndpoints = [
               placeholder="Ketik nama app lalu Enter atau koma... (Dana, Gojek)"
             />
             <p class="text-xs text-muted-foreground">
-              Tekan <kbd class="rounded border px-1 text-xs">Enter</kbd> atau <kbd class="rounded border px-1 text-xs">,</kbd> untuk menambah. Kosongkan untuk terima dari semua aplikasi.
+              Tekan <kbd class="rounded border px-1 text-xs">Enter</kbd> atau
+              <kbd class="rounded border px-1 text-xs">,</kbd> untuk menambah. Kosongkan untuk
+              terima dari semua aplikasi.
             </p>
           </div>
 
@@ -149,7 +160,8 @@ const apiEndpoints = [
                 placeholder="Pembayaran Diterima, QRIS..."
               />
               <p class="text-xs text-muted-foreground">
-                Judul notifikasi harus mengandung <em>salah satu</em> kata ini. Kosongkan untuk melewati pengecekan.
+                Judul notifikasi harus mengandung <em>salah satu</em> kata ini. Kosongkan untuk
+                melewati pengecekan.
               </p>
             </div>
             <div class="space-y-2">
@@ -160,7 +172,8 @@ const apiEndpoints = [
                 placeholder="Transaksi QRIS, berhasil..."
               />
               <p class="text-xs text-muted-foreground">
-                Isi notifikasi harus mengandung <em>salah satu</em> kata ini. Kosongkan untuk melewati pengecekan.
+                Isi notifikasi harus mengandung <em>salah satu</em> kata ini. Kosongkan untuk
+                melewati pengecekan.
               </p>
             </div>
           </div>
@@ -193,8 +206,14 @@ const apiEndpoints = [
           Daftar API Endpoint
         </CardTitle>
         <CardDescription class="flex items-center justify-between">
-          <span>Gunakan <code>x-api-key</code> di header untuk mengakses endpoint di bawah ini.</span>
-          <a href="/docs" target="_blank" class="text-primary hover:underline font-medium flex items-center gap-1 text-xs">
+          <span
+            >Gunakan <code>x-api-key</code> di header untuk mengakses endpoint di bawah ini.</span
+          >
+          <a
+            href="/docs"
+            target="_blank"
+            class="text-primary hover:underline font-medium flex items-center gap-1 text-xs"
+          >
             Dokumentasi lengkap <LinkIcon class="h-3 w-3" />
           </a>
         </CardDescription>

@@ -17,7 +17,16 @@ import { Package } from '@lucide/vue'
 
 const props = defineProps<{
   open: boolean
-  plan: { id: number; name: string; price: number; description: string | null; maxQris: number | null; maxTransactionPerMonth: number | null; isFeatured: boolean; features: string[] | null } | null
+  plan: {
+    id: number
+    name: string
+    price: number
+    description: string | null
+    maxQris: number | null
+    maxTransactionPerMonth: number | null
+    isFeatured: boolean
+    features: string[] | null
+  } | null
 }>()
 
 const emit = defineEmits<{
@@ -83,7 +92,7 @@ function submit() {
         </DialogDescription>
       </DialogHeader>
 
-      <form @submit.prevent="submit" class="space-y-4 pt-4">
+      <form class="space-y-4 pt-4" @submit.prevent="submit">
         <div class="space-y-2">
           <Label for="name">Plan Name</Label>
           <Input id="name" v-model="form.name" placeholder="e.g. Pro, Enterprise" required />
@@ -92,32 +101,59 @@ function submit() {
 
         <div class="space-y-2">
           <Label for="price">Price (Rp)</Label>
-          <Input id="price" v-model="form.price" type="number" min="0" placeholder="0 for Free" required />
+          <Input
+            id="price"
+            v-model="form.price"
+            type="number"
+            min="0"
+            placeholder="0 for Free"
+            required
+          />
           <p v-if="form.errors.price" class="text-sm text-destructive">{{ form.errors.price }}</p>
         </div>
 
         <div class="space-y-2">
           <Label for="description">Description</Label>
-          <Input id="description" v-model="form.description" placeholder="Brief description of the plan" />
-          <p v-if="form.errors.description" class="text-sm text-destructive">{{ form.errors.description }}</p>
+          <Input
+            id="description"
+            v-model="form.description"
+            placeholder="Brief description of the plan"
+          />
+          <p v-if="form.errors.description" class="text-sm text-destructive">
+            {{ form.errors.description }}
+          </p>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div class="space-y-2">
             <Label for="maxQris">Max QRIS (empty = unlimited)</Label>
             <Input id="maxQris" v-model="form.maxQris" type="number" min="0" placeholder="e.g. 5" />
-            <p v-if="form.errors.maxQris" class="text-sm text-destructive">{{ form.errors.maxQris }}</p>
+            <p v-if="form.errors.maxQris" class="text-sm text-destructive">
+              {{ form.errors.maxQris }}
+            </p>
           </div>
 
           <div class="space-y-2">
             <Label for="maxTransaction">Max Trx/Month (empty = unlimited)</Label>
-            <Input id="maxTransaction" v-model="form.maxTransactionPerMonth" type="number" min="0" placeholder="e.g. 1500" />
-            <p v-if="form.errors.maxTransactionPerMonth" class="text-sm text-destructive">{{ form.errors.maxTransactionPerMonth }}</p>
+            <Input
+              id="maxTransaction"
+              v-model="form.maxTransactionPerMonth"
+              type="number"
+              min="0"
+              placeholder="e.g. 1500"
+            />
+            <p v-if="form.errors.maxTransactionPerMonth" class="text-sm text-destructive">
+              {{ form.errors.maxTransactionPerMonth }}
+            </p>
           </div>
         </div>
 
         <div class="flex items-center space-x-2 pt-2">
-          <Checkbox id="isFeatured" :checked="form.isFeatured" @update:checked="form.isFeatured = $event" />
+          <Checkbox
+            id="isFeatured"
+            :checked="form.isFeatured"
+            @update:checked="form.isFeatured = $event"
+          />
           <Label for="isFeatured" class="font-normal cursor-pointer text-sm">
             Tandai sebagai Paket Paling Populer (Featured)
           </Label>
@@ -131,7 +167,9 @@ function submit() {
             placeholder="Type feature and press Enter..."
           />
           <p class="text-xs text-muted-foreground mt-1">Press Enter or comma to add a feature.</p>
-          <p v-if="form.errors.features" class="text-sm text-destructive">{{ form.errors.features }}</p>
+          <p v-if="form.errors.features" class="text-sm text-destructive">
+            {{ form.errors.features }}
+          </p>
         </div>
 
         <div class="flex justify-end pt-4">

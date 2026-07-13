@@ -41,10 +41,10 @@
 
 Isi konfigurasi berikut di aplikasi Android Notification Forwarder:
 
-| Field | Contoh Nilai | Keterangan |
-|-------|-------------|-----------|
-| **Server URL** | `https://your-domain.com/api/v1/dynamic-qris/callback` | Endpoint callback QRIS Dinamis |
-| **Headers** | `x-api-key: qd_live_abc123xyz456` | API Key dari dashboard (Wajib ditaruh di header `x-api-key`) |
+| Field          | Contoh Nilai                                                     | Keterangan                                                   |
+| -------------- | ---------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Server URL** | `https://qris.karuhundeveloper.com/api/v1/dynamic-qris/callback` | Endpoint callback QRIS Dinamis                               |
+| **Headers**    | `x-api-key: qd_live_abc123xyz456`                                | API Key dari dashboard (Wajib ditaruh di header `x-api-key`) |
 
 Setelah dikonfigurasi, aplikasi akan otomatis mengirim setiap notifikasi yang masuk ke server QRIS Dinamis.
 
@@ -150,10 +150,7 @@ app.post('/webhook/qris', express.raw({ type: 'application/json' }), (req, res) 
   const receivedSignature = req.headers['x-signature-key']
 
   // Verifikasi signature
-  const expectedSignature = crypto
-    .createHmac('sha256', HMAC_KEY)
-    .update(req.body)
-    .digest('hex')
+  const expectedSignature = crypto.createHmac('sha256', HMAC_KEY).update(req.body).digest('hex')
 
   const isValid = crypto.timingSafeEqual(
     Buffer.from(expectedSignature, 'hex'),
@@ -170,7 +167,7 @@ app.post('/webhook/qris', express.raw({ type: 'application/json' }), (req, res) 
     const transaction = payload.data
     console.log(`Transaksi ${transaction.transactionCode} berhasil dibayar`)
     console.log(`Nominal: Rp ${transaction.amount.toLocaleString('id-ID')}`)
-    
+
     // Update status order di database, kirim notifikasi ke customer, dll.
   }
 

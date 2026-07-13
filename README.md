@@ -21,16 +21,16 @@ Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan 
 
 ## 🚀 Fitur Utama
 
-| Fitur | Deskripsi |
-|---|---|
-| 🔁 **Dynamic QRIS Generator** | Otomatis append nominal + kode unik ke base payload Static QRIS |
-| 📡 **Real-time Webhook** | Endpoint siap menerima POST request dari Android Notification Forwarder |
-| 🤖 **Auto Verification** | Parsing teks notifikasi untuk mencocokkan nominal & update status otomatis |
-| 🔑 **API Key & HMAC** | Autentikasi aman untuk semua akses API |
-| 🛡️ **Webhook Filtering** | Wildcard filter berdasarkan nama app, judul & isi notifikasi |
-| 📊 **Analytics Dashboard** | Chart penggunaan harian, statistik, dan log transaksi terbaru |
-| 👥 **Multi-user & Roles** | Manajemen user dengan role Superadmin dan User biasa |
-| 💰 **Zero PG Fees** | 100% self-hosted, bebas biaya admin payment gateway |
+| Fitur                         | Deskripsi                                                                  |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| 🔁 **Dynamic QRIS Generator** | Otomatis append nominal + kode unik ke base payload Static QRIS            |
+| 📡 **Real-time Webhook**      | Endpoint siap menerima POST request dari Android Notification Forwarder    |
+| 🤖 **Auto Verification**      | Parsing teks notifikasi untuk mencocokkan nominal & update status otomatis |
+| 🔑 **API Key & HMAC**         | Autentikasi aman untuk semua akses API                                     |
+| 🛡️ **Webhook Filtering**      | Wildcard filter berdasarkan nama app, judul & isi notifikasi               |
+| 📊 **Analytics Dashboard**    | Chart penggunaan harian, statistik, dan log transaksi terbaru              |
+| 👥 **Multi-user & Roles**     | Manajemen user dengan role Superadmin dan User biasa                       |
+| 💰 **Zero PG Fees**           | 100% self-hosted, bebas biaya admin payment gateway                        |
 
 ## ⚙️ Cara Kerja
 
@@ -60,23 +60,26 @@ Push notification masuk ke HP merchant
 Semua endpoint membutuhkan header `x-api-key` untuk autentikasi.
 
 ### Static QRIS
-| Method | Endpoint | Deskripsi |
-|---|---|---|
-| `GET` | `/api/v1/static-qris` | Daftar semua QRIS statis (paginasi) |
-| `POST` | `/api/v1/static-qris` | Tambah QRIS statis baru |
-| `GET` | `/api/v1/static-qris/:id` | Detail QRIS statis |
-| `PUT` | `/api/v1/static-qris/:id` | Update QRIS statis |
-| `DELETE` | `/api/v1/static-qris/:id` | Hapus QRIS statis |
+
+| Method   | Endpoint                  | Deskripsi                           |
+| -------- | ------------------------- | ----------------------------------- |
+| `GET`    | `/api/v1/static-qris`     | Daftar semua QRIS statis (paginasi) |
+| `POST`   | `/api/v1/static-qris`     | Tambah QRIS statis baru             |
+| `GET`    | `/api/v1/static-qris/:id` | Detail QRIS statis                  |
+| `PUT`    | `/api/v1/static-qris/:id` | Update QRIS statis                  |
+| `DELETE` | `/api/v1/static-qris/:id` | Hapus QRIS statis                   |
 
 ### Dynamic QRIS
-| Method | Endpoint | Deskripsi |
-|---|---|---|
-| `POST` | `/api/v1/dynamic-qris` | Generate QRIS dinamis baru |
-| `GET` | `/api/v1/dynamic-qris/:id` | Cek status transaksi |
-| `PUT` | `/api/v1/dynamic-qris/:id` | Update status manual |
+
+| Method | Endpoint                        | Deskripsi                               |
+| ------ | ------------------------------- | --------------------------------------- |
+| `POST` | `/api/v1/dynamic-qris`          | Generate QRIS dinamis baru              |
+| `GET`  | `/api/v1/dynamic-qris/:id`      | Cek status transaksi                    |
+| `PUT`  | `/api/v1/dynamic-qris/:id`      | Update status manual                    |
 | `POST` | `/api/v1/dynamic-qris/callback` | **Webhook** untuk notifikasi pembayaran |
 
 ### Webhook Callback Payload
+
 ```json
 POST /api/v1/dynamic-qris/callback
 x-api-key: YOUR_API_KEY
@@ -100,6 +103,7 @@ x-api-key: YOUR_API_KEY
 ## 🛠️ Instalasi
 
 ### Prerequisites
+
 - Node.js >= 20
 - NPM atau Yarn
 - Database (SQLite untuk development, PostgreSQL/MySQL untuk production)

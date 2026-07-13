@@ -2,7 +2,7 @@
 
 ## Apa itu QRIS Dinamis?
 
-**QRIS Dinamis** adalah platform yang memungkinkan kamu mengubah QRIS statis menjadi QRIS dinamis secara programatik. Dengan QRIS statis biasa, pembayar harus memasukkan nominal sendiri, sehingga sulit dicocokkan secara otomatis. QRIS Dinamis mengatasi hal ini dengan meng-*embed* nominal langsung ke dalam kode QRIS yang di-generate, lalu mencocokkan pembayaran masuk secara otomatis melalui notifikasi Android.
+**QRIS Dinamis** adalah platform yang memungkinkan kamu mengubah QRIS statis menjadi QRIS dinamis secara programatik. Dengan QRIS statis biasa, pembayar harus memasukkan nominal sendiri, sehingga sulit dicocokkan secara otomatis. QRIS Dinamis mengatasi hal ini dengan meng-_embed_ nominal langsung ke dalam kode QRIS yang di-generate, lalu mencocokkan pembayaran masuk secara otomatis melalui notifikasi Android.
 
 Platform ini dibangun di atas **AdonisJS 6** (backend) dan **Vue 3 + Inertia** (frontend), dan dapat diintegrasikan ke sistem e-commerce atau aplikasi apapun melalui REST API.
 
@@ -10,15 +10,15 @@ Platform ini dibangun di atas **AdonisJS 6** (backend) dan **Vue 3 + Inertia** (
 
 ## Fitur Utama
 
-| Fitur | Deskripsi |
-|-------|-----------|
-| **Nominal Otomatis** | QRIS yang di-generate sudah memuat nominal yang harus dibayar, tidak perlu input manual oleh pembayar |
-| **Kode Unik** | Setiap transaksi mendapat kode unik (3 digit) sebagai suffix nominal, memudahkan pencocokan mutasi |
-| **API Key** | Otentikasi berbasis API Key untuk keamanan akses endpoint |
-| **Webhook** | Notifikasi otomatis ke URL tujuanmu saat transaksi berhasil dibayar |
+| Fitur                | Deskripsi                                                                                                                                                                                        |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Nominal Otomatis** | QRIS yang di-generate sudah memuat nominal yang harus dibayar, tidak perlu input manual oleh pembayar                                                                                            |
+| **Kode Unik**        | Setiap transaksi mendapat kode unik (3 digit) sebagai suffix nominal, memudahkan pencocokan mutasi                                                                                               |
+| **API Key**          | Otentikasi berbasis API Key untuk keamanan akses endpoint                                                                                                                                        |
+| **Webhook**          | Notifikasi otomatis ke URL tujuanmu saat transaksi berhasil dibayar                                                                                                                              |
 | **Android Listener** | Memanfaatkan [Android Notification Forwarder](https://github.com/karuhun-developer/android-notification-forwarder) untuk menangkap notifikasi pembayaran dari aplikasi mobile banking / e-wallet |
-| **HMAC Signature** | Verifikasi keaslian payload webhook menggunakan HMAC-SHA256 |
-| **Multi QRIS** | Kelola beberapa QRIS statis dalam satu akun |
+| **HMAC Signature**   | Verifikasi keaslian payload webhook menggunakan HMAC-SHA256                                                                                                                                      |
+| **Multi QRIS**       | Kelola beberapa QRIS statis dalam satu akun                                                                                                                                                      |
 
 ---
 

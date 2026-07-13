@@ -16,10 +16,10 @@ export default class DynamicQrisController {
   async index({ request, inertia, auth }: HttpContext) {
     const user = auth.user!
     const page = request.input('page', 1)
-    
+
     // Get static QRIS list for the dropdown
     const qrisList = await this.qrisManagementService.getAllForUser(user.id, 1, 100)
-    
+
     // We want to parse the static QRIS strings so the frontend can display merchant info
     const staticQrisOptions = qrisList.all().map((q) => {
       try {
@@ -31,7 +31,7 @@ export default class DynamicQrisController {
           merchantCity: parsed.merchantCity,
           postalCode: parsed.postalCode,
           merchantCategoryCode: parsed.merchantCategoryCode,
-          transactionCurrency: parsed.currency
+          transactionCurrency: parsed.currency,
         }
       } catch (e) {
         return {
@@ -49,7 +49,7 @@ export default class DynamicQrisController {
     // @ts-ignore
     return inertia.render('qris-dynamic/index', {
       staticQrisOptions,
-      transactions: transactions.serialize() as any
+      transactions: transactions.serialize() as any,
     })
   }
 
@@ -60,7 +60,7 @@ export default class DynamicQrisController {
     await this.dynamicQrisService.generateDynamicQris({
       ...payload,
       userId: user.id,
-      expiredHours: payload.expiredHours || 24
+      expiredHours: payload.expiredHours || 24,
     })
 
     session.flash('success', 'QRIS Dinamis berhasil digenerate!')
@@ -84,10 +84,10 @@ export default class DynamicQrisController {
 
     if (payload.status === 'paid') {
       transaction.paidAt = DateTime.now()
-      
+
       if (payload.proof) {
         await payload.proof.move(app.makePath('public/uploads/proofs'), {
-          name: `${string.random(32)}.${payload.proof.extname}`
+          name: `${string.random(32)}.${payload.proof.extname}`,
         })
         transaction.proof = `uploads/proofs/${payload.proof.fileName}`
       }

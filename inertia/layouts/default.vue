@@ -29,7 +29,9 @@ watch(
 
 <template>
   <div class="min-h-screen bg-background font-sans antialiased flex flex-col">
-    <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+    >
       <div class="container flex h-14 items-center justify-between">
         <div class="flex items-center gap-1">
           <Link href="/" class="font-bold flex items-center space-x-2 mr-2">
@@ -37,6 +39,14 @@ watch(
           </Link>
           <Button as-child variant="ghost" size="sm">
             <Link href="/docs">Dokumentasi</Link>
+          </Button>
+          <Button
+            as-child
+            variant="ghost"
+            size="sm"
+            class="text-primary hover:text-primary hover:bg-primary/10"
+          >
+            <Link href="/demo">Coba Demo</Link>
           </Button>
         </div>
         <div class="flex items-center gap-4">
@@ -57,7 +67,6 @@ watch(
                 <Link href="/register">Sign Up</Link>
               </Button>
             </template>
-
           </nav>
         </div>
       </div>

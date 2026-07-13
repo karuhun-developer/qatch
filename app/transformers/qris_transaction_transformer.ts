@@ -1,5 +1,5 @@
 import { BaseTransformer } from '@adonisjs/core/transformers'
-import QrisTransaction from '#models/qris_transaction'
+import type QrisTransaction from '#models/qris_transaction'
 
 export default class QrisTransactionTransformer extends BaseTransformer<QrisTransaction> {
   toObject() {

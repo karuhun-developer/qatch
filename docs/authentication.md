@@ -24,7 +24,7 @@ x-api-key: YOUR_API_KEY
 #### Contoh dengan cURL
 
 ```bash
-curl -X GET https://your-domain.com/api/v1/static-qris \
+curl -X GET https://qris.karuhundeveloper.com/api/v1/static-qris \
   -H "x-api-key: qd_live_abc123xyz456def789"
 ```
 
@@ -60,10 +60,7 @@ Signature dihitung dari **raw request body** (JSON string) menggunakan algoritma
 const crypto = require('crypto')
 
 function verifyWebhookSignature(rawBody, receivedSignature, hmacKey) {
-  const expectedSignature = crypto
-    .createHmac('sha256', hmacKey)
-    .update(rawBody)
-    .digest('hex')
+  const expectedSignature = crypto.createHmac('sha256', hmacKey).update(rawBody).digest('hex')
 
   return crypto.timingSafeEqual(
     Buffer.from(expectedSignature, 'hex'),
@@ -119,8 +116,8 @@ public function handleWebhook(Request $request)
 
 ## Ringkasan Header
 
-| Header | Wajib | Keterangan |
-|--------|-------|-----------|
-| `x-api-key` | ✅ Ya | Untuk otentikasi semua request API |
-| `x-signature-key` | ⚠️ Opsional | Dikirim server pada payload webhook, untuk verifikasi di sisi penerima |
-| `Content-Type` | ✅ (POST/PUT) | `application/json` untuk body JSON |
+| Header            | Wajib         | Keterangan                                                             |
+| ----------------- | ------------- | ---------------------------------------------------------------------- |
+| `x-api-key`       | ✅ Ya         | Untuk otentikasi semua request API                                     |
+| `x-signature-key` | ⚠️ Opsional   | Dikirim server pada payload webhook, untuk verifikasi di sisi penerima |
+| `Content-Type`    | ✅ (POST/PUT) | `application/json` untuk body JSON                                     |

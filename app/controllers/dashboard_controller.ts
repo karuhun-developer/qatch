@@ -17,11 +17,11 @@ export default class DashboardController {
     }
 
     const daysFilter = request.input('days', '7')
-    
+
     // Common query builder base based on role
     const qrisQuery = Qris.query()
     const txQuery = QrisTransaction.query()
-    
+
     if (!isSuperadmin) {
       qrisQuery.where('userId', user.id)
       txQuery.where('userId', user.id)
@@ -29,7 +29,7 @@ export default class DashboardController {
 
     // Apply date filter
     if (daysFilter !== 'all') {
-      const days = parseInt(daysFilter, 10)
+      const days = Number.parseInt(daysFilter, 10)
       if (!isNaN(days)) {
         const targetDate = DateTime.now().minus({ days }).toSQLDate()
         qrisQuery.where('created_at', '>=', targetDate as string)
@@ -40,12 +40,12 @@ export default class DashboardController {
     // Dashboard Stats
     const totalQris = await qrisQuery.clone().count('* as total').first()
     const totalTransactions = await txQuery.clone().count('* as total').first()
-    
+
     let totalUsers = null
     if (isSuperadmin) {
       const userQuery = User.query()
       if (daysFilter !== 'all') {
-        const days = parseInt(daysFilter, 10)
+        const days = Number.parseInt(daysFilter, 10)
         if (!isNaN(days)) {
           const targetDate = DateTime.now().minus({ days }).toSQLDate()
           userQuery.where('created_at', '>=', targetDate as string)
@@ -55,7 +55,8 @@ export default class DashboardController {
     }
 
     // Chart Data (Grouped by date)
-    const chartDataQuery = txQuery.clone()
+    const chartDataQuery = txQuery
+      .clone()
       .select(db.raw('DATE(created_at) as date'))
       .select(db.raw('COUNT(*) as total'))
       .select(db.raw(`SUM(CASE WHEN status = 'paid' THEN 1 ELSE 0 END) as paid`))
@@ -64,7 +65,7 @@ export default class DashboardController {
       .orderByRaw('DATE(created_at) ASC')
 
     const rawChartData = await chartDataQuery
-    
+
     // Formatting chart data for frontend
     const dates = []
     const generated = []
@@ -79,14 +80,12 @@ export default class DashboardController {
     }
 
     // Recent Transactions
-    const recentTxQuery = txQuery.clone()
-      .orderBy('createdAt', 'desc')
-      .limit(10)
-    
+    const recentTxQuery = txQuery.clone().orderBy('createdAt', 'desc').limit(10)
+
     if (isSuperadmin) {
       recentTxQuery.preload('user')
     }
-    
+
     const recentTransactions = await recentTxQuery
 
     return inertia.render('dashboard', {
@@ -95,15 +94,15 @@ export default class DashboardController {
       stats: {
         totalUsers: Number(totalUsers),
         totalQris: Number(totalQris?.$extras.total || 0),
-        totalDynamicQris: Number(totalTransactions?.$extras.total || 0)
+        totalDynamicQris: Number(totalTransactions?.$extras.total || 0),
       },
       chartData: {
         labels: dates,
         datasets: {
           generated,
           paid,
-          expired
-        }
+          expired,
+        },
       },
       recentTransactions: recentTransactions.map((tx) => {
         return {
@@ -113,14 +112,16 @@ export default class DashboardController {
           total: tx.total,
           status: tx.status,
           createdAt: tx.createdAt,
-          user: isSuperadmin ? {
-            fullName: tx.user?.fullName,
-            email: tx.user?.email
-          } : undefined
+          user: isSuperadmin
+            ? {
+                fullName: tx.user?.fullName,
+                email: tx.user?.email,
+              }
+            : undefined,
         }
       }),
       systemHealth: 'OK',
-      daysFilter
+      daysFilter,
     })
   }
 }

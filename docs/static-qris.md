@@ -2,20 +2,20 @@
 
 Endpoint ini digunakan untuk mengelola data QRIS statis milikmu — upload, edit, lihat, dan hapus QRIS.
 
-**Base URL:** `https://your-domain.com`  
+**Base URL:** `https://qris.karuhundeveloper.com`  
 **Auth:** Semua endpoint memerlukan header `x-api-key`.
 
 ---
 
 ## Ringkasan Endpoint
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/api/v1/static-qris` | List semua QRIS statis |
-| POST | `/api/v1/static-qris` | Tambah QRIS statis baru |
-| GET | `/api/v1/static-qris/:id` | Detail satu QRIS |
-| PUT | `/api/v1/static-qris/:id` | Update QRIS |
-| DELETE | `/api/v1/static-qris/:id` | Hapus QRIS |
+| Method | Endpoint                  | Deskripsi               |
+| ------ | ------------------------- | ----------------------- |
+| GET    | `/api/v1/static-qris`     | List semua QRIS statis  |
+| POST   | `/api/v1/static-qris`     | Tambah QRIS statis baru |
+| GET    | `/api/v1/static-qris/:id` | Detail satu QRIS        |
+| PUT    | `/api/v1/static-qris/:id` | Update QRIS             |
+| DELETE | `/api/v1/static-qris/:id` | Hapus QRIS              |
 
 ---
 
@@ -31,15 +31,15 @@ x-api-key: YOUR_API_KEY
 
 ### Query Parameters
 
-| Parameter | Tipe | Default | Deskripsi |
-|-----------|------|---------|-----------|
-| `page` | integer | 1 | Halaman yang ditampilkan |
-| `limit` | integer | 10 | Jumlah item per halaman |
+| Parameter | Tipe    | Default | Deskripsi                |
+| --------- | ------- | ------- | ------------------------ |
+| `page`    | integer | 1       | Halaman yang ditampilkan |
+| `limit`   | integer | 10      | Jumlah item per halaman  |
 
 ### Contoh Request
 
 ```bash
-curl -X GET "https://your-domain.com/api/v1/static-qris?page=1&limit=10" \
+curl -X GET "https://qris.karuhundeveloper.com/api/v1/static-qris?page=1&limit=10" \
   -H "x-api-key: qd_live_abc123xyz456"
 ```
 
@@ -86,17 +86,17 @@ Content-Type: multipart/form-data
 
 ### Request Body
 
-| Field | Tipe | Wajib | Keterangan |
-|-------|------|-------|------------|
-| `name` | string | ✅ | Nama QRIS (min. 3 karakter) |
-| `description` | string | ❌ | Deskripsi opsional |
-| `qris` | file | ✅ | File gambar QRIS (jpg/png/jpeg/webp, max 5MB) |
-| `qrisString` | string | ✅ | String QRIS hasil scan/parse (min. 10 karakter) |
+| Field         | Tipe   | Wajib | Keterangan                                      |
+| ------------- | ------ | ----- | ----------------------------------------------- |
+| `name`        | string | ✅    | Nama QRIS (min. 3 karakter)                     |
+| `description` | string | ❌    | Deskripsi opsional                              |
+| `qris`        | file   | ✅    | File gambar QRIS (jpg/png/jpeg/webp, max 5MB)   |
+| `qrisString`  | string | ✅    | String QRIS hasil scan/parse (min. 10 karakter) |
 
 ### Contoh Request
 
 ```bash
-curl -X POST https://your-domain.com/api/v1/static-qris \
+curl -X POST https://qris.karuhundeveloper.com/api/v1/static-qris \
   -H "x-api-key: qd_live_abc123xyz456" \
   -F "name=QRIS Toko Utama" \
   -F "description=QRIS untuk kasir utama" \
@@ -137,7 +137,7 @@ x-api-key: YOUR_API_KEY
 ### Contoh Request
 
 ```bash
-curl -X GET https://your-domain.com/api/v1/static-qris/1 \
+curl -X GET https://qris.karuhundeveloper.com/api/v1/static-qris/1 \
   -H "x-api-key: qd_live_abc123xyz456"
 ```
 
@@ -182,17 +182,17 @@ Content-Type: multipart/form-data
 
 ### Request Body
 
-| Field | Tipe | Wajib | Keterangan |
-|-------|------|-------|------------|
-| `name` | string | ❌ | Nama baru (min. 3 karakter) |
-| `description` | string | ❌ | Deskripsi baru |
-| `qris` | file | ❌ | File gambar QRIS baru (jpg/png/jpeg/webp, max 5MB) |
-| `qrisString` | string | ❌ | String QRIS baru (min. 10 karakter) |
+| Field         | Tipe   | Wajib | Keterangan                                         |
+| ------------- | ------ | ----- | -------------------------------------------------- |
+| `name`        | string | ❌    | Nama baru (min. 3 karakter)                        |
+| `description` | string | ❌    | Deskripsi baru                                     |
+| `qris`        | file   | ❌    | File gambar QRIS baru (jpg/png/jpeg/webp, max 5MB) |
+| `qrisString`  | string | ❌    | String QRIS baru (min. 10 karakter)                |
 
 ### Contoh Request
 
 ```bash
-curl -X PUT https://your-domain.com/api/v1/static-qris/1 \
+curl -X PUT https://qris.karuhundeveloper.com/api/v1/static-qris/1 \
   -H "x-api-key: qd_live_abc123xyz456" \
   -F "name=QRIS Toko Diperbarui" \
   -F "description=Deskripsi baru"
@@ -231,7 +231,7 @@ x-api-key: YOUR_API_KEY
 ### Contoh Request
 
 ```bash
-curl -X DELETE https://your-domain.com/api/v1/static-qris/1 \
+curl -X DELETE https://qris.karuhundeveloper.com/api/v1/static-qris/1 \
   -H "x-api-key: qd_live_abc123xyz456"
 ```
 

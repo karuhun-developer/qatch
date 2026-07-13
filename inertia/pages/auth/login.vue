@@ -4,7 +4,14 @@ import DefaultLayout from '@/layouts/default.vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { Loader2 } from '@lucide/vue'
 
 defineOptions({ layout: DefaultLayout })
@@ -27,20 +34,18 @@ function submit() {
     <Card class="w-full max-w-sm">
       <CardHeader class="space-y-1">
         <CardTitle class="text-2xl font-bold">Login</CardTitle>
-        <CardDescription>
-          Masukkan email dan password untuk masuk ke akun Anda.
-        </CardDescription>
+        <CardDescription> Masukkan email dan password untuk masuk ke akun Anda. </CardDescription>
       </CardHeader>
       <form @submit.prevent="submit">
         <CardContent class="space-y-4">
           <div class="space-y-2">
             <Label for="email">Email</Label>
-            <Input 
-              id="email" 
-              type="email" 
-              v-model="form.email" 
-              placeholder="m@example.com" 
-              required 
+            <Input
+              id="email"
+              v-model="form.email"
+              type="email"
+              placeholder="m@example.com"
+              required
               :class="{ 'border-destructive': form.errors.email }"
             />
             <p v-if="form.errors.email" class="text-sm text-destructive">{{ form.errors.email }}</p>
@@ -49,14 +54,16 @@ function submit() {
             <div class="flex items-center justify-between">
               <Label for="password">Password</Label>
             </div>
-            <Input 
-              id="password" 
-              type="password" 
-              v-model="form.password" 
-              required 
+            <Input
+              id="password"
+              v-model="form.password"
+              type="password"
+              required
               :class="{ 'border-destructive': form.errors.password }"
             />
-            <p v-if="form.errors.password" class="text-sm text-destructive">{{ form.errors.password }}</p>
+            <p v-if="form.errors.password" class="text-sm text-destructive">
+              {{ form.errors.password }}
+            </p>
           </div>
         </CardContent>
         <CardFooter class="flex flex-col space-y-4">

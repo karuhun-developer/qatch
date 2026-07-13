@@ -12,7 +12,7 @@ export default class RolesController {
     if (await bouncer.denies(manageRoles)) {
       return response.redirect().toRoute('dashboard')
     }
-    
+
     const page = request.input('page', 1)
     const roles = await this.roleService.getPaginatedRoles(page, 10)
     return inertia.render('roles/index', { roles: roles.serialize() as any })
@@ -24,7 +24,7 @@ export default class RolesController {
     }
 
     const payload = await request.validateUsing(createRoleValidator)
-    
+
     await this.roleService.createRole(payload.name)
     session.flash('success', 'Role berhasil dibuat!')
 
@@ -36,8 +36,10 @@ export default class RolesController {
       return response.unauthorized('You are not authorized')
     }
 
-    const payload = await request.validateUsing(updateRoleValidator, { meta: { roleId: params.id } })
-    
+    const payload = await request.validateUsing(updateRoleValidator, {
+      meta: { roleId: params.id },
+    })
+
     await this.roleService.updateRole(params.id, payload.name)
     session.flash('success', 'Role berhasil diperbarui!')
 

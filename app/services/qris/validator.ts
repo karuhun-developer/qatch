@@ -70,7 +70,7 @@ export function validateQRIS(qrisString: string): ValidationResult {
 
   // Check at least one merchant account info exists (tags 26-51)
   const hasMerchant = elements.some((e) => {
-    const n = parseInt(e.tag, 10)
+    const n = Number.parseInt(e.tag, 10)
     return n >= 26 && n <= 51
   })
   if (!hasMerchant) {

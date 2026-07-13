@@ -2,25 +2,25 @@
 
 Endpoint ini digunakan untuk men-generate QRIS dinamis, mengecek status transaksi, mengupdate status secara manual, serta menerima callback dari Android Notification Forwarder.
 
-**Base URL:** `https://your-domain.com`  
+**Base URL:** `https://qris.karuhundeveloper.com`  
 **Auth:** Semua endpoint memerlukan header `x-api-key`.
 
 ---
 
 ## Ringkasan Endpoint
 
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| POST | `/api/v1/dynamic-qris` | Generate QRIS dinamis baru |
-| GET | `/api/v1/dynamic-qris/:id` | Cek status transaksi |
-| PUT | `/api/v1/dynamic-qris/:id` | Update status transaksi manual |
-| POST | `/api/v1/dynamic-qris/callback` | Callback dari Android Forwarder |
+| Method | Endpoint                        | Deskripsi                       |
+| ------ | ------------------------------- | ------------------------------- |
+| POST   | `/api/v1/dynamic-qris`          | Generate QRIS dinamis baru      |
+| GET    | `/api/v1/dynamic-qris/:id`      | Cek status transaksi            |
+| PUT    | `/api/v1/dynamic-qris/:id`      | Update status transaksi manual  |
+| POST   | `/api/v1/dynamic-qris/callback` | Callback dari Android Forwarder |
 
 ---
 
 ## POST /api/v1/dynamic-qris
 
-Men-generate QRIS dinamis berdasarkan QRIS statis yang sudah terdaftar. Server akan membuat `qrisString` baru dengan nominal yang sudah di-*embed* beserta kode unik.
+Men-generate QRIS dinamis berdasarkan QRIS statis yang sudah terdaftar. Server akan membuat `qrisString` baru dengan nominal yang sudah di-_embed_ beserta kode unik.
 
 ### Headers
 
@@ -31,26 +31,26 @@ Content-Type: application/json
 
 ### Request Body
 
-| Field | Tipe | Wajib | Keterangan |
-|-------|------|-------|------------|
-| `qrisId` | integer | ✅ | ID QRIS statis yang akan digunakan sebagai dasar |
-| `amount` | integer | ✅ | Nominal transaksi dalam rupiah (min. 1) |
-| `feeType` | string | ✅ | Tipe biaya: `none`, `fixed`, atau `percent` |
-| `feeValue` | number | ✅ | Nilai biaya (min. 0). Jika `feeType=none`, isi `0` |
-| `expiredHours` | integer | ❌ | Durasi kadaluarsa dalam jam (min. 1, max. 720). Default: 24 |
+| Field          | Tipe    | Wajib | Keterangan                                                  |
+| -------------- | ------- | ----- | ----------------------------------------------------------- |
+| `qrisId`       | integer | ✅    | ID QRIS statis yang akan digunakan sebagai dasar            |
+| `amount`       | integer | ✅    | Nominal transaksi dalam rupiah (min. 1)                     |
+| `feeType`      | string  | ✅    | Tipe biaya: `none`, `fixed`, atau `percent`                 |
+| `feeValue`     | number  | ✅    | Nilai biaya (min. 0). Jika `feeType=none`, isi `0`          |
+| `expiredHours` | integer | ❌    | Durasi kadaluarsa dalam jam (min. 1, max. 720). Default: 24 |
 
 #### Penjelasan `feeType`
 
-| `feeType` | `feeValue` | Keterangan |
-|-----------|-----------|-----------|
-| `none` | `0` | Tidak ada biaya tambahan |
-| `fixed` | `2000` | Biaya tetap Rp 2.000 |
-| `percent` | `2.5` | Biaya 2.5% dari `amount` |
+| `feeType` | `feeValue` | Keterangan               |
+| --------- | ---------- | ------------------------ |
+| `none`    | `0`        | Tidak ada biaya tambahan |
+| `fixed`   | `2000`     | Biaya tetap Rp 2.000     |
+| `percent` | `2.5`      | Biaya 2.5% dari `amount` |
 
 ### Contoh Request
 
 ```bash
-curl -X POST https://your-domain.com/api/v1/dynamic-qris \
+curl -X POST https://qris.karuhundeveloper.com/api/v1/dynamic-qris \
   -H "x-api-key: qd_live_abc123xyz456" \
   -H "Content-Type: application/json" \
   -d '{
@@ -106,7 +106,7 @@ x-api-key: YOUR_API_KEY
 ### Contoh Request
 
 ```bash
-curl -X GET https://your-domain.com/api/v1/dynamic-qris/42 \
+curl -X GET https://qris.karuhundeveloper.com/api/v1/dynamic-qris/42 \
   -H "x-api-key: qd_live_abc123xyz456"
 ```
 
@@ -139,11 +139,11 @@ curl -X GET https://your-domain.com/api/v1/dynamic-qris/42 \
 
 #### Status Transaksi
 
-| Status | Keterangan |
-|--------|-----------|
+| Status    | Keterangan          |
+| --------- | ------------------- |
 | `pending` | Menunggu pembayaran |
-| `paid` | Sudah dibayar |
-| `expired` | Kadaluarsa |
+| `paid`    | Sudah dibayar       |
+| `expired` | Kadaluarsa          |
 
 ---
 
@@ -162,15 +162,15 @@ Content-Type: multipart/form-data
 
 ### Request Body
 
-| Field | Tipe | Wajib | Keterangan |
-|-------|------|-------|------------|
-| `status` | string | ✅ | Status baru: `pending`, `paid`, atau `expired` |
-| `proof` | file | ❌ | Bukti pembayaran (jpg/png/jpeg, max 5MB). Hanya diproses jika `status=paid` |
+| Field    | Tipe   | Wajib | Keterangan                                                                  |
+| -------- | ------ | ----- | --------------------------------------------------------------------------- |
+| `status` | string | ✅    | Status baru: `pending`, `paid`, atau `expired`                              |
+| `proof`  | file   | ❌    | Bukti pembayaran (jpg/png/jpeg, max 5MB). Hanya diproses jika `status=paid` |
 
 ### Contoh Request — Tandai Paid dengan Bukti
 
 ```bash
-curl -X PUT https://your-domain.com/api/v1/dynamic-qris/42 \
+curl -X PUT https://qris.karuhundeveloper.com/api/v1/dynamic-qris/42 \
   -H "x-api-key: qd_live_abc123xyz456" \
   -F "status=paid" \
   -F "proof=@/path/to/bukti.jpg"
@@ -179,7 +179,7 @@ curl -X PUT https://your-domain.com/api/v1/dynamic-qris/42 \
 ### Contoh Request — Tandai Expired
 
 ```bash
-curl -X PUT https://your-domain.com/api/v1/dynamic-qris/42 \
+curl -X PUT https://qris.karuhundeveloper.com/api/v1/dynamic-qris/42 \
   -H "x-api-key: qd_live_abc123xyz456" \
   -H "Content-Type: application/json" \
   -d '{"status": "expired"}'
@@ -222,17 +222,17 @@ Content-Type: application/json
 
 ### Request Body
 
-| Field | Tipe | Wajib | Keterangan |
-|-------|------|-------|------------|
-| `app_name` | string | ❌ | Nama package aplikasi pengirim notifikasi (contoh: `com.bni.bniactivity`) |
-| `notification_title` | string | ❌ | Judul notifikasi |
-| `notification_text` | string | ✅ | Isi teks notifikasi yang mengandung informasi pembayaran |
-| `timestamp_ms` | integer | ❌ | Timestamp notifikasi dalam millisecond |
+| Field                | Tipe    | Wajib | Keterangan                                                                |
+| -------------------- | ------- | ----- | ------------------------------------------------------------------------- |
+| `app_name`           | string  | ❌    | Nama package aplikasi pengirim notifikasi (contoh: `com.bni.bniactivity`) |
+| `notification_title` | string  | ❌    | Judul notifikasi                                                          |
+| `notification_text`  | string  | ✅    | Isi teks notifikasi yang mengandung informasi pembayaran                  |
+| `timestamp_ms`       | integer | ❌    | Timestamp notifikasi dalam millisecond                                    |
 
 ### Contoh Request (dari Android Forwarder)
 
 ```bash
-curl -X POST https://your-domain.com/api/v1/dynamic-qris/callback \
+curl -X POST https://qris.karuhundeveloper.com/api/v1/dynamic-qris/callback \
   -H "x-api-key: qd_live_abc123xyz456" \
   -H "Content-Type: application/json" \
   -d '{

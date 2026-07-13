@@ -8,7 +8,18 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class PlanSchema extends BaseModel {
-  static $columns = ['createdAt', 'description', 'features', 'id', 'isFeatured', 'maxQris', 'maxTransactionPerMonth', 'name', 'price', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'description',
+    'features',
+    'id',
+    'isFeatured',
+    'maxQris',
+    'maxTransactionPerMonth',
+    'name',
+    'price',
+    'updatedAt',
+  ] as const
   $columns = PlanSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -33,7 +44,16 @@ export class PlanSchema extends BaseModel {
 }
 
 export class QriSchema extends BaseModel {
-  static $columns = ['createdAt', 'description', 'id', 'name', 'qris', 'qrisString', 'updatedAt', 'userId'] as const
+  static $columns = [
+    'createdAt',
+    'description',
+    'id',
+    'name',
+    'qris',
+    'qrisString',
+    'updatedAt',
+    'userId',
+  ] as const
   $columns = QriSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -54,7 +74,25 @@ export class QriSchema extends BaseModel {
 }
 
 export class QrisTransactionSchema extends BaseModel {
-  static $columns = ['amount', 'createdAt', 'expiredAt', 'feeAmount', 'feeType', 'feeValue', 'id', 'paidAt', 'proof', 'qrisId', 'qrisString', 'status', 'total', 'transactionCode', 'uniqueCode', 'updatedAt', 'userId'] as const
+  static $columns = [
+    'amount',
+    'createdAt',
+    'expiredAt',
+    'feeAmount',
+    'feeType',
+    'feeValue',
+    'id',
+    'paidAt',
+    'proof',
+    'qrisId',
+    'qrisString',
+    'status',
+    'total',
+    'transactionCode',
+    'uniqueCode',
+    'updatedAt',
+    'userId',
+  ] as const
   $columns = QrisTransactionSchema.$columns
   @column()
   declare amount: string
@@ -106,7 +144,24 @@ export class RoleSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'planId', 'qrisTotal', 'roleId', 'transactionTotal', 'updatedAt', 'webhookListenApps', 'webhookTextWildcard', 'webhookTitleWildcard', 'webhookUrl'] as const
+  static $columns = [
+    'apiKey',
+    'createdAt',
+    'email',
+    'fullName',
+    'hmacKey',
+    'id',
+    'password',
+    'planId',
+    'qrisTotal',
+    'roleId',
+    'transactionTotal',
+    'updatedAt',
+    'webhookListenApps',
+    'webhookTextWildcard',
+    'webhookTitleWildcard',
+    'webhookUrl',
+  ] as const
   $columns = UserSchema.$columns
   @column()
   declare apiKey: string | null

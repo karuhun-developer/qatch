@@ -23,7 +23,18 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet'
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
-import { LayoutDashboard, User, LogOut, Shield, Users, Menu, QrCode, RefreshCw, Webhook, Package } from '@lucide/vue'
+import {
+  LayoutDashboard,
+  User,
+  LogOut,
+  Shield,
+  Users,
+  Menu,
+  QrCode,
+  RefreshCw,
+  Webhook,
+  Package,
+} from '@lucide/vue'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
 
@@ -32,11 +43,15 @@ const logoutModalOpen = ref(false)
 const mobileMenuOpen = ref(false)
 
 function handleLogout() {
-  router.post('/logout', {}, {
-    onFinish: () => {
-      logoutModalOpen.value = false
+  router.post(
+    '/logout',
+    {},
+    {
+      onFinish: () => {
+        logoutModalOpen.value = false
+      },
     }
-  })
+  )
 }
 
 watch(
@@ -88,7 +103,10 @@ watch(
           <Link
             href="/qris"
             class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris') && !$page.url.startsWith('/qris-dynamic') }"
+            :class="{
+              'bg-muted text-primary':
+                $page.url.startsWith('/qris') && !$page.url.startsWith('/qris-dynamic'),
+            }"
           >
             <QrCode class="h-4 w-4" />
             QRIS Statis
@@ -145,85 +163,94 @@ watch(
           </SheetTrigger>
           <SheetContent side="left" class="flex flex-col w-[280px] p-0 border-r-0">
             <SheetTitle class="sr-only">Navigasi Menu</SheetTitle>
-            <SheetDescription class="sr-only">Menu navigasi untuk berpindah halaman di dashboard QRIS Dinamis.</SheetDescription>
+            <SheetDescription class="sr-only"
+              >Menu navigasi untuk berpindah halaman di dashboard QRIS Dinamis.</SheetDescription
+            >
             <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-              <Link href="/" class="flex items-center gap-2 font-semibold" @click="mobileMenuOpen = false">
+              <Link
+                href="/"
+                class="flex items-center gap-2 font-semibold"
+                @click="mobileMenuOpen = false"
+              >
                 <span class="">QRIS Dinamis</span>
               </Link>
             </div>
             <div class="flex-1 overflow-y-auto">
               <nav class="grid items-start px-2 text-sm font-medium mt-4 gap-2">
-              <Link
-                href="/dashboard"
-                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                :class="{ 'bg-muted text-primary': $page.url === '/dashboard' }"
-                @click="mobileMenuOpen = false"
-              >
-                <LayoutDashboard class="h-4 w-4" />
-                Dashboard
-              </Link>
-              <Link
-                href="/qris-dynamic"
-                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris-dynamic') }"
-                @click="mobileMenuOpen = false"
-              >
-                <RefreshCw class="h-4 w-4" />
-                QRIS Dinamis
-              </Link>
-              <Link
-                href="/qris"
-                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris') && !$page.url.startsWith('/qris-dynamic') }"
-                @click="mobileMenuOpen = false"
-              >
-                <QrCode class="h-4 w-4" />
-                QRIS Statis
-              </Link>
-              <Link
-                href="/webhook-settings"
-                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                :class="{ 'bg-muted text-primary': $page.url.startsWith('/webhook-settings') }"
-                @click="mobileMenuOpen = false"
-              >
-                <Webhook class="h-4 w-4" />
-                Webhook & API
-              </Link>
-              <Link
-                v-if="page.props.user?.roleId === 1"
-                href="/users"
-                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                :class="{ 'bg-muted text-primary': $page.url.startsWith('/users') }"
-                @click="mobileMenuOpen = false"
-              >
-                <Users class="h-4 w-4" />
-                Users
-              </Link>
-              <Link
-                v-if="page.props.user?.roleId === 1"
-                href="/roles"
-                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                :class="{ 'bg-muted text-primary': $page.url.startsWith('/roles') }"
-                @click="mobileMenuOpen = false"
-              >
-                <Shield class="h-4 w-4" />
-                Roles
-              </Link>
-              <Link
-                v-if="page.props.user?.roleId === 1"
-                href="/plans"
-                class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                :class="{ 'bg-muted text-primary': $page.url.startsWith('/plans') }"
-                @click="mobileMenuOpen = false"
-              >
-                <Package class="h-4 w-4" />
-                Plans
-              </Link>
+                <Link
+                  href="/dashboard"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url === '/dashboard' }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <LayoutDashboard class="h-4 w-4" />
+                  Dashboard
+                </Link>
+                <Link
+                  href="/qris-dynamic"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/qris-dynamic') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <RefreshCw class="h-4 w-4" />
+                  QRIS Dinamis
+                </Link>
+                <Link
+                  href="/qris"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{
+                    'bg-muted text-primary':
+                      $page.url.startsWith('/qris') && !$page.url.startsWith('/qris-dynamic'),
+                  }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <QrCode class="h-4 w-4" />
+                  QRIS Statis
+                </Link>
+                <Link
+                  href="/webhook-settings"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/webhook-settings') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <Webhook class="h-4 w-4" />
+                  Webhook & API
+                </Link>
+                <Link
+                  v-if="page.props.user?.roleId === 1"
+                  href="/users"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/users') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <Users class="h-4 w-4" />
+                  Users
+                </Link>
+                <Link
+                  v-if="page.props.user?.roleId === 1"
+                  href="/roles"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/roles') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <Shield class="h-4 w-4" />
+                  Roles
+                </Link>
+                <Link
+                  v-if="page.props.user?.roleId === 1"
+                  href="/plans"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/plans') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <Package class="h-4 w-4" />
+                  Plans
+                </Link>
               </nav>
             </div>
           </SheetContent>
         </Sheet>
-        
+
         <div class="w-full flex-1"></div>
         <DropdownMenu v-if="page.props.user">
           <DropdownMenuTrigger as-child>
@@ -250,7 +277,7 @@ watch(
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem 
+            <DropdownMenuItem
               class="w-full text-left flex items-center cursor-pointer text-destructive"
               @click="logoutModalOpen = true"
             >

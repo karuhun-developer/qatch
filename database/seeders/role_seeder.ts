@@ -3,9 +3,6 @@ import Role from '#models/role'
 
 export default class extends BaseSeeder {
   async run() {
-    await Role.updateOrCreateMany('name', [
-      { name: 'superadmin' },
-      { name: 'user' },
-    ])
+    await Role.updateOrCreateMany('name', [{ name: 'superadmin' }, { name: 'user' }])
   }
 }

@@ -14,7 +14,7 @@ export default class UserTransformer extends BaseTransformer<User> {
       'planId',
       'qrisTotal',
       'transactionTotal',
-      'plan'
+      'plan',
     ])
   }
 }

@@ -95,12 +95,15 @@ function changePage(page: number) {
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-start">
-    
     <!-- Left Column: Summary & Actions -->
     <div class="flex flex-col gap-4">
       <!-- Total Roles Card -->
-      <Card class="bg-gradient-to-br from-purple-500/10 to-transparent border-purple-500/20 relative overflow-hidden">
-        <div class="absolute -right-4 -top-4 bg-purple-500/10 w-24 h-24 rounded-full blur-2xl"></div>
+      <Card
+        class="bg-gradient-to-br from-purple-500/10 to-transparent border-purple-500/20 relative overflow-hidden"
+      >
+        <div
+          class="absolute -right-4 -top-4 bg-purple-500/10 w-24 h-24 rounded-full blur-2xl"
+        ></div>
         <CardHeader class="flex flex-row items-center justify-between pb-2 relative z-10">
           <CardTitle class="text-sm font-medium text-muted-foreground">Total Roles</CardTitle>
           <Shield class="h-4 w-4 text-purple-500" />
@@ -110,14 +113,16 @@ function changePage(page: number) {
           <p class="text-xs text-purple-500 font-medium mt-1">Grup hak akses aktif</p>
         </CardContent>
       </Card>
-      
+
       <!-- Quick Add Card -->
-      <Card 
+      <Card
         class="bg-card/60 backdrop-blur-xl border-muted/60 hover:border-primary/50 transition-all cursor-pointer group min-h-[180px]"
         @click="openCreateModal"
       >
         <CardContent class="p-6 flex flex-col items-center justify-center text-center h-full">
-          <div class="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform group-hover:bg-primary/20">
+          <div
+            class="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform group-hover:bg-primary/20"
+          >
             <Plus class="h-6 w-6 text-primary" />
           </div>
           <h3 class="font-bold tracking-tight">Tambah Role</h3>
@@ -145,17 +150,33 @@ function changePage(page: number) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow v-for="role in roles.data" :key="role.id" class="hover:bg-muted/20 transition-colors">
+              <TableRow
+                v-for="role in roles.data"
+                :key="role.id"
+                class="hover:bg-muted/20 transition-colors"
+              >
                 <TableCell class="font-medium">
                   <div class="flex items-center gap-3">
-                    <div class="h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold"
-                         :class="role.id === 1 ? 'bg-purple-500/10 text-purple-500' : 'bg-primary/10 text-primary'">
+                    <div
+                      class="h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold"
+                      :class="
+                        role.id === 1
+                          ? 'bg-purple-500/10 text-purple-500'
+                          : 'bg-primary/10 text-primary'
+                      "
+                    >
                       <Shield class="h-4 w-4" />
                     </div>
                     <span class="capitalize">{{ role.name }}</span>
                   </div>
                 </TableCell>
-                <TableCell class="text-muted-foreground">{{ new Date(role.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) }}</TableCell>
+                <TableCell class="text-muted-foreground">{{
+                  new Date(role.createdAt).toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                }}</TableCell>
                 <TableCell class="text-right">
                   <div class="flex justify-end gap-2">
                     <Button
@@ -176,7 +197,11 @@ function changePage(page: number) {
                     >
                       <Trash2 class="h-4 w-4" />
                     </Button>
-                    <span v-if="role.id === 1 || role.id === 2" class="text-xs text-muted-foreground italic px-2 py-1">Sistem</span>
+                    <span
+                      v-if="role.id === 1 || role.id === 2"
+                      class="text-xs text-muted-foreground italic px-2 py-1"
+                      >Sistem</span
+                    >
                   </div>
                 </TableCell>
               </TableRow>
@@ -192,7 +217,7 @@ function changePage(page: number) {
           </Table>
         </div>
 
-        <div class="mt-4 flex justify-end" v-if="roles.meta.lastPage > 1">
+        <div v-if="roles.meta.lastPage > 1" class="mt-4 flex justify-end">
           <Pagination
             :total="roles.meta.total"
             :sibling-count="1"
@@ -203,12 +228,17 @@ function changePage(page: number) {
           >
             <PaginationContent v-slot="{ items }" class="flex items-center gap-1">
               <PaginationPrevious
-                @click="changePage(roles.meta.currentPage - 1)"
                 :disabled="roles.meta.currentPage === 1"
+                @click="changePage(roles.meta.currentPage - 1)"
               />
 
               <template v-for="(item, index) in items">
-                <PaginationItem v-if="item.type === 'page'" :key="index" :value="item.value" as-child>
+                <PaginationItem
+                  v-if="item.type === 'page'"
+                  :key="index"
+                  :value="item.value"
+                  as-child
+                >
                   <Button
                     class="w-9 h-9 p-0"
                     :variant="item.value === roles.meta.currentPage ? 'default' : 'outline'"
@@ -220,8 +250,8 @@ function changePage(page: number) {
               </template>
 
               <PaginationNext
-                @click="changePage(roles.meta.currentPage + 1)"
                 :disabled="roles.meta.currentPage === roles.meta.lastPage"
+                @click="changePage(roles.meta.currentPage + 1)"
               />
             </PaginationContent>
           </Pagination>

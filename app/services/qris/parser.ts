@@ -65,7 +65,7 @@ export function parseTLV(data: string): TLV[] {
     if (pos + 4 > data.length) break
 
     const tag = data.substring(pos, pos + 2)
-    const length = parseInt(data.substring(pos + 2, pos + 4), 10)
+    const length = Number.parseInt(data.substring(pos + 2, pos + 4), 10)
 
     if (isNaN(length) || pos + 4 + length > data.length) break
 
@@ -105,7 +105,7 @@ export function parseQRIS(qrisString: string): QRISData {
   // Extract merchant account information (tags 26-51)
   const merchantAccountInfo: MerchantAccountInfo[] = raw
     .filter((t) => {
-      const tagNum = parseInt(t.tag, 10)
+      const tagNum = Number.parseInt(t.tag, 10)
       return tagNum >= 26 && tagNum <= 51 && t.children
     })
     .map((t) => {

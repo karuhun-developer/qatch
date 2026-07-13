@@ -20,7 +20,10 @@ const sidebarOpen = ref(false)
 <template>
   <Head>
     <title>{{ currentTitle }} — Dokumentasi QRIS Dinamis</title>
-    <meta name="description" content="Dokumentasi lengkap API, instalasi, dan konfigurasi QRIS Dinamis." />
+    <meta
+      name="description"
+      content="Dokumentasi lengkap API, instalasi, dan konfigurasi QRIS Dinamis."
+    />
   </Head>
 
   <div class="max-w-screen-xl mx-auto flex relative">
@@ -36,11 +39,13 @@ const sidebarOpen = ref(false)
       :class="[
         'fixed top-14 bottom-0 z-40 w-60 border-r border-border/50 bg-background overflow-y-auto transition-transform duration-200',
         'lg:sticky lg:translate-x-0 lg:shrink-0',
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
       ]"
     >
       <nav class="px-3 py-6 space-y-0.5">
-        <p class="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3 px-2">Panduan</p>
+        <p class="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3 px-2">
+          Panduan
+        </p>
         <Link
           v-for="item in nav"
           :key="item.slug"
@@ -49,12 +54,15 @@ const sidebarOpen = ref(false)
             'flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors w-full',
             currentSlug === item.slug
               ? 'bg-primary/10 text-primary font-semibold'
-              : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted',
           ]"
           @click="sidebarOpen = false"
         >
           <ChevronRight
-            :class="['h-3 w-3 shrink-0 transition-transform', currentSlug === item.slug ? 'text-primary' : 'opacity-0']"
+            :class="[
+              'h-3 w-3 shrink-0 transition-transform',
+              currentSlug === item.slug ? 'text-primary' : 'opacity-0',
+            ]"
           />
           {{ item.title }}
         </Link>
@@ -77,28 +85,16 @@ const sidebarOpen = ref(false)
       <div class="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
         <Link href="/" class="hover:text-foreground transition-colors">Beranda</Link>
         <ChevronRight class="h-3.5 w-3.5" />
-        <Link href="/docs/introduction" class="hover:text-foreground transition-colors">Dokumentasi</Link>
+        <Link href="/docs/introduction" class="hover:text-foreground transition-colors"
+          >Dokumentasi</Link
+        >
         <ChevronRight class="h-3.5 w-3.5" />
         <span class="text-foreground font-medium">{{ currentTitle }}</span>
       </div>
 
       <!-- Rendered markdown -->
       <article
-        class="prose prose-neutral max-w-3xl
-          prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-20
-          prose-h1:text-3xl prose-h1:mb-2
-          prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-3 prose-h2:border-b prose-h2:border-border/60 prose-h2:pb-2
-          prose-h3:text-base prose-h3:mt-6 prose-h3:mb-2
-          prose-p:text-muted-foreground prose-p:leading-7
-          prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-          prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-none
-          prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-muted-foreground
-          prose-strong:text-foreground prose-strong:font-semibold
-          prose-table:text-sm
-          prose-thead:border-border prose-th:text-foreground prose-th:font-semibold
-          prose-td:text-muted-foreground prose-tr:border-border
-          prose-img:rounded-xl prose-img:border prose-img:border-border/60
-          prose-li:text-muted-foreground prose-li:marker:text-primary"
+        class="prose prose-neutral max-w-3xl prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-20 prose-h1:text-3xl prose-h1:mb-2 prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-3 prose-h2:border-b prose-h2:border-border/60 prose-h2:pb-2 prose-h3:text-base prose-h3:mt-6 prose-h3:mb-2 prose-p:text-muted-foreground prose-p:leading-7 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-none prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-muted-foreground prose-strong:text-foreground prose-strong:font-semibold prose-table:text-sm prose-thead:border-border prose-th:text-foreground prose-th:font-semibold prose-td:text-muted-foreground prose-tr:border-border prose-img:rounded-xl prose-img:border prose-img:border-border/60 prose-li:text-muted-foreground prose-li:marker:text-primary"
         v-html="content"
       />
 
@@ -112,7 +108,9 @@ const sidebarOpen = ref(false)
               class="group flex flex-col gap-1 text-sm"
             >
               <span class="text-xs text-muted-foreground">← Sebelumnya</span>
-              <span class="text-primary font-medium group-hover:underline">{{ nav[i - 1].title }}</span>
+              <span class="text-primary font-medium group-hover:underline">{{
+                nav[i - 1].title
+              }}</span>
             </Link>
             <div v-else />
             <Link
@@ -121,7 +119,9 @@ const sidebarOpen = ref(false)
               class="group flex flex-col gap-1 text-sm text-right"
             >
               <span class="text-xs text-muted-foreground">Selanjutnya →</span>
-              <span class="text-primary font-medium group-hover:underline">{{ nav[i + 1].title }}</span>
+              <span class="text-primary font-medium group-hover:underline">{{
+                nav[i + 1].title
+              }}</span>
             </Link>
             <div v-else />
           </template>
@@ -151,7 +151,8 @@ const sidebarOpen = ref(false)
   font-size: 0.875em;
   color: hsl(var(--foreground));
 }
-:deep(:not(pre) > code::before), :deep(:not(pre) > code::after) {
+:deep(:not(pre) > code::before),
+:deep(:not(pre) > code::after) {
   content: none;
 }
 </style>

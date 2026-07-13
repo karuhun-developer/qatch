@@ -18,7 +18,8 @@ export default class UserService {
 
   async deleteUser(id: number) {
     const user = await User.findOrFail(id)
-    if (user.id !== 1) { // Prevent deleting superadmin
+    if (user.id !== 1) {
+      // Prevent deleting superadmin
       await user.delete()
     }
   }

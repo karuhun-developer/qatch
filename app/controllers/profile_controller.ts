@@ -6,7 +6,7 @@ import vine from '@vinejs/vine'
 export default class ProfileController {
   async index({ inertia, auth }: HttpContext) {
     const user = auth.user!
-    
+
     // Decrypt API Key if it exists
     let decryptedApiKey: string | null = null
     if (user.apiKey) {
@@ -15,7 +15,7 @@ export default class ProfileController {
 
     return inertia.render('profile', {
       apiKey: decryptedApiKey,
-      hasHmac: !!user.hmacKey // Only send boolean if it exists
+      hasHmac: !!user.hmacKey, // Only send boolean if it exists
     })
   }
 
@@ -23,13 +23,13 @@ export default class ProfileController {
     const payload = await request.validateUsing(
       vine.compile(
         vine.object({
-          hmacString: vine.string().trim().minLength(8)
+          hmacString: vine.string().trim().minLength(8),
         })
       )
     )
 
     const user = auth.user!
-    
+
     user.hmacKey = payload.hmacString
     await user.save()
 
@@ -39,13 +39,13 @@ export default class ProfileController {
 
   async generateApiKey({ response, auth, session }: HttpContext) {
     const user = auth.user!
-    
+
     // Generate a random 32-character string
     const rawApiKey = `sk_test_${string.random(32)}`
-    
+
     // Encrypt it using AdonisJS encryption module
     const encryptedApiKey = encryption.encrypt(rawApiKey)
-    
+
     user.apiKey = encryptedApiKey
     await user.save()
 

@@ -10,17 +10,17 @@ export default class extends BaseSchema {
       table.string('transaction_code').notNullable().unique()
       table.integer('qris_id').unsigned().references('id').inTable('qris').onDelete('CASCADE')
       table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
-      
+
       table.decimal('amount', 12, 2).notNullable()
       table.enum('fee_type', ['none', 'fixed', 'percent']).defaultTo('none')
       table.decimal('fee_value', 12, 2).defaultTo(0)
       table.decimal('fee_amount', 12, 2).defaultTo(0)
       table.integer('unique_code').defaultTo(0)
       table.decimal('total', 12, 2).notNullable()
-      
+
       table.text('qris_string').notNullable()
       table.enum('status', ['pending', 'paid', 'expired']).defaultTo('pending')
-      
+
       table.timestamp('paid_at').nullable()
       table.timestamp('expired_at').notNullable()
       table.timestamp('created_at')

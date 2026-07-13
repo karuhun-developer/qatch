@@ -139,7 +139,7 @@ const chartOptions = {
     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
       <div class="flex items-center">
         <Calendar class="mr-2 h-4 w-4 text-muted-foreground hidden sm:block" />
-        <Select :modelValue="props.daysFilter" @update:modelValue="updateFilter">
+        <Select :model-value="props.daysFilter" @update:model-value="updateFilter">
           <SelectTrigger class="w-full sm:w-[180px]">
             <SelectValue />
           </SelectTrigger>

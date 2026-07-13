@@ -20,7 +20,18 @@ import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 defineOptions({ layout: DashboardLayout })
 
 const props = defineProps<{
-  plans: { id: number; name: string; price: number; description: string | null; maxQris: number | null; maxTransactionPerMonth: number | null; isFeatured: boolean; features: string[] | null; createdAt: string; updatedAt: string }[]
+  plans: {
+    id: number
+    name: string
+    price: number
+    description: string | null
+    maxQris: number | null
+    maxTransactionPerMonth: number | null
+    isFeatured: boolean
+    features: string[] | null
+    createdAt: string
+    updatedAt: string
+  }[]
 }>()
 
 // Modal states
@@ -103,23 +114,31 @@ function deletePlan() {
                 <TableRow v-for="plan in plans" :key="plan.id">
                   <TableCell class="font-medium">
                     {{ plan.name }}
-                    <span v-if="plan.isFeatured" class="ml-2 inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                    <span
+                      v-if="plan.isFeatured"
+                      class="ml-2 inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary"
+                    >
                       Featured
                     </span>
                   </TableCell>
-                  <TableCell>
-                    Rp {{ plan.price.toLocaleString('id-ID') }}
-                  </TableCell>
+                  <TableCell> Rp {{ plan.price.toLocaleString('id-ID') }} </TableCell>
                   <TableCell class="text-muted-foreground">
                     {{ plan.description || '-' }}
                   </TableCell>
                   <TableCell class="text-xs text-muted-foreground whitespace-nowrap">
                     <div>QRIS: {{ plan.maxQris === null ? 'Unlimited' : plan.maxQris }}</div>
-                    <div>Trx/mo: {{ plan.maxTransactionPerMonth === null ? 'Unlimited' : plan.maxTransactionPerMonth }}</div>
+                    <div>
+                      Trx/mo:
+                      {{
+                        plan.maxTransactionPerMonth === null
+                          ? 'Unlimited'
+                          : plan.maxTransactionPerMonth
+                      }}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <ul class="list-disc list-inside text-xs text-muted-foreground">
-                      <li v-for="(feature, i) in (plan.features || [])" :key="i">{{ feature }}</li>
+                      <li v-for="(feature, i) in plan.features || []" :key="i">{{ feature }}</li>
                     </ul>
                   </TableCell>
                   <TableCell class="text-right space-x-2">
@@ -144,10 +163,7 @@ function deletePlan() {
     </div>
   </div>
 
-  <PlanModal
-    v-model:open="planModalOpen"
-    :plan="selectedPlan"
-  />
+  <PlanModal v-model:open="planModalOpen" :plan="selectedPlan" />
 
   <ConfirmModal
     v-model:open="confirmModalOpen"

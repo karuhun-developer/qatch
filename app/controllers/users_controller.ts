@@ -16,14 +16,14 @@ export default class UsersController {
     if (await bouncer.denies(manageUsers)) {
       return response.redirect().toRoute('dashboard')
     }
-    
+
     const page = request.input('page', 1)
     const users = await this.userService.getPaginatedUsers(page, 10)
     const roles = await this.roleService.getAllRoles()
-    
-    return inertia.render('users/index', { 
+
+    return inertia.render('users/index', {
       users: users.serialize() as any,
-      roles: roles.map(r => r.serialize()) as any
+      roles: roles.map((r) => r.serialize()) as any,
     })
   }
 
@@ -33,7 +33,7 @@ export default class UsersController {
     }
 
     const payload = await request.validateUsing(createUserValidator)
-    
+
     await this.userService.createUser(payload)
     session.flash('success', 'User berhasil dibuat!')
 
@@ -45,13 +45,15 @@ export default class UsersController {
       return response.unauthorized('You are not authorized')
     }
 
-    const payload = await request.validateUsing(updateUserValidator, { meta: { userId: params.id } })
-    
+    const payload = await request.validateUsing(updateUserValidator, {
+      meta: { userId: params.id },
+    })
+
     // If password is not provided, don't update it
     const dataToUpdate: any = {
       fullName: payload.fullName,
       email: payload.email,
-      roleId: payload.roleId
+      roleId: payload.roleId,
     }
 
     if (payload.password) {

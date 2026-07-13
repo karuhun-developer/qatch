@@ -6,7 +6,6 @@ import { inject } from '@adonisjs/core'
 import { DateTime } from 'luxon'
 import string from '@adonisjs/core/helpers/string'
 
-
 @inject()
 export default class DynamicQrisService {
   constructor(protected qrisService: QrisService) {}
@@ -22,8 +21,14 @@ export default class DynamicQrisService {
     // 0. Check limits
     const user = await User.findOrFail(data.userId)
     await user.load('plan')
-    if (user.plan && user.plan.maxTransactionPerMonth !== null && user.transactionTotal >= user.plan.maxTransactionPerMonth) {
-      throw new Error(`Limit transaksi tercapai. Anda hanya dapat membuat maksimal ${user.plan.maxTransactionPerMonth} transaksi per bulan.`)
+    if (
+      user.plan &&
+      user.plan.maxTransactionPerMonth !== null &&
+      user.transactionTotal >= user.plan.maxTransactionPerMonth
+    ) {
+      throw new Error(
+        `Limit transaksi tercapai. Anda hanya dapat membuat maksimal ${user.plan.maxTransactionPerMonth} transaksi per bulan.`
+      )
     }
 
     // 1. Get the static QRIS
@@ -60,14 +65,14 @@ export default class DynamicQrisService {
     if (data.feeType !== 'none') {
       convertOptions.fee = {
         type: data.feeType === 'percent' ? 'percentage' : 'fixed',
-        value: data.feeValue
+        value: data.feeValue,
       }
     }
     const dynamicQrisString = this.qrisService.convert(staticQris.qrisString, convertOptions)
 
     // 6. Save to database
     const transactionCode = `TRX-${string.random(8).toUpperCase()}-${Date.now()}`
-    
+
     const transaction = await QrisTransaction.create({
       transactionCode,
       qrisId: staticQris.id,
@@ -80,7 +85,7 @@ export default class DynamicQrisService {
       total,
       qrisString: dynamicQrisString,
       status: 'pending',
-      expiredAt: DateTime.now().plus({ hours: data.expiredHours })
+      expiredAt: DateTime.now().plus({ hours: data.expiredHours }),
     })
 
     // 7. Increment limit

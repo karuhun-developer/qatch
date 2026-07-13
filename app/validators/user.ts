@@ -19,7 +19,7 @@ export const createUserValidator = vine.compile(
     fullName: vine.string().trim().optional(),
     email: email().unique({ table: 'users', column: 'email' }),
     password: password(),
-    roleId: vine.number()
+    roleId: vine.number(),
   })
 )
 
@@ -31,9 +31,9 @@ export const updateUserValidator = vine.withMetaData<{ userId: number }>().compi
       column: 'email',
       filter: (db, _value, field) => {
         db.whereNot('id', field.meta.userId)
-      }
+      },
     }),
     password: vine.string().minLength(8).optional(),
-    roleId: vine.number()
+    roleId: vine.number(),
   })
 )

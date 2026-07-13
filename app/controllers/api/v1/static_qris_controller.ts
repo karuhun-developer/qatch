@@ -11,18 +11,18 @@ export default class StaticQrisController {
     const user = auth.user!
     const page = request.input('page', 1)
     const limit = request.input('limit', 10)
-    
+
     const qrisData = await this.qrisManagementService.getAllForUser(user.id, page, limit)
-    
+
     return response.ok({
       message: 'Success fetch static QRIS',
-      data: qrisData
+      data: qrisData,
     })
   }
 
   async show({ params, response, auth }: HttpContext) {
     const user = auth.user!
-    
+
     const qris = await this.qrisManagementService.getByIdAndUser(params.id, user.id)
     if (!qris) {
       return response.notFound({ message: 'Static QRIS not found' })
@@ -30,7 +30,7 @@ export default class StaticQrisController {
 
     return response.ok({
       message: 'Success get static QRIS',
-      data: qris
+      data: qris,
     })
   }
 
@@ -43,14 +43,14 @@ export default class StaticQrisController {
         userId: user.id,
         name: payload.name,
         description: payload.description,
-        qrisString: payload.qrisString
+        qrisString: payload.qrisString,
       },
       payload.qris
     )
 
     return response.created({
       message: 'Static QRIS created successfully',
-      data: qris
+      data: qris,
     })
   }
 
@@ -67,13 +67,13 @@ export default class StaticQrisController {
 
     return response.ok({
       message: 'Static QRIS updated successfully',
-      data: updatedQris
+      data: updatedQris,
     })
   }
 
   async destroy({ params, response, auth }: HttpContext) {
     const user = auth.user!
-    
+
     const qris = await this.qrisManagementService.getByIdAndUser(params.id, user.id)
     if (!qris) {
       return response.notFound({ message: 'Static QRIS not found' })
@@ -82,7 +82,7 @@ export default class StaticQrisController {
     await this.qrisManagementService.deleteQris(qris)
 
     return response.ok({
-      message: 'Static QRIS deleted successfully'
+      message: 'Static QRIS deleted successfully',
     })
   }
 }

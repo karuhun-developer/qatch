@@ -6,7 +6,7 @@ import encryption from '@adonisjs/core/services/encryption'
 export default class ApiKeyMiddleware {
   async handle(ctx: HttpContext, next: NextFn) {
     const { request, response } = ctx
-    
+
     const apiKey = request.header('x-api-key')
     if (!apiKey) {
       return response.unauthorized({ message: 'Missing x-api-key header' })
@@ -17,7 +17,7 @@ export default class ApiKeyMiddleware {
     // kita load users yang punya apiKey dan cocokan manual
     const users = await User.query().whereNotNull('apiKey')
     let authenticatedUser: User | null = null
-    
+
     for (const user of users) {
       try {
         const decryptedKey = encryption.decrypt(user.apiKey!) as string
