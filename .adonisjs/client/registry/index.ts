@@ -42,17 +42,29 @@ const routes = {
     tokens: [{"old":"/register","type":0,"val":"register","end":""}],
     types: placeholder as Registry['new_account.store']['types'],
   },
-  'session.create': {
+  'login': {
     methods: ["GET","HEAD"],
     pattern: '/login',
     tokens: [{"old":"/login","type":0,"val":"login","end":""}],
-    types: placeholder as Registry['session.create']['types'],
+    types: placeholder as Registry['login']['types'],
   },
   'session.store': {
     methods: ["POST"],
     pattern: '/login',
     tokens: [{"old":"/login","type":0,"val":"login","end":""}],
     types: placeholder as Registry['session.store']['types'],
+  },
+  'auth.redirect': {
+    methods: ["GET","HEAD"],
+    pattern: '/auth/:provider/redirect',
+    tokens: [{"old":"/auth/:provider/redirect","type":0,"val":"auth","end":""},{"old":"/auth/:provider/redirect","type":1,"val":"provider","end":""},{"old":"/auth/:provider/redirect","type":0,"val":"redirect","end":""}],
+    types: placeholder as Registry['auth.redirect']['types'],
+  },
+  'auth.callback': {
+    methods: ["GET","HEAD"],
+    pattern: '/auth/:provider/callback',
+    tokens: [{"old":"/auth/:provider/callback","type":0,"val":"auth","end":""},{"old":"/auth/:provider/callback","type":1,"val":"provider","end":""},{"old":"/auth/:provider/callback","type":0,"val":"callback","end":""}],
+    types: placeholder as Registry['auth.callback']['types'],
   },
   'dashboard': {
     methods: ["GET","HEAD"],
@@ -185,6 +197,12 @@ const routes = {
     pattern: '/webhook-settings',
     tokens: [{"old":"/webhook-settings","type":0,"val":"webhook-settings","end":""}],
     types: placeholder as Registry['webhook-settings.update']['types'],
+  },
+  'active-plan.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/active-plan',
+    tokens: [{"old":"/active-plan","type":0,"val":"active-plan","end":""}],
+    types: placeholder as Registry['active-plan.index']['types'],
   },
   'qris-dynamic.index': {
     methods: ["GET","HEAD"],

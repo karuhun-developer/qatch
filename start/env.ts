@@ -35,4 +35,10 @@ export default await Env.create(new URL('../', import.meta.url), {
   // libSQL (Turso)
   LIBSQL_URL: Env.schema.string.optional(),
   LIBSQL_AUTH_TOKEN: Env.schema.string.optional(),
+
+  // Ally Providers
+  GITHUB_CLIENT_ID: Env.schema.string.optional(),
+  GITHUB_CLIENT_SECRET: Env.schema.string.optional(),
+  GOOGLE_CLIENT_ID: Env.schema.string.optional(),
+  GOOGLE_CLIENT_SECRET: Env.schema.string.optional(),
 })

@@ -124,6 +124,14 @@ watch(
             <Webhook class="h-4 w-4" />
             Webhook & API
           </Link>
+          <Link
+            href="/active-plan"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+            :class="{ 'bg-muted text-primary': $page.url.startsWith('/active-plan') }"
+          >
+            <Package class="h-4 w-4" />
+            Plan Aktif
+          </Link>
           <a
             href="/docs"
             target="_blank"
@@ -272,6 +280,15 @@ watch(
                 >
                   <Webhook class="h-4 w-4" />
                   Webhook & API
+                </Link>
+                <Link
+                  href="/active-plan"
+                  class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                  :class="{ 'bg-muted text-primary': $page.url.startsWith('/active-plan') }"
+                  @click="mobileMenuOpen = false"
+                >
+                  <Package class="h-4 w-4" />
+                  Plan Aktif
                 </Link>
                 <a
                   href="/docs"

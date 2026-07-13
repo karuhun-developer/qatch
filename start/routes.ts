@@ -22,8 +22,12 @@ router
     router.get('register', [controllers.NewAccount, 'create'])
     router.post('register', [controllers.NewAccount, 'store'])
 
-    router.get('login', [controllers.Session, 'create'])
+    router.get('login', [controllers.Session, 'create']).as('login')
     router.post('login', [controllers.Session, 'store'])
+
+    // Social Auth
+    router.get('auth/:provider/redirect', [controllers.SocialAuth, 'redirect']).as('auth.redirect')
+    router.get('auth/:provider/callback', [controllers.SocialAuth, 'callback']).as('auth.callback')
   })
   .use(middleware.guest())
 
@@ -59,6 +63,8 @@ router
     router
       .post('webhook-settings', [controllers.WebhookSettings, 'update'])
       .as('webhook-settings.update')
+
+    router.get('active-plan', [() => import('#controllers/active_plan_controller'), 'index']).as('active-plan.index')
 
     router.get('qris-dynamic', [controllers.DynamicQris, 'index']).as('qris-dynamic.index')
     router.post('qris-dynamic', [controllers.DynamicQris, 'store']).as('qris-dynamic.store')

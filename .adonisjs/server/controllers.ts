@@ -4,6 +4,7 @@
  */
 
 export const controllers = {
+  ActivePlan: () => import('#controllers/active_plan_controller'),
   api: {
     v1: {
       DynamicQris: () => import('#controllers/api/v1/dynamic_qris_controller'),
@@ -21,6 +22,7 @@ export const controllers = {
   Qris: () => import('#controllers/qris_controller'),
   Roles: () => import('#controllers/roles_controller'),
   Session: () => import('#controllers/session_controller'),
+  SocialAuth: () => import('#controllers/social_auth_controller'),
   Tutorials: () => import('#controllers/tutorials_controller'),
   Users: () => import('#controllers/users_controller'),
   WebhookSettings: () => import('#controllers/webhook_settings_controller'),

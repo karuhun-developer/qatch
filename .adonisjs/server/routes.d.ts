@@ -10,8 +10,10 @@ export type ScannedRoutes = {
     'demo': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
     'new_account.store': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'login': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
+    'auth.redirect': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
+    'auth.callback': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'profile.index': { paramsTuple?: []; params?: {} }
     'profile.hmac': { paramsTuple?: []; params?: {} }
@@ -34,6 +36,7 @@ export type ScannedRoutes = {
     'qris.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.update': { paramsTuple?: []; params?: {} }
+    'active-plan.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.store': { paramsTuple?: []; params?: {} }
     'qris-dynamic.status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -54,7 +57,9 @@ export type ScannedRoutes = {
     'tutorial': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
     'demo': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'login': { paramsTuple?: []; params?: {} }
+    'auth.redirect': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
+    'auth.callback': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'profile.index': { paramsTuple?: []; params?: {} }
     'roles.index': { paramsTuple?: []; params?: {} }
@@ -62,6 +67,7 @@ export type ScannedRoutes = {
     'plans.index': { paramsTuple?: []; params?: {} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
+    'active-plan.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
     'static_qris.index': { paramsTuple?: []; params?: {} }
     'static_qris.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -73,7 +79,9 @@ export type ScannedRoutes = {
     'tutorial': { paramsTuple?: [ParamValue?]; params?: {'slug'?: ParamValue} }
     'demo': { paramsTuple?: []; params?: {} }
     'new_account.create': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'login': { paramsTuple?: []; params?: {} }
+    'auth.redirect': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
+    'auth.callback': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
     'dashboard': { paramsTuple?: []; params?: {} }
     'profile.index': { paramsTuple?: []; params?: {} }
     'roles.index': { paramsTuple?: []; params?: {} }
@@ -81,6 +89,7 @@ export type ScannedRoutes = {
     'plans.index': { paramsTuple?: []; params?: {} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
+    'active-plan.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
     'static_qris.index': { paramsTuple?: []; params?: {} }
     'static_qris.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

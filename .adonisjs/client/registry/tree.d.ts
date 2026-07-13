@@ -10,10 +10,14 @@ export interface ApiDefinition {
     create: typeof routes['new_account.create']
     store: typeof routes['new_account.store']
   }
+  login: typeof routes['login']
   session: {
-    create: typeof routes['session.create']
     store: typeof routes['session.store']
     destroy: typeof routes['session.destroy']
+  }
+  auth: {
+    redirect: typeof routes['auth.redirect']
+    callback: typeof routes['auth.callback']
   }
   dashboard: typeof routes['dashboard']
   profile: {
@@ -48,6 +52,9 @@ export interface ApiDefinition {
   webhookSettings: {
     index: typeof routes['webhook-settings.index']
     update: typeof routes['webhook-settings.update']
+  }
+  activePlan: {
+    index: typeof routes['active-plan.index']
   }
   qrisDynamic: {
     index: typeof routes['qris-dynamic.index']
