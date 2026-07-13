@@ -31,7 +31,7 @@ export default defineConfig({
     () => import('@adonisjs/lucid/commands'),
     () => import('@adonisjs/session/commands'),
     () => import('@adonisjs/inertia/commands'),
-    () => import('@adonisjs/bouncer/commands')
+    () => import('@adonisjs/bouncer/commands'),
   ],
 
   /*
@@ -61,7 +61,7 @@ export default defineConfig({
     () => import('@adonisjs/inertia/inertia_provider'),
     () => import('@adonisjs/auth/auth_provider'),
     () => import('#providers/api_provider'),
-    () => import('@adonisjs/bouncer/bouncer_provider')
+    () => import('@adonisjs/bouncer/bouncer_provider'),
   ],
 
   /*
@@ -78,8 +78,8 @@ export default defineConfig({
     () => import('#start/validator'),
     {
       file: () => import('#start/scheduler'),
-      environment: ['web', 'console']
-    }
+      environment: ['web', 'console'],
+    },
   ],
 
   /*
@@ -130,6 +130,10 @@ export default defineConfig({
       pattern: 'public/**',
       reloadServer: false,
     },
+    {
+      pattern: 'docs/**/*.md',
+      reloadServer: false,
+    },
   ],
 
   hooks: {
@@ -139,7 +143,7 @@ export default defineConfig({
       }),
       indexPages({ framework: 'vue3' }),
       generateRegistry(),
-      indexPolicies()
+      indexPolicies(),
     ],
     buildStarting: [() => import('@adonisjs/vite/build_hook')],
   },
