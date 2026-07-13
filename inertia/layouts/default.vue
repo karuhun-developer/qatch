@@ -1,12 +1,21 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { watch, ref } from 'vue'
 import { usePage } from '@inertiajs/vue3'
 import { toast, Toaster } from 'vue-sonner'
 import type { Data } from '@generated/data'
 import { Link, Form } from '@adonisjs/inertia/vue'
 import { Button } from '@/components/ui/button'
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+  SheetDescription,
+} from '@/components/ui/sheet'
+import { Menu } from '@lucide/vue'
 
 const page = usePage<Data.SharedProps>()
+const mobileOpen = ref(false)
 
 watch(
   () => page.url,
@@ -28,49 +37,94 @@ watch(
 </script>
 
 <template>
-  <div class="min-h-screen bg-background font-sans antialiased flex flex-col">
+  <div class="min-h-screen bg-background font-sans antialiased flex flex-col overflow-x-hidden">
     <header
       class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <div class="container flex h-14 items-center justify-between">
+        <!-- Logo + Desktop nav links -->
         <div class="flex items-center gap-1">
-          <Link href="/" class="font-bold flex items-center space-x-2 mr-2">
-            <img src="/QATCHLOGO-bg-removed-vector.svg" alt="Qatch" class="h-8 w-auto" />
+          <Link href="/" class="font-bold flex items-center gap-2 mr-2">
+            <img :src="'/QATCHLOGO-bg-removed-vector.svg'" alt="Qatch" class="h-10 w-auto" />
+            <span class="font-bold text-lg">Qatch</span>
           </Link>
-          <Button as-child variant="ghost" size="sm">
-            <Link href="/docs">Dokumentasi</Link>
-          </Button>
-          <Button as-child variant="ghost" size="sm">
-            <Link href="/tutorial">Tutorial</Link>
-          </Button>
-          <Button
-            as-child
-            variant="ghost"
-            size="sm"
-            class="text-primary hover:text-primary hover:bg-primary/10"
-          >
-            <Link href="/demo">Coba Demo</Link>
-          </Button>
+          <!-- Desktop only -->
+          <div class="hidden md:flex items-center gap-1">
+            <Button as-child variant="ghost" size="sm">
+              <Link href="/docs">Dokumentasi</Link>
+            </Button>
+            <Button as-child variant="ghost" size="sm">
+              <Link href="/tutorial">Tutorial</Link>
+            </Button>
+            <Button
+              as-child
+              variant="ghost"
+              size="sm"
+              class="text-primary hover:text-primary hover:bg-primary/10"
+            >
+              <Link href="/demo">Coba Demo</Link>
+            </Button>
+          </div>
         </div>
-        <div class="flex items-center gap-4">
-          <nav class="flex items-center space-x-2">
+
+        <!-- Right side: auth + hamburger -->
+        <div class="flex items-center gap-2">
+          <!-- Auth buttons — always visible -->
+          <nav class="flex items-center gap-2">
             <template v-if="page.props.user">
-              <Button as-child variant="ghost">
+              <Button as-child variant="ghost" size="sm">
                 <Link href="/dashboard">Dashboard</Link>
               </Button>
               <Form route="session.destroy">
-                <Button type="submit" variant="destructive">Logout</Button>
+                <Button type="submit" variant="destructive" size="sm">Logout</Button>
               </Form>
             </template>
             <template v-else>
-              <Button as-child variant="ghost">
+              <Button as-child variant="ghost" size="sm">
                 <Link href="/login">Login</Link>
               </Button>
-              <Button as-child>
+              <Button as-child size="sm">
                 <Link href="/register">Sign Up</Link>
               </Button>
             </template>
           </nav>
+
+          <!-- Hamburger — mobile only, opens nav links sidebar -->
+          <div class="flex md:hidden">
+            <Sheet v-model:open="mobileOpen">
+              <SheetTrigger as-child>
+                <Button variant="ghost" size="icon">
+                  <Menu class="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" class="w-[220px] flex flex-col p-0">
+                <SheetTitle class="sr-only">Menu</SheetTitle>
+                <SheetDescription class="sr-only">Menu navigasi</SheetDescription>
+                <div class="flex h-14 items-center border-b px-4">
+                  <span class="font-semibold text-sm text-muted-foreground">Menu</span>
+                </div>
+                <nav class="flex flex-col gap-1 p-4">
+                  <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
+                    <Link href="/">Home</Link>
+                  </Button>
+                  <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
+                    <Link href="/docs">Dokumentasi</Link>
+                  </Button>
+                  <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
+                    <Link href="/tutorial">Tutorial</Link>
+                  </Button>
+                  <Button
+                    as-child
+                    variant="ghost"
+                    class="justify-start text-primary hover:text-primary hover:bg-primary/10"
+                    @click="mobileOpen = false"
+                  >
+                    <Link href="/demo">Coba Demo</Link>
+                  </Button>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>

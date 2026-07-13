@@ -1,6 +1,6 @@
 # Dynamic QRIS API
 
-Endpoint ini digunakan untuk men-generate Qatch, mengecek status transaksi, mengupdate status secara manual, serta menerima callback dari Android Notification Forwarder.
+Endpoint ini digunakan untuk men-generate QRIS Dinamis, mengecek status transaksi, mengupdate status secara manual, serta menerima callback dari Android Notification Forwarder.
 
 **Base URL:** `https://qris.karuhundeveloper.com`  
 **Auth:** Semua endpoint memerlukan header `x-api-key`.
@@ -11,7 +11,7 @@ Endpoint ini digunakan untuk men-generate Qatch, mengecek status transaksi, meng
 
 | Method | Endpoint                        | Deskripsi                       |
 | ------ | ------------------------------- | ------------------------------- |
-| POST   | `/api/v1/dynamic-qris`          | Generate Qatch baru             |
+| POST   | `/api/v1/dynamic-qris`          | Generate QRIS Dinamis baru      |
 | GET    | `/api/v1/dynamic-qris/:id`      | Cek status transaksi            |
 | PUT    | `/api/v1/dynamic-qris/:id`      | Update status transaksi manual  |
 | POST   | `/api/v1/dynamic-qris/callback` | Callback dari Android Forwarder |
@@ -20,7 +20,7 @@ Endpoint ini digunakan untuk men-generate Qatch, mengecek status transaksi, meng
 
 ## POST /api/v1/dynamic-qris
 
-Men-generate Qatch berdasarkan QRIS statis yang sudah terdaftar. Server akan membuat `qrisString` baru dengan nominal yang sudah di-_embed_ beserta kode unik.
+Men-generate QRIS Dinamis berdasarkan QRIS statis yang sudah terdaftar. Server akan membuat `qrisString` baru dengan nominal yang sudah di-_embed_ beserta kode unik.
 
 ### Headers
 
@@ -95,7 +95,7 @@ curl -X POST https://qris.karuhundeveloper.com/api/v1/dynamic-qris \
 
 ## GET /api/v1/dynamic-qris/:id
 
-Mengambil detail dan status terkini sebuah transaksi Qatch.
+Mengambil detail dan status terkini sebuah transaksi QRIS Dinamis.
 
 ### Headers
 

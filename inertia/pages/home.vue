@@ -39,14 +39,23 @@ const displayPlans = computed(() => {
 <template>
   <Head>
     <title>Qatch — Alternative Payment Gateway QRIS Dinamis Otomatis untuk Bisnis Indonesia</title>
-    <meta name="description" content="Qatch adalah alternative payment gateway berbasis QRIS untuk UMKM dan developer Indonesia. Ubah QRIS statis menjadi QRIS dinamis dengan nominal otomatis, kode unik anti-duplikat, API Key, Webhook, dan Android Listener." />
-    <meta name="keywords" content="alternative payment gateway, QRIS dinamis, QRIS statis, generate QRIS, QRIS otomatis, API QRIS, webhook pembayaran, QR code pembayaran, payment gateway indonesia, QRIS nominal otomatis, Qatch, alternative midtrans, alternative xendit, QRIS UMKM" />
+    <meta
+      name="description"
+      content="Qatch adalah alternative payment gateway berbasis QRIS untuk UMKM dan developer Indonesia. Ubah QRIS statis menjadi QRIS dinamis dengan nominal otomatis, kode unik anti-duplikat, API Key, Webhook, dan Android Listener."
+    />
+    <meta
+      name="keywords"
+      content="alternative payment gateway, QRIS dinamis, QRIS statis, generate QRIS, QRIS otomatis, API QRIS, webhook pembayaran, QR code pembayaran, payment gateway indonesia, QRIS nominal otomatis, Qatch, alternative midtrans, alternative xendit, QRIS UMKM"
+    />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Karuhun Developer" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Qatch — Alternative Payment Gateway QRIS Dinamis Otomatis" />
-    <meta property="og:description" content="Alternative payment gateway ringan untuk UMKM & developer. Konversi QRIS statis ke dinamis secara real-time. Dilengkapi API, Webhook, dan Android Notification Forwarder." />
+    <meta
+      property="og:description"
+      content="Alternative payment gateway ringan untuk UMKM & developer. Konversi QRIS statis ke dinamis secara real-time. Dilengkapi API, Webhook, dan Android Notification Forwarder."
+    />
     <meta property="og:url" :content="String($page.props.appUrl)" />
     <meta property="og:image" :content="String($page.props.appUrl) + '/QATCHLOGO.jpeg'" />
     <meta property="og:site_name" content="Qatch" />
@@ -54,7 +63,10 @@ const displayPlans = computed(() => {
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Qatch — Alternative Payment Gateway QRIS Dinamis" />
-    <meta name="twitter:description" content="Alternative payment gateway berbasis QRIS. Konversi QRIS statis ke dinamis dengan nominal otomatis, API & Webhook siap pakai." />
+    <meta
+      name="twitter:description"
+      content="Alternative payment gateway berbasis QRIS. Konversi QRIS statis ke dinamis dengan nominal otomatis, API & Webhook siap pakai."
+    />
     <meta name="twitter:image" :content="String($page.props.appUrl) + '/QATCHLOGO.jpeg'" />
     <!-- Canonical -->
     <link rel="canonical" :href="String($page.props.appUrl)" />
@@ -190,7 +202,7 @@ const displayPlans = computed(() => {
         <div class="p-6 pt-0 mt-auto">
           <Button as-child class="w-full" :variant="plan.price === 0 ? 'outline' : 'default'">
             <Link
-              :href="plan.price === 0 ? '/register' : `/checkout?plan=${plan.name.toLowerCase()}`"
+              :href="plan.price === 0 ? '/register' : `/register?plan=${plan.name.toLowerCase()}`"
             >
               {{ plan.price === 0 ? 'Mulai Gratis' : `Pilih ${plan.name}` }}
             </Link>

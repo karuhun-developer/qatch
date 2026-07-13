@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
 import DefaultLayout from '@/layouts/default.vue'
-import { ChevronRight, Menu, X } from '@lucide/vue'
+import { ChevronRight, Menu } from '@lucide/vue'
 import { ref } from 'vue'
 import 'highlight.js/styles/monokai-sublime.css'
 
@@ -41,7 +41,7 @@ const sidebarOpen = ref(false)
     <link rel="icon" type="image/x-icon" href="/QATCHLOGO.ico" />
   </Head>
 
-  <div class="max-w-screen-xl mx-auto flex relative">
+  <div class="max-w-screen-xl mx-auto flex relative overflow-x-hidden w-full">
     <!-- Sidebar overlay (mobile) -->
     <div
       v-if="sidebarOpen"
@@ -84,19 +84,21 @@ const sidebarOpen = ref(false)
       </nav>
     </aside>
 
-    <!-- Mobile sidebar toggle (floating) -->
-    <button
-      class="fixed bottom-6 left-4 z-50 lg:hidden flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2.5 text-sm font-medium shadow-lg shadow-primary/20"
-      @click="sidebarOpen = !sidebarOpen"
-    >
-      <Menu v-if="!sidebarOpen" class="h-4 w-4" />
-      <X v-else class="h-4 w-4" />
-      Menu
-    </button>
-
     <!-- Main Content -->
-    <main class="flex-1 min-w-0 px-6 lg:px-12 py-10">
-      <!-- Breadcrumb -->
+    <main class="flex-1 min-w-0 flex flex-col">
+      <!-- Mobile Subnav -->
+      <div class="sticky top-14 z-30 lg:hidden w-full border-b bg-background/95 backdrop-blur px-4 py-3 flex items-center justify-between">
+        <span class="text-sm font-semibold text-foreground truncate pr-4">{{ currentTitle }}</span>
+        <button
+          class="flex items-center gap-2 text-sm font-medium bg-primary/10 text-primary px-3 py-1.5 rounded-md shrink-0"
+          @click="sidebarOpen = true"
+        >
+          <Menu class="h-4 w-4" /> Menu
+        </button>
+      </div>
+
+      <div class="px-6 lg:px-12 py-6 lg:py-10">
+        <!-- Breadcrumb -->
       <div class="flex items-center gap-1.5 text-sm text-muted-foreground mb-6">
         <Link href="/" class="hover:text-foreground transition-colors">Beranda</Link>
         <ChevronRight class="h-3.5 w-3.5" />
@@ -141,6 +143,7 @@ const sidebarOpen = ref(false)
             <div v-else />
           </template>
         </template>
+      </div>
       </div>
     </main>
   </div>

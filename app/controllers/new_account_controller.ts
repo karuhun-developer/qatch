@@ -4,9 +4,12 @@ import { signupValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class NewAccountController {
-  async create({ inertia }: HttpContext) {
+  async create({ request, inertia }: HttpContext) {
     const plans = await Plan.query().orderBy('price', 'asc')
-    return inertia.render('auth/signup', { plans })
+
+    const plan = (await Plan.query().where('name', request.input('plan')).first())?.id
+
+    return inertia.render('auth/signup', { plans, plan })
   }
 
   async store({ request, response, auth }: HttpContext) {

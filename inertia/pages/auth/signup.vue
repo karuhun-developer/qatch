@@ -26,6 +26,7 @@ defineOptions({ layout: DefaultLayout })
 
 const props = defineProps<{
   plans: { id: number; name: string; price: number }[]
+  plan: number | null | undefined
 }>()
 
 const form = useForm({
@@ -33,7 +34,7 @@ const form = useForm({
   email: '',
   password: '',
   passwordConfirmation: '',
-  planId: null as number | null,
+  planId: props.plan ? props.plan.toString() : '',
 })
 
 function submit() {
