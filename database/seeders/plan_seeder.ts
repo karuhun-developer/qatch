@@ -20,7 +20,7 @@ export default class extends BaseSeeder {
       },
       {
         name: 'Pro',
-        price: 99000,
+        price: 24999,
         description: 'Untuk bisnis yang sedang berkembang pesat',
         maxQris: 5,
         maxTransactionPerMonth: 1500,
@@ -35,7 +35,7 @@ export default class extends BaseSeeder {
       },
       {
         name: 'Enterprise',
-        price: 199000,
+        price: 49999,
         description: 'Skala tak terbatas untuk bisnis besar',
         maxQris: null,
         maxTransactionPerMonth: null,
