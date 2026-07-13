@@ -91,7 +91,7 @@ Content-Type: multipart/form-data
 | `name`        | string | ✅    | Nama QRIS (min. 3 karakter)                     |
 | `description` | string | ❌    | Deskripsi opsional                              |
 | `qris`        | file   | ✅    | File gambar QRIS (jpg/png/jpeg/webp, max 5MB)   |
-| `qrisString`  | string | ✅    | String QRIS hasil scan/parse (min. 10 karakter) |
+| `qrisString`  | string | ❌    | String QRIS hasil scan/parse (min. 10 karakter) |
 
 ### Contoh Request
 
