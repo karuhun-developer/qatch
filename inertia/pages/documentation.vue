@@ -173,4 +173,13 @@ const sidebarOpen = ref(false)
 :deep(:not(pre) > code::after) {
   content: none;
 }
+
+/* Make tables scrollable on mobile */
+:deep(table) {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+}
 </style>

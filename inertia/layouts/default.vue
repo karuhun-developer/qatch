@@ -37,16 +37,15 @@ watch(
 </script>
 
 <template>
-  <div class="min-h-screen bg-background font-sans antialiased flex flex-col overflow-x-hidden">
+  <div class="min-h-screen bg-background font-sans antialiased flex flex-col">
     <header
       class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <div class="container flex h-14 items-center justify-between">
         <!-- Logo + Desktop nav links -->
         <div class="flex items-center gap-1">
-          <Link href="/" class="font-bold flex items-center gap-2 mr-2">
-            <img :src="'/QATCHLOGO-bg-removed-vector.svg'" alt="Qatch" class="h-10 w-auto" />
-            <span class="font-bold text-lg">Qatch</span>
+          <Link href="/" class="flex items-center gap-2 font-semibold mr-2">
+            <img :src="'/QATCHLOGO-bg-removed-vector.svg'" alt="Qatch" class="h-20 w-30" />
           </Link>
           <!-- Desktop only -->
           <div class="hidden md:flex items-center gap-1">
@@ -97,31 +96,35 @@ watch(
                   <Menu class="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" class="w-[220px] flex flex-col p-0">
+              <SheetContent side="left" class="flex flex-col w-[280px] p-0 border-r-0">
                 <SheetTitle class="sr-only">Menu</SheetTitle>
                 <SheetDescription class="sr-only">Menu navigasi</SheetDescription>
                 <div class="flex h-14 items-center border-b px-4">
-                  <span class="font-semibold text-sm text-muted-foreground">Menu</span>
+                  <Link href="/" class="flex items-center gap-2 font-semibold" @click="mobileOpen = false">
+                    <img :src="'/QATCHLOGO-bg-removed-vector.svg'" alt="Qatch" class="h-20 w-30" />
+                  </Link>
                 </div>
-                <nav class="flex flex-col gap-1 p-4">
-                  <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
-                    <Link href="/">Home</Link>
-                  </Button>
-                  <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
-                    <Link href="/docs">Dokumentasi</Link>
-                  </Button>
-                  <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
-                    <Link href="/tutorial">Tutorial</Link>
-                  </Button>
-                  <Button
-                    as-child
-                    variant="ghost"
-                    class="justify-start text-primary hover:text-primary hover:bg-primary/10"
-                    @click="mobileOpen = false"
-                  >
-                    <Link href="/demo">Coba Demo</Link>
-                  </Button>
-                </nav>
+                <div class="flex-1 overflow-y-auto">
+                  <nav class="flex flex-col gap-1 p-4">
+                    <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
+                      <Link href="/">Home</Link>
+                    </Button>
+                    <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
+                      <Link href="/docs">Dokumentasi</Link>
+                    </Button>
+                    <Button as-child variant="ghost" class="justify-start" @click="mobileOpen = false">
+                      <Link href="/tutorial">Tutorial</Link>
+                    </Button>
+                    <Button
+                      as-child
+                      variant="ghost"
+                      class="justify-start text-primary hover:text-primary hover:bg-primary/10"
+                      @click="mobileOpen = false"
+                    >
+                      <Link href="/demo">Coba Demo</Link>
+                    </Button>
+                  </nav>
+                </div>
               </SheetContent>
             </Sheet>
           </div>
