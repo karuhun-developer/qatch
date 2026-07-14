@@ -19,7 +19,7 @@ cron.schedule('0 0 1 * *', async () => {
 cron.schedule('0 * * * *', async () => {
   logger.info('Running expired transaction cleanup job...')
   try {
-    const now = DateTime.now().toSQL()
+    const now = DateTime.now().toSQLDate()
     const result = await QrisTransaction.query()
       .where('status', 'pending')
       .where('expiredAt', '<=', now!)
@@ -30,4 +30,3 @@ cron.schedule('0 * * * *', async () => {
     logger.error('Failed to run expired transaction cleanup', error)
   }
 })
-
