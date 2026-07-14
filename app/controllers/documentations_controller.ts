@@ -20,7 +20,7 @@ const marked = new Marked(
 // Sidebar navigation structure
 const NAV = [
   { slug: 'introduction', title: 'Pengenalan' },
-  // { slug: 'installation', title: 'Self Hosted' },
+  { slug: 'installation', title: 'Self Hosted' },
   { slug: 'authentication', title: 'Autentikasi API' },
   { slug: 'static-qris', title: 'QRIS Statis' },
   { slug: 'dynamic-qris', title: 'QRIS Dinamis' },

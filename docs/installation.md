@@ -2,9 +2,9 @@
 
 ## Requirements
 
-- **Node.js** v20 atau lebih baru
-- **npm** v10+
-- **MySQL** / **PostgreSQL** (sesuaikan `.env`)
+- **Node.js** v24 atau lebih baru
+- **npm** v11+
+- **MySQL** / **Sqlite** (sesuaikan `.env`)
 
 ---
 
@@ -32,23 +32,35 @@ cp .env.example .env
 Buka file `.env` dan isi variabel berikut:
 
 ```env
-# App
+# Node
 TZ=Asia/Jakarta
 PORT=3333
-HOST=0.0.0.0
-LOG_LEVEL=info
-APP_KEY=                        # Generate dengan: node ace generate:key
-NODE_ENV=production
+HOST=localhost
+NODE_ENV=development
 
-# Database
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=your_db_password
-DB_DATABASE=qris_dinamis
+# Buka https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app untuk mendapatkan Client ID dan Client Secret GitHub Anda.
+GITHUB_CLIENT_ID=               # Isi dengan Client ID GitHub Anda
+GITHUB_CLIENT_SECRET=           # Isi dengan Client Secret GitHub Anda
+
+# Buka https://console.cloud.google.com/apis/credentials untuk mendapatkan Client ID dan Client Secret Google Anda.
+GOOGLE_CLIENT_ID=               # Isi dengan Client ID Google Anda
+GOOGLE_CLIENT_SECRET=           # Isi dengan Client Secret Google Anda
+
+# App
+LOG_LEVEL=warning
+APP_KEY=                        # Generate dengan: node ace generate:key
+APP_URL=https://example.com     # Isi dengan URL aplikasi Anda
 
 # Session
 SESSION_DRIVER=cookie
+
+# Database
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=
+DB_DATABASE=qrisdinamis
 ```
 
 > **Catatan:** Jalankan `node ace generate:key` untuk mendapatkan nilai `APP_KEY`.
@@ -64,7 +76,7 @@ node ace migration:run
 #### Development (dengan hot-reload)
 
 ```bash
-node ace serve --watch
+npm run dev
 ```
 
 Aplikasi akan berjalan di `http://localhost:3333`.
@@ -73,6 +85,7 @@ Aplikasi akan berjalan di `http://localhost:3333`.
 
 ```bash
 npm run build
+npm ci --omit="dev"
 node bin/server.js
 ```
 
