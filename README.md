@@ -94,7 +94,7 @@ x-api-key: YOUR_API_KEY
 
 ## 🔧 Tech Stack
 
-- **[AdonisJS v6](https://adonisjs.com/)** — Backend framework (API, Webhook, Auth)
+- **[AdonisJS v7](https://adonisjs.com/)** — Backend framework (API, Webhook, Auth)
 - **[Inertia.js](https://inertiajs.com/) + [Vue.js 3](https://vuejs.org/)** — Full-stack SPA tanpa REST overhead
 - **[shadcn/vue](https://www.shadcn-vue.com/)** — UI Component library
 - **[Chart.js](https://www.chartjs.org/)** — Visualisasi data dashboard
