@@ -127,7 +127,7 @@ const displayPlans = computed(() => {
             size="lg"
             class="px-8 h-12 rounded-full text-md shadow-lg shadow-primary/20 transition-all hover:scale-105"
           >
-            <Link href="/signup">Mulai Gratis Sekarang</Link>
+            <Link href="/register">Mulai Gratis Sekarang</Link>
           </Button>
           <Button
             as-child
