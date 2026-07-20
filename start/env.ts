@@ -41,4 +41,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   GITHUB_CLIENT_SECRET: Env.schema.string.optional(),
   GOOGLE_CLIENT_ID: Env.schema.string.optional(),
   GOOGLE_CLIENT_SECRET: Env.schema.string.optional(),
+
+  // Paywuz
+  PAYWUZ_API_KEY: Env.schema.string.optional(),
 })

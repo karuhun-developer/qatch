@@ -66,12 +66,6 @@ const routes = {
     tokens: [{"old":"/auth/:provider/callback","type":0,"val":"auth","end":""},{"old":"/auth/:provider/callback","type":1,"val":"provider","end":""},{"old":"/auth/:provider/callback","type":0,"val":"callback","end":""}],
     types: placeholder as Registry['auth.callback']['types'],
   },
-  'dashboard': {
-    methods: ["GET","HEAD"],
-    pattern: '/dashboard',
-    tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
-    types: placeholder as Registry['dashboard']['types'],
-  },
   'profile.index': {
     methods: ["GET","HEAD"],
     pattern: '/profile',
@@ -162,6 +156,36 @@ const routes = {
     tokens: [{"old":"/plans/:id","type":0,"val":"plans","end":""},{"old":"/plans/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['plans.destroy']['types'],
   },
+  'active-plan.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/active-plan',
+    tokens: [{"old":"/active-plan","type":0,"val":"active-plan","end":""}],
+    types: placeholder as Registry['active-plan.index']['types'],
+  },
+  'active-plan.subscribe': {
+    methods: ["POST"],
+    pattern: '/active-plan/subscribe',
+    tokens: [{"old":"/active-plan/subscribe","type":0,"val":"active-plan","end":""},{"old":"/active-plan/subscribe","type":0,"val":"subscribe","end":""}],
+    types: placeholder as Registry['active-plan.subscribe']['types'],
+  },
+  'active-plan.cancel': {
+    methods: ["DELETE"],
+    pattern: '/active-plan/:id/cancel',
+    tokens: [{"old":"/active-plan/:id/cancel","type":0,"val":"active-plan","end":""},{"old":"/active-plan/:id/cancel","type":1,"val":"id","end":""},{"old":"/active-plan/:id/cancel","type":0,"val":"cancel","end":""}],
+    types: placeholder as Registry['active-plan.cancel']['types'],
+  },
+  'session.destroy': {
+    methods: ["POST"],
+    pattern: '/logout',
+    tokens: [{"old":"/logout","type":0,"val":"logout","end":""}],
+    types: placeholder as Registry['session.destroy']['types'],
+  },
+  'dashboard': {
+    methods: ["GET","HEAD"],
+    pattern: '/dashboard',
+    tokens: [{"old":"/dashboard","type":0,"val":"dashboard","end":""}],
+    types: placeholder as Registry['dashboard']['types'],
+  },
   'qris.index': {
     methods: ["GET","HEAD"],
     pattern: '/qris',
@@ -198,12 +222,6 @@ const routes = {
     tokens: [{"old":"/webhook-settings","type":0,"val":"webhook-settings","end":""}],
     types: placeholder as Registry['webhook-settings.update']['types'],
   },
-  'active-plan.index': {
-    methods: ["GET","HEAD"],
-    pattern: '/active-plan',
-    tokens: [{"old":"/active-plan","type":0,"val":"active-plan","end":""}],
-    types: placeholder as Registry['active-plan.index']['types'],
-  },
   'qris-dynamic.index': {
     methods: ["GET","HEAD"],
     pattern: '/qris-dynamic',
@@ -221,12 +239,6 @@ const routes = {
     pattern: '/qris-dynamic/:id/status',
     tokens: [{"old":"/qris-dynamic/:id/status","type":0,"val":"qris-dynamic","end":""},{"old":"/qris-dynamic/:id/status","type":1,"val":"id","end":""},{"old":"/qris-dynamic/:id/status","type":0,"val":"status","end":""}],
     types: placeholder as Registry['qris-dynamic.status']['types'],
-  },
-  'session.destroy': {
-    methods: ["POST"],
-    pattern: '/logout',
-    tokens: [{"old":"/logout","type":0,"val":"logout","end":""}],
-    types: placeholder as Registry['session.destroy']['types'],
   },
   'static_qris.index': {
     methods: ["GET","HEAD"],
@@ -281,6 +293,12 @@ const routes = {
     pattern: '/api/v1/dynamic-qris/callback',
     tokens: [{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"api","end":""},{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"v1","end":""},{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"dynamic-qris","end":""},{"old":"/api/v1/dynamic-qris/callback","type":0,"val":"callback","end":""}],
     types: placeholder as Registry['dynamic_qris.callback']['types'],
+  },
+  'paywuz.webhook': {
+    methods: ["POST"],
+    pattern: '/api/v1/paywuz/webhook',
+    tokens: [{"old":"/api/v1/paywuz/webhook","type":0,"val":"api","end":""},{"old":"/api/v1/paywuz/webhook","type":0,"val":"v1","end":""},{"old":"/api/v1/paywuz/webhook","type":0,"val":"paywuz","end":""},{"old":"/api/v1/paywuz/webhook","type":0,"val":"webhook","end":""}],
+    types: placeholder as Registry['paywuz.webhook']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

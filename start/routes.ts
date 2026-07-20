@@ -33,10 +33,14 @@ router
 
 router
   .group(() => {
-    router.get('dashboard', [controllers.Dashboard, 'index']).as('dashboard')
+    // ── These routes are always accessible to authenticated users ─────────────
+    // (active-plan, profile, logout, admin pages don't require an active plan)
+
     router.get('profile', [controllers.Profile, 'index']).as('profile.index')
     router.post('profile/hmac', [controllers.Profile, 'updateHmac']).as('profile.hmac')
     router.post('profile/api-key', [controllers.Profile, 'generateApiKey']).as('profile.apikey')
+
+    // Admin-only routes
     router.get('roles', [controllers.Roles, 'index']).as('roles.index')
     router.post('roles', [controllers.Roles, 'store']).as('roles.store')
     router.put('roles/:id', [controllers.Roles, 'update']).as('roles.update')
@@ -52,6 +56,25 @@ router
     router.put('plans/:id', [controllers.Plans, 'update']).as('plans.update')
     router.delete('plans/:id', [controllers.Plans, 'destroy']).as('plans.destroy')
 
+    // Active Plan & billing — must stay outside the plan gate so user can pay
+    router.get('active-plan', [controllers.ActivePlan, 'index']).as('active-plan.index')
+    router
+      .post('active-plan/subscribe', [controllers.ActivePlan, 'subscribe'])
+      .as('active-plan.subscribe')
+    router
+      .delete('active-plan/:id/cancel', [controllers.ActivePlan, 'cancelInvoice'])
+      .as('active-plan.cancel')
+
+    router.post('logout', [controllers.Session, 'destroy'])
+  })
+  .use(middleware.auth())
+
+// ── Plan-gated routes — requires an active subscription ───────────────────────
+// Superadmin bypasses automatically inside ActivePlanMiddleware.
+router
+  .group(() => {
+    router.get('dashboard', [controllers.Dashboard, 'index']).as('dashboard')
+
     router.get('qris', [controllers.Qris, 'index']).as('qris.index')
     router.post('qris', [controllers.Qris, 'store']).as('qris.store')
     router.put('qris/:id', [controllers.Qris, 'update']).as('qris.update')
@@ -64,17 +87,13 @@ router
       .post('webhook-settings', [controllers.WebhookSettings, 'update'])
       .as('webhook-settings.update')
 
-    router.get('active-plan', [() => import('#controllers/active_plan_controller'), 'index']).as('active-plan.index')
-
     router.get('qris-dynamic', [controllers.DynamicQris, 'index']).as('qris-dynamic.index')
     router.post('qris-dynamic', [controllers.DynamicQris, 'store']).as('qris-dynamic.store')
     router
       .post('qris-dynamic/:id/status', [controllers.DynamicQris, 'updateStatus'])
       .as('qris-dynamic.status')
-
-    router.post('logout', [controllers.Session, 'destroy'])
   })
-  .use(middleware.auth())
+  .use([middleware.auth(), middleware.activePlan()])
 
 // API Routes
 router
@@ -96,3 +115,6 @@ router
   })
   .prefix('api/v1')
   .use([middleware.apiKey(), middleware.forceJsonReponse()])
+
+// Paywuz Webhook — public endpoint, no auth needed
+router.post('api/v1/paywuz/webhook', [controllers.ActivePlan, 'webhook']).as('paywuz.webhook')

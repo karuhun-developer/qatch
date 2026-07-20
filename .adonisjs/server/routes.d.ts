@@ -14,7 +14,6 @@ export type ScannedRoutes = {
     'session.store': { paramsTuple?: []; params?: {} }
     'auth.redirect': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
     'auth.callback': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
-    'dashboard': { paramsTuple?: []; params?: {} }
     'profile.index': { paramsTuple?: []; params?: {} }
     'profile.hmac': { paramsTuple?: []; params?: {} }
     'profile.apikey': { paramsTuple?: []; params?: {} }
@@ -30,17 +29,20 @@ export type ScannedRoutes = {
     'plans.store': { paramsTuple?: []; params?: {} }
     'plans.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'plans.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'active-plan.index': { paramsTuple?: []; params?: {} }
+    'active-plan.subscribe': { paramsTuple?: []; params?: {} }
+    'active-plan.cancel': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'session.destroy': { paramsTuple?: []; params?: {} }
+    'dashboard': { paramsTuple?: []; params?: {} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'qris.store': { paramsTuple?: []; params?: {} }
     'qris.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'qris.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.update': { paramsTuple?: []; params?: {} }
-    'active-plan.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.store': { paramsTuple?: []; params?: {} }
     'qris-dynamic.status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'session.destroy': { paramsTuple?: []; params?: {} }
     'static_qris.index': { paramsTuple?: []; params?: {} }
     'static_qris.store': { paramsTuple?: []; params?: {} }
     'static_qris.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -50,6 +52,7 @@ export type ScannedRoutes = {
     'dynamic_qris.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'dynamic_qris.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'dynamic_qris.callback': { paramsTuple?: []; params?: {} }
+    'paywuz.webhook': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'home': { paramsTuple?: []; params?: {} }
@@ -60,14 +63,14 @@ export type ScannedRoutes = {
     'login': { paramsTuple?: []; params?: {} }
     'auth.redirect': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
     'auth.callback': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
-    'dashboard': { paramsTuple?: []; params?: {} }
     'profile.index': { paramsTuple?: []; params?: {} }
     'roles.index': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'plans.index': { paramsTuple?: []; params?: {} }
+    'active-plan.index': { paramsTuple?: []; params?: {} }
+    'dashboard': { paramsTuple?: []; params?: {} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
-    'active-plan.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
     'static_qris.index': { paramsTuple?: []; params?: {} }
     'static_qris.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -82,14 +85,14 @@ export type ScannedRoutes = {
     'login': { paramsTuple?: []; params?: {} }
     'auth.redirect': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
     'auth.callback': { paramsTuple: [ParamValue]; params: {'provider': ParamValue} }
-    'dashboard': { paramsTuple?: []; params?: {} }
     'profile.index': { paramsTuple?: []; params?: {} }
     'roles.index': { paramsTuple?: []; params?: {} }
     'users.index': { paramsTuple?: []; params?: {} }
     'plans.index': { paramsTuple?: []; params?: {} }
+    'active-plan.index': { paramsTuple?: []; params?: {} }
+    'dashboard': { paramsTuple?: []; params?: {} }
     'qris.index': { paramsTuple?: []; params?: {} }
     'webhook-settings.index': { paramsTuple?: []; params?: {} }
-    'active-plan.index': { paramsTuple?: []; params?: {} }
     'qris-dynamic.index': { paramsTuple?: []; params?: {} }
     'static_qris.index': { paramsTuple?: []; params?: {} }
     'static_qris.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -103,14 +106,16 @@ export type ScannedRoutes = {
     'roles.store': { paramsTuple?: []; params?: {} }
     'users.store': { paramsTuple?: []; params?: {} }
     'plans.store': { paramsTuple?: []; params?: {} }
+    'active-plan.subscribe': { paramsTuple?: []; params?: {} }
+    'session.destroy': { paramsTuple?: []; params?: {} }
     'qris.store': { paramsTuple?: []; params?: {} }
     'webhook-settings.update': { paramsTuple?: []; params?: {} }
     'qris-dynamic.store': { paramsTuple?: []; params?: {} }
     'qris-dynamic.status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-    'session.destroy': { paramsTuple?: []; params?: {} }
     'static_qris.store': { paramsTuple?: []; params?: {} }
     'dynamic_qris.store': { paramsTuple?: []; params?: {} }
     'dynamic_qris.callback': { paramsTuple?: []; params?: {} }
+    'paywuz.webhook': { paramsTuple?: []; params?: {} }
   }
   PUT: {
     'roles.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -124,6 +129,7 @@ export type ScannedRoutes = {
     'roles.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'plans.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'active-plan.cancel': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'qris.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'static_qris.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }

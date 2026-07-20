@@ -33,6 +33,7 @@ router.use([
 export const middleware = router.named({
   guest: () => import('#middleware/guest_middleware'),
   auth: () => import('#middleware/auth_middleware'),
+  activePlan: () => import('#middleware/active_plan_middleware'),
   apiKey: () => import('#middleware/api_key_middleware'),
   forceJsonReponse: () => import('#middleware/force_json_response_middleware'),
 })

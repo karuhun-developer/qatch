@@ -99,6 +99,7 @@
     "marked-highlight": "^2.2.4",
     "mysql2": "^3.22.6",
     "node-cron": "^4.6.0",
+    "paywuz-sdk": "^1.0.0",
     "qrcode.vue": "^3.10.0",
     "reflect-metadata": "^0.2.2",
     "reka-ui": "^2.10.1",

@@ -54,9 +54,13 @@ export default class StaticQrisController {
         data: qris,
       })
     } catch (error: any) {
-      return response.badRequest({
-        message: error.message + ' Silakan upgrade plan Anda untuk menambah limit.',
-      })
+      if (error.message?.includes('paket langganan')) {
+        return response.forbidden({ message: error.message })
+      }
+      if (error.message?.includes('Limit QRIS')) {
+        return response.tooManyRequests({ message: error.message })
+      }
+      return response.badRequest({ message: error.message })
     }
   }
 

@@ -8,18 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class PlanSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'description',
-    'features',
-    'id',
-    'isFeatured',
-    'maxQris',
-    'maxTransactionPerMonth',
-    'name',
-    'price',
-    'updatedAt',
-  ] as const
+  static $columns = ['createdAt', 'description', 'features', 'id', 'isFeatured', 'maxQris', 'maxTransactionPerMonth', 'name', 'price', 'updatedAt'] as const
   $columns = PlanSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -44,16 +33,7 @@ export class PlanSchema extends BaseModel {
 }
 
 export class QriSchema extends BaseModel {
-  static $columns = [
-    'createdAt',
-    'description',
-    'id',
-    'name',
-    'qris',
-    'qrisString',
-    'updatedAt',
-    'userId',
-  ] as const
+  static $columns = ['createdAt', 'description', 'id', 'name', 'qris', 'qrisString', 'updatedAt', 'userId'] as const
   $columns = QriSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -74,25 +54,7 @@ export class QriSchema extends BaseModel {
 }
 
 export class QrisTransactionSchema extends BaseModel {
-  static $columns = [
-    'amount',
-    'createdAt',
-    'expiredAt',
-    'feeAmount',
-    'feeType',
-    'feeValue',
-    'id',
-    'paidAt',
-    'proof',
-    'qrisId',
-    'qrisString',
-    'status',
-    'total',
-    'transactionCode',
-    'uniqueCode',
-    'updatedAt',
-    'userId',
-  ] as const
+  static $columns = ['amount', 'createdAt', 'expiredAt', 'feeAmount', 'feeType', 'feeValue', 'id', 'paidAt', 'proof', 'qrisId', 'qrisString', 'status', 'total', 'transactionCode', 'uniqueCode', 'updatedAt', 'userId'] as const
   $columns = QrisTransactionSchema.$columns
   @column()
   declare amount: string
@@ -143,25 +105,43 @@ export class RoleSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class UserSubscriptionSchema extends BaseModel {
+  static $columns = ['amount', 'createdAt', 'endsAt', 'id', 'orderId', 'paidAt', 'paymentMethod', 'paymentNumber', 'paymentUrl', 'paywuzTransactionId', 'planId', 'startsAt', 'status', 'updatedAt', 'userId'] as const
+  $columns = UserSubscriptionSchema.$columns
+  @column()
+  declare amount: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare endsAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare orderId: string | null
+  @column.dateTime()
+  declare paidAt: DateTime | null
+  @column()
+  declare paymentMethod: string | null
+  @column()
+  declare paymentNumber: string | null
+  @column()
+  declare paymentUrl: string | null
+  @column()
+  declare paywuzTransactionId: string | null
+  @column()
+  declare planId: number
+  @column.dateTime()
+  declare startsAt: DateTime | null
+  @column()
+  declare status: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+}
+
 export class UserSchema extends BaseModel {
-  static $columns = [
-    'apiKey',
-    'createdAt',
-    'email',
-    'fullName',
-    'hmacKey',
-    'id',
-    'password',
-    'planId',
-    'qrisTotal',
-    'roleId',
-    'transactionTotal',
-    'updatedAt',
-    'webhookListenApps',
-    'webhookTextWildcard',
-    'webhookTitleWildcard',
-    'webhookUrl',
-  ] as const
+  static $columns = ['apiKey', 'createdAt', 'email', 'fullName', 'hmacKey', 'id', 'password', 'planId', 'qrisTotal', 'roleId', 'transactionTotal', 'updatedAt', 'webhookListenApps', 'webhookTextWildcard', 'webhookTitleWildcard', 'webhookUrl'] as const
   $columns = UserSchema.$columns
   @column()
   declare apiKey: string | null

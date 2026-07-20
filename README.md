@@ -30,7 +30,9 @@ Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan 
 | 🛡️ **Webhook Filtering**      | Wildcard filter berdasarkan nama app, judul & isi notifikasi               |
 | 📊 **Analytics Dashboard**    | Chart penggunaan harian, statistik, dan log transaksi terbaru              |
 | 👥 **Multi-user & Roles**     | Manajemen user dengan role Superadmin dan User biasa                       |
-| 💰 **Zero PG Fees**           | 100% self-hosted, bebas biaya admin payment gateway                        |
+| 💳 **Subscription System**    | Manajemen paket berlangganan berbayar dan gratis, serta batasan limit      |
+| ⚡ **Paywuz Integration**     | Pembayaran otomatis dengan Paywuz API (Virtual Account & QRIS)             |
+| 💰 **Zero PG Fees**           | 100% self-hosted untuk proses Dynamic QRIS (kecuali langganan platform)    |
 
 ## ⚙️ Cara Kerja
 
@@ -94,11 +96,12 @@ x-api-key: YOUR_API_KEY
 
 ## 🔧 Tech Stack
 
-- **[AdonisJS v7](https://adonisjs.com/)** — Backend framework (API, Webhook, Auth)
+- **[AdonisJS v7](https://adonisjs.com/)** — Backend framework (API, Webhook, Auth, Cron Jobs)
 - **[Inertia.js](https://inertiajs.com/) + [Vue.js 3](https://vuejs.org/)** — Full-stack SPA tanpa REST overhead
 - **[shadcn/vue](https://www.shadcn-vue.com/)** — UI Component library
 - **[Chart.js](https://www.chartjs.org/)** — Visualisasi data dashboard
 - **[Android Notification Forwarder](https://github.com/karuhun-developer/android-notification-forwarder)** — Notification interceptor di sisi Android
+- **[Paywuz SDK](https://www.npmjs.com/package/paywuz-sdk)** — Sistem pembayaran berlangganan platform
 
 ## 🛠️ Instalasi
 

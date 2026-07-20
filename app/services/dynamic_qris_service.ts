@@ -1,6 +1,7 @@
 import QrisTransaction from '#models/qris_transaction'
 import Qris from '#models/qris'
 import User from '#models/user'
+import UserSubscription from '#models/user_subscription'
 import QrisService from '#services/qris_service'
 import { inject } from '@adonisjs/core'
 import { DateTime } from 'luxon'
@@ -20,14 +21,34 @@ export default class DynamicQrisService {
     // 0. Check limits
     const user = await User.findOrFail(data.userId)
     await user.load('plan')
-    if (
-      user.plan &&
-      user.plan.maxTransactionPerMonth !== null &&
-      user.transactionTotal >= user.plan.maxTransactionPerMonth
-    ) {
-      throw new Error(
-        `Limit transaksi tercapai. Anda hanya dapat membuat maksimal ${user.plan.maxTransactionPerMonth} transaksi per bulan.`
-      )
+
+    // Superadmin has no restrictions
+    const isSuperadmin = user.roleId === 1
+
+    if (!isSuperadmin) {
+      // Check active subscription
+      const activeSubscription = await UserSubscription.query()
+        .where('userId', user.id)
+        .where('status', 'active')
+        .where('ends_at', '>', DateTime.now().toSQL()!)
+        .first()
+
+      if (!activeSubscription) {
+        throw new Error(
+          'Anda tidak memiliki paket langganan aktif. Silakan aktifkan paket terlebih dahulu.'
+        )
+      }
+
+      // Check monthly transaction limit based on active plan
+      if (
+        user.plan &&
+        user.plan.maxTransactionPerMonth !== null &&
+        user.transactionTotal >= user.plan.maxTransactionPerMonth
+      ) {
+        throw new Error(
+          `Limit transaksi tercapai. Anda hanya dapat membuat maksimal ${user.plan.maxTransactionPerMonth} transaksi per bulan.`
+        )
+      }
     }
 
     // 1. Get the static QRIS

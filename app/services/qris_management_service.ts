@@ -1,10 +1,12 @@
 import Qris from '#models/qris'
 import User from '#models/user'
+import UserSubscription from '#models/user_subscription'
 import app from '@adonisjs/core/services/app'
 import { type MultipartFile } from '@adonisjs/core/bodyparser'
 import string from '@adonisjs/core/helpers/string'
 import { Jimp } from 'jimp'
 import jsQR from 'jsqr'
+import { DateTime } from 'luxon'
 
 export default class QrisManagementService {
   async getAllForUser(userId: number, page: number, limit: number) {
@@ -25,10 +27,29 @@ export default class QrisManagementService {
     const user = await User.findOrFail(data.userId)
     await user.load('plan')
 
-    if (user.plan && user.plan.maxQris !== null && user.qrisTotal >= user.plan.maxQris) {
-      throw new Error(
-        `Limit QRIS tercapai. Anda hanya dapat membuat maksimal ${user.plan.maxQris} QRIS.`
-      )
+    // Superadmin has no restrictions
+    const isSuperadmin = user.roleId === 1
+
+    if (!isSuperadmin) {
+      // Check active subscription
+      const activeSubscription = await UserSubscription.query()
+        .where('userId', user.id)
+        .where('status', 'active')
+        .where('ends_at', '>', DateTime.now().toSQL()!)
+        .first()
+
+      if (!activeSubscription) {
+        throw new Error(
+          'Anda tidak memiliki paket langganan aktif. Silakan aktifkan paket terlebih dahulu.'
+        )
+      }
+
+      // Check QRIS limit based on active plan
+      if (user.plan && user.plan.maxQris !== null && user.qrisTotal >= user.plan.maxQris) {
+        throw new Error(
+          `Limit QRIS tercapai. Anda hanya dapat membuat maksimal ${user.plan.maxQris} QRIS.`
+        )
+      }
     }
 
     await file.move(app.makePath('public/uploads/qris'), {

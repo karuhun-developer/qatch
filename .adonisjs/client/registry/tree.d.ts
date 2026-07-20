@@ -19,7 +19,6 @@ export interface ApiDefinition {
     redirect: typeof routes['auth.redirect']
     callback: typeof routes['auth.callback']
   }
-  dashboard: typeof routes['dashboard']
   profile: {
     index: typeof routes['profile.index']
     hmac: typeof routes['profile.hmac']
@@ -43,6 +42,12 @@ export interface ApiDefinition {
     update: typeof routes['plans.update']
     destroy: typeof routes['plans.destroy']
   }
+  activePlan: {
+    index: typeof routes['active-plan.index']
+    subscribe: typeof routes['active-plan.subscribe']
+    cancel: typeof routes['active-plan.cancel']
+  }
+  dashboard: typeof routes['dashboard']
   qris: {
     index: typeof routes['qris.index']
     store: typeof routes['qris.store']
@@ -52,9 +57,6 @@ export interface ApiDefinition {
   webhookSettings: {
     index: typeof routes['webhook-settings.index']
     update: typeof routes['webhook-settings.update']
-  }
-  activePlan: {
-    index: typeof routes['active-plan.index']
   }
   qrisDynamic: {
     index: typeof routes['qris-dynamic.index']
@@ -73,5 +75,8 @@ export interface ApiDefinition {
     show: typeof routes['dynamic_qris.show']
     update: typeof routes['dynamic_qris.update']
     callback: typeof routes['dynamic_qris.callback']
+  }
+  paywuz: {
+    webhook: typeof routes['paywuz.webhook']
   }
 }
