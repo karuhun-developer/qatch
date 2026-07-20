@@ -111,9 +111,7 @@ const isExpiringSoon = computed(() => daysLeft.value !== null && daysLeft.value 
 const vaPaymentMethods = computed(() =>
   props.paymentMethods.filter((m) => m.type === 'virtual_account')
 )
-const qrisPaymentMethods = computed(() =>
-  props.paymentMethods.filter((m) => m.type === 'qris')
-)
+const qrisPaymentMethods = computed(() => props.paymentMethods.filter((m) => m.type === 'qris'))
 
 function isPlanUpgrade(plan: (typeof props.plans)[0]) {
   const currentPlan = props.plans.find((p) => p.id === activePlanId.value)
@@ -127,13 +125,19 @@ function planActionLabel(plan: (typeof props.plans)[0]) {
 }
 
 function formatRupiah(amount: number) {
-  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount)
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    maximumFractionDigits: 0,
+  }).format(amount)
 }
 
 function formatDate(dateStr: string | null) {
   if (!dateStr) return '-'
   return new Date(dateStr).toLocaleDateString('id-ID', {
-    day: 'numeric', month: 'long', year: 'numeric',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
   })
 }
 
@@ -169,6 +173,7 @@ function submitSubscribe() {
       onFinish: () => {
         isSubmitting.value = false
         subscribeModalOpen.value = false
+        window.location.reload()
       },
     }
   )
@@ -251,21 +256,33 @@ function confirmCancel() {
                 {{ activeSubscription.plan.name }}
               </div>
               <div class="text-muted-foreground text-sm mt-1">
-                {{ activeSubscription.plan.price === 0 ? 'Gratis' : formatRupiah(activeSubscription.plan.price) + ' / bulan' }}
+                {{
+                  activeSubscription.plan.price === 0
+                    ? 'Gratis'
+                    : formatRupiah(activeSubscription.plan.price) + ' / bulan'
+                }}
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-4 pt-2">
               <div class="space-y-0.5">
-                <p class="text-xs text-muted-foreground font-medium uppercase tracking-wide">Mulai</p>
+                <p class="text-xs text-muted-foreground font-medium uppercase tracking-wide">
+                  Mulai
+                </p>
                 <p class="text-sm font-medium">{{ formatDate(activeSubscription.startsAt) }}</p>
               </div>
               <div class="space-y-0.5">
-                <p class="text-xs text-muted-foreground font-medium uppercase tracking-wide flex items-center gap-1">
+                <p
+                  class="text-xs text-muted-foreground font-medium uppercase tracking-wide flex items-center gap-1"
+                >
                   <Calendar class="h-3 w-3" /> Berakhir
                 </p>
                 <p class="text-sm font-medium" :class="isExpiringSoon ? 'text-amber-500' : ''">
-                  {{ activeSubscription.plan.price === 0 ? 'Selamanya' : formatDate(activeSubscription.endsAt) }}
+                  {{
+                    activeSubscription.plan.price === 0
+                      ? 'Selamanya'
+                      : formatDate(activeSubscription.endsAt)
+                  }}
                 </p>
               </div>
             </div>
@@ -274,12 +291,12 @@ function confirmCancel() {
               v-if="daysLeft !== null && activeSubscription.plan.price > 0"
               class="flex items-center gap-2 pt-1"
             >
-              <AlertTriangle
-                v-if="isExpiringSoon"
-                class="h-4 w-4 text-amber-500 shrink-0"
-              />
+              <AlertTriangle v-if="isExpiringSoon" class="h-4 w-4 text-amber-500 shrink-0" />
               <Clock v-else class="h-4 w-4 text-muted-foreground shrink-0" />
-              <span class="text-sm" :class="isExpiringSoon ? 'text-amber-500 font-medium' : 'text-muted-foreground'">
+              <span
+                class="text-sm"
+                :class="isExpiringSoon ? 'text-amber-500 font-medium' : 'text-muted-foreground'"
+              >
                 {{ daysLeft }} hari lagi sebelum perlu perpanjangan
               </span>
             </div>
@@ -305,7 +322,9 @@ function confirmCancel() {
       <div class="flex items-center gap-2">
         <Receipt class="h-5 w-5 text-amber-500" />
         <h2 class="text-lg font-semibold">Tagihan Menunggu Pembayaran</h2>
-        <span class="inline-flex items-center justify-center rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-semibold px-2 py-0.5">
+        <span
+          class="inline-flex items-center justify-center rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 text-xs font-semibold px-2 py-0.5"
+        >
           {{ pendingInvoices.length }}
         </span>
       </div>
@@ -320,7 +339,9 @@ function confirmCancel() {
           <CardContent class="p-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div class="flex items-start gap-3">
-                <div class="h-10 w-10 rounded-full bg-amber-500/15 flex items-center justify-center shrink-0">
+                <div
+                  class="h-10 w-10 rounded-full bg-amber-500/15 flex items-center justify-center shrink-0"
+                >
                   <CreditCard class="h-5 w-5 text-amber-500" />
                 </div>
                 <div class="space-y-0.5">
@@ -334,7 +355,10 @@ function confirmCancel() {
                   <p class="text-xs text-muted-foreground">
                     Dibuat {{ formatDate(invoice.createdAt) }}
                   </p>
-                  <p v-if="invoice.paymentNumber" class="text-xs font-mono bg-muted px-2 py-0.5 rounded inline-block mt-1">
+                  <p
+                    v-if="invoice.paymentNumber"
+                    class="text-xs font-mono bg-muted px-2 py-0.5 rounded inline-block mt-1"
+                  >
                     {{ invoice.paymentNumber }}
                   </p>
                 </div>
@@ -382,21 +406,32 @@ function confirmCancel() {
           :key="plan.id"
           class="flex flex-col relative transition-all duration-200"
           :class="{
-            'border-primary shadow-lg shadow-primary/10 ring-1 ring-primary/20': plan.id === activePlanId,
+            'border-primary shadow-lg shadow-primary/10 ring-1 ring-primary/20':
+              plan.id === activePlanId,
             'hover:border-muted-foreground/30 hover:shadow-md': plan.id !== activePlanId,
           }"
         >
           <!-- Current plan badge -->
-          <div v-if="plan.id === activePlanId" class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-            <span class="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary px-3 py-0.5 text-xs font-semibold text-primary-foreground shadow-sm">
+          <div
+            v-if="plan.id === activePlanId"
+            class="absolute -top-3 left-1/2 -translate-x-1/2 z-10"
+          >
+            <span
+              class="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary px-3 py-0.5 text-xs font-semibold text-primary-foreground shadow-sm"
+            >
               <CheckCircle2 class="h-3 w-3" />
               Paket Saat Ini
             </span>
           </div>
 
           <!-- Featured badge -->
-          <div v-if="plan.isFeatured && plan.id !== activePlanId" class="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-            <span class="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-0.5 text-xs font-semibold text-white shadow-sm">
+          <div
+            v-if="plan.isFeatured && plan.id !== activePlanId"
+            class="absolute -top-3 left-1/2 -translate-x-1/2 z-10"
+          >
+            <span
+              class="inline-flex items-center gap-1 rounded-full border border-amber-400/30 bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-0.5 text-xs font-semibold text-white shadow-sm"
+            >
               <Star class="h-3 w-3 fill-white" />
               Paling Populer
             </span>
@@ -437,7 +472,10 @@ function confirmCancel() {
               <li class="flex items-center gap-2">
                 <CheckCircle2 class="h-4 w-4 text-primary shrink-0" />
                 <span class="text-muted-foreground">
-                  {{ plan.maxTransactionPerMonth === null ? 'Unlimited' : plan.maxTransactionPerMonth }} Transaksi / Bulan
+                  {{
+                    plan.maxTransactionPerMonth === null ? 'Unlimited' : plan.maxTransactionPerMonth
+                  }}
+                  Transaksi / Bulan
                 </span>
               </li>
               <li class="flex items-center gap-2">
@@ -479,7 +517,11 @@ function confirmCancel() {
             <Button
               v-else
               class="w-full"
-              :class="plan.isFeatured ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0' : ''"
+              :class="
+                plan.isFeatured
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-0'
+                  : ''
+              "
               @click="openSubscribeModal(plan)"
             >
               <ArrowUpCircle v-if="isPlanUpgrade(plan)" class="h-4 w-4 mr-2" />
@@ -509,9 +551,7 @@ function confirmCancel() {
           <span v-if="selectedPlan?.price === 0">
             Anda akan downgrade ke plan gratis. Fitur berbayar akan dinonaktifkan.
           </span>
-          <span v-else>
-            Pilih metode pembayaran untuk menyelesaikan berlangganan.
-          </span>
+          <span v-else> Pilih metode pembayaran untuk menyelesaikan berlangganan. </span>
         </DialogDescription>
       </DialogHeader>
 
@@ -529,7 +569,10 @@ function confirmCancel() {
               {{ selectedPlan?.price === 0 ? 'Gratis' : formatRupiah(selectedPlan?.price ?? 0) }}
             </span>
           </div>
-          <div v-if="(selectedPlan?.price ?? 0) > 0" class="text-xs text-muted-foreground text-right">
+          <div
+            v-if="(selectedPlan?.price ?? 0) > 0"
+            class="text-xs text-muted-foreground text-right"
+          >
             Tagihan diperbarui setiap 30 hari
           </div>
         </div>
@@ -551,8 +594,13 @@ function confirmCancel() {
             >
               <input v-model="selectedPaymentMethod" type="radio" value="VA" class="sr-only" />
               <span class="text-xs font-semibold leading-tight">VA Pilihan Bank</span>
-              <span class="text-[11px] text-muted-foreground leading-tight">BCA, BNI, BRI & lainnya</span>
-              <span class="text-[10px] mt-1 font-medium" :class="selectedPaymentMethod === 'VA' ? 'text-primary' : 'text-muted-foreground'">
+              <span class="text-[11px] text-muted-foreground leading-tight"
+                >BCA, BNI, BRI & lainnya</span
+              >
+              <span
+                class="text-[10px] mt-1 font-medium"
+                :class="selectedPaymentMethod === 'VA' ? 'text-primary' : 'text-muted-foreground'"
+              >
                 Fee sesuai bank
               </span>
             </label>
@@ -569,10 +617,22 @@ function confirmCancel() {
                     : 'border-muted hover:border-muted-foreground/40 hover:bg-muted/30'
                 "
               >
-                <input v-model="selectedPaymentMethod" type="radio" :value="pm.code" class="sr-only" />
+                <input
+                  v-model="selectedPaymentMethod"
+                  type="radio"
+                  :value="pm.code"
+                  class="sr-only"
+                />
                 <span class="text-xs font-semibold leading-tight">{{ pm.name }}</span>
-                <span class="text-[11px] text-muted-foreground leading-tight capitalize">{{ pm.type.replace('_', ' ') }}</span>
-                <span class="text-[10px] mt-1 font-medium" :class="selectedPaymentMethod === pm.code ? 'text-primary' : 'text-muted-foreground'">
+                <span class="text-[11px] text-muted-foreground leading-tight capitalize">{{
+                  pm.type.replace('_', ' ')
+                }}</span>
+                <span
+                  class="text-[10px] mt-1 font-medium"
+                  :class="
+                    selectedPaymentMethod === pm.code ? 'text-primary' : 'text-muted-foreground'
+                  "
+                >
                   {{ feeLabel(pm) }}
                 </span>
               </label>
@@ -590,10 +650,22 @@ function confirmCancel() {
                     : 'border-muted hover:border-muted-foreground/40 hover:bg-muted/30'
                 "
               >
-                <input v-model="selectedPaymentMethod" type="radio" :value="pm.code" class="sr-only" />
+                <input
+                  v-model="selectedPaymentMethod"
+                  type="radio"
+                  :value="pm.code"
+                  class="sr-only"
+                />
                 <span class="text-xs font-semibold leading-tight">{{ pm.name }}</span>
-                <span class="text-[11px] text-muted-foreground leading-tight capitalize">{{ pm.type.replace('_', ' ') }}</span>
-                <span class="text-[10px] mt-1 font-medium" :class="selectedPaymentMethod === pm.code ? 'text-primary' : 'text-muted-foreground'">
+                <span class="text-[11px] text-muted-foreground leading-tight capitalize">{{
+                  pm.type.replace('_', ' ')
+                }}</span>
+                <span
+                  class="text-[10px] mt-1 font-medium"
+                  :class="
+                    selectedPaymentMethod === pm.code ? 'text-primary' : 'text-muted-foreground'
+                  "
+                >
                   {{ feeLabel(pm) }}
                 </span>
               </label>
@@ -601,14 +673,19 @@ function confirmCancel() {
           </div>
 
           <!-- Fallback jika payment methods kosong -->
-          <div v-if="paymentMethods.length === 0" class="rounded-lg border border-dashed border-muted p-3 text-sm text-muted-foreground text-center">
+          <div
+            v-if="paymentMethods.length === 0"
+            class="rounded-lg border border-dashed border-muted p-3 text-sm text-muted-foreground text-center"
+          >
             Menggunakan Virtual Account (metode default)
           </div>
         </div>
       </div>
 
       <!-- Fixed Footer -->
-      <DialogFooter class="px-6 py-4 bg-muted/20 border-t border-muted/40 gap-2 sm:justify-end shrink-0">
+      <DialogFooter
+        class="px-6 py-4 bg-muted/20 border-t border-muted/40 gap-2 sm:justify-end shrink-0"
+      >
         <Button
           type="button"
           variant="outline"
@@ -617,11 +694,7 @@ function confirmCancel() {
         >
           Batal
         </Button>
-        <Button
-          type="button"
-          :disabled="isSubmitting"
-          @click="submitSubscribe"
-        >
+        <Button type="button" :disabled="isSubmitting" @click="submitSubscribe">
           <Loader2 v-if="isSubmitting" class="h-4 w-4 mr-2 animate-spin" />
           <CreditCard v-else-if="(selectedPlan?.price ?? 0) > 0" class="h-4 w-4 mr-2" />
           <CheckCircle2 v-else class="h-4 w-4 mr-2" />
@@ -629,14 +702,13 @@ function confirmCancel() {
             isSubmitting
               ? 'Memproses...'
               : (selectedPlan?.price ?? 0) > 0
-              ? 'Lanjut ke Pembayaran'
-              : 'Aktifkan Plan Gratis'
+                ? 'Lanjut ke Pembayaran'
+                : 'Aktifkan Plan Gratis'
           }}
         </Button>
       </DialogFooter>
     </DialogContent>
   </Dialog>
-
 
   <!-- ── Cancel Invoice Confirmation Modal ── -->
   <Dialog :open="cancelModalOpen" @update:open="cancelModalOpen = $event">
@@ -651,7 +723,9 @@ function confirmCancel() {
           Anda perlu membuat tagihan baru untuk berlangganan.
         </DialogDescription>
       </DialogHeader>
-      <DialogFooter class="px-6 py-4 bg-muted/20 border-t border-muted/40 mt-4 gap-2 sm:justify-end">
+      <DialogFooter
+        class="px-6 py-4 bg-muted/20 border-t border-muted/40 mt-4 gap-2 sm:justify-end"
+      >
         <Button
           type="button"
           variant="outline"
@@ -660,12 +734,7 @@ function confirmCancel() {
         >
           Kembali
         </Button>
-        <Button
-          type="button"
-          variant="destructive"
-          :disabled="isCancelling"
-          @click="confirmCancel"
-        >
+        <Button type="button" variant="destructive" :disabled="isCancelling" @click="confirmCancel">
           <Loader2 v-if="isCancelling" class="h-4 w-4 mr-2 animate-spin" />
           {{ isCancelling ? 'Membatalkan...' : 'Ya, Batalkan Tagihan' }}
         </Button>
