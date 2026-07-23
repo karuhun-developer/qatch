@@ -159,19 +159,19 @@ function copyBase64() {
 
 <template>
   <Head>
-    <title>Demo Qatch — Coba Generator QRIS Dinamis Gratis</title>
+    <title>Demo QRIS Dinamis — Coba Generator QRIS Dinamis Gratis</title>
     <meta
       name="description"
-      content="Coba langsung fitur Qatch secara gratis. Generate QRIS dinamis dengan nominal kustom, kode unik, dan fee otomatis tanpa perlu daftar."
+      content="Coba langsung fitur QRIS Dinamis secara gratis. Generate QRIS dinamis dengan nominal kustom, kode unik, dan fee otomatis tanpa perlu daftar."
     />
     <meta
       name="keywords"
-      content="demo QRIS dinamis, coba QRIS otomatis, generator QRIS gratis, QRIS nominal kustom, Qatch demo"
+      content="demo QRIS dinamis, coba QRIS otomatis, generator QRIS gratis, QRIS nominal kustom, QRIS Dinamis demo"
     />
     <meta name="robots" content="index, follow" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Demo Qatch — Coba Generator QRIS Dinamis Gratis" />
+    <meta property="og:title" content="Demo QRIS Dinamis — Coba Generator QRIS Dinamis Gratis" />
     <meta
       property="og:description"
       content="Coba langsung generate QRIS dinamis dengan nominal kustom, kode unik, dan fee otomatis. Tanpa perlu daftar."
