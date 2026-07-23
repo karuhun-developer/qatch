@@ -37,24 +37,32 @@ Normalnya, Static QRIS mengharuskan _customer_ input nominal secara manual, dan 
 ## ⚙️ Cara Kerja
 
 ```
-Customer scan QR
-      │
-      ▼
-[Qatch] Generate QR dengan nominal spesifik + kode unik
-      │         misal: Rp 50.000 → Rp 50.021 (021 = kode unik harian)
-      │
-      ▼
-Customer bayar via e-wallet / m-banking
-      │
-      ▼
-Push notification masuk ke HP merchant
-("Dana masuk: Rp 50.021 dari QRIS")
-      │
-      ▼
-[Android Notification Forwarder] intercept & forward ke webhook
-      │
-      ▼
-[Qatch] validasi nominal → status PENDING → PAID ✅
+[Merchant App] Ecommerce / Toko Topup / Dll
+     │
+     │ POST /api/v1/dynamic-qris
+     │ { qrisId, amount, feeType, expiredHours }
+     ▼
+[Qatch Server]
+     │ Generate QRIS string dinamis + kode unik
+     │ Simpan transaksi status: pending
+     ▼
+[QR Code] ──── Ditampilkan ke pembayar
+     │
+     │ Pembayar scan & bayar via m-banking/e-wallet
+     ▼
+[Notifikasi Masuk di HP Android Merchant]
+     │
+     │ Android Notification Forwarder forward ke:
+     │ POST /api/v1/dynamic-qris/callback
+     ▼
+[Qatch Server]
+     │ Cocokkan nominal di teks notifikasi
+     │   dengan `total` transaksi pending
+     │ Jika cocok → status: paid
+     ▼
+[Webhook ke Target URL]
+     POST https://your-app.com/webhook
+     { event: "transaction.paid", data: {...} }
 ```
 
 ## 🗺️ API Endpoints
