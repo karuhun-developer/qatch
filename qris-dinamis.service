@@ -8,10 +8,17 @@ StartLimitBurst=5
 
 [Service]
 Type=simple
-Restart=on-failure
-RestartSec=5s
 WorkingDirectory=/var/www/qris/build
 ExecStart=/usr/bin/node/ /var/www/qris/build/bin/server.js
+
+# Speed up Shutdown & Restart Cycles
+KillSignal=SIGTERM
+TimeoutStopSec=4s
+SendSIGKILL=yes
+
+# Restart Policy
+Restart=on-failure
+RestartSec=2s
 
 [Install]
 WantedBy=multi-user.target
